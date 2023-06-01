@@ -1,0 +1,28 @@
+Seller:
+(CRUD)product
+(CD)ImageForProduct
+(CR)AuctionForProduct
+(CRUD)Profile
+(CRUD)Booth
+
+--------------
+Customer:
+GetBoothWithSellerId
+GetSellersByCategory
+AddProductToCart
+AddBidForAuction
+GetAuctions
+GetAuctionById
+AddCommentForProduct
+GetInvoices
+(CRUD)Profile
+-----------------
+Admin:
+ConfirmForAddProduct --- Done
+ConfirmForAddComment --- Done
+(RUD)Product --- Done
+(RUD)Store --- Done
+(RUD)User --- Done
+GetCommissionFromSellers
+GetCommissionBySellerId
+AddMedalForSeller

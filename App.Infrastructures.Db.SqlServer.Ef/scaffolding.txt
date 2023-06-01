@@ -1,0 +1,7 @@
+﻿dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=db_DokanNet" Microsoft.EntityFrameworkCore.SqlServer
+
+
+Scaffold-DbContext "Data Source=.; Initial Catalog=db_DokanNet" -Context AppDbContext -ContextDir Database -OutputDir Entities  Microsoft.EntityFrameworkCore.SqlServer
+
+
+Scaffold-DbContext "Server=.;Initial Catalog=db_DokanNet;Integrated Security=True;TrustServerCertificate=True" -Provider Microsoft.EntityFrameworkCore.SqlServer -Context AppDbContext -ContextDir Database -OutputDir Entities
