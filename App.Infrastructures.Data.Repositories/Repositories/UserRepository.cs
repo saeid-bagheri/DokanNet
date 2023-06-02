@@ -40,6 +40,11 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     CreatedAt = u.CreatedAt,
                     PhoneNumber = u.PhoneNumber
                 }).ToListAsync(cancellationToken);
+            ////check records is null
+            //if (true)
+            //{
+
+            //}
             return records;
         }
 

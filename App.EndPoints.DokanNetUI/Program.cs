@@ -5,6 +5,7 @@ using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
 using App.EndPoints.DokanNetUI.Models;
+using App.Infrastructures.Data.Repositories;
 using App.Infrastructures.Data.Repositories.AutoMapper;
 using App.Infrastructures.Data.Repositories.Repositories;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
@@ -23,8 +24,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath= "/";
 
 });
-
-
 
 
 var config = new ConfigurationBuilder()
@@ -62,11 +61,41 @@ var mapper = configMapper.CreateMapper();
 builder.Services.AddSingleton(mapper);
 #endregion config autoMapper
 
-builder.Services.AddScoped<IGetUsers, GetUsers>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRegisterUser, RegisterUser>();
-builder.Services.AddScoped<ILoginUser, LoginUser>();
+#region dependency injection
 
+//admins
+builder.Services.AddScoped<ICloseStore, CloseStore>();
+builder.Services.AddScoped<IConfirmComment, ConfirmComment>();
+builder.Services.AddScoped<IConfirmProduct, ConfirmProduct>();
+builder.Services.AddScoped<IDeleteProduct, DeleteProduct>();
+builder.Services.AddScoped<IDeleteUser, DeleteUser>();
+builder.Services.AddScoped<ILoginUser, LoginUser>();
+builder.Services.AddScoped<IRegisterUser, RegisterUser>();
+builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
+builder.Services.AddScoped<IUpdateStore, UpdateStore>();
+builder.Services.AddScoped<IUpdateUser, UpdateUser>();
+builder.Services.AddScoped<IGetProductById, GetProductById>();
+builder.Services.AddScoped<IGetStoreById, GetStoreById>();
+builder.Services.AddScoped<IGetStores, GetStores>();
+builder.Services.AddScoped<IGetUserById, GetUserById>();
+builder.Services.AddScoped<IGetUsers, GetUsers>();
+
+//repositories
+builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
+builder.Services.AddScoped<IBidRepository, BidRepository>();
+builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IMedalRepository, MedalRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ISellerRepository, SellerRepository>();
+builder.Services.AddScoped<IStoreRepository, StoreRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+#endregion dependency injection
 
 var app = builder.Build();
 

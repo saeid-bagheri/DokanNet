@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace App.Infrastructures.Data.Repositories.Repositories
 {
-    internal class SellerRepository : ISellerRepository
+    public class SellerRepository : ISellerRepository
     {
 
         private readonly AppDbContext _context;

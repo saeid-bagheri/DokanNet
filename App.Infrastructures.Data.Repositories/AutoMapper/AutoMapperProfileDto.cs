@@ -14,11 +14,14 @@ namespace App.Infrastructures.Data.Repositories.AutoMapper
         public AutoMapperProfileDto()
         {
 
-            CreateMap<SellerDto, Seller>().ReverseMap(); //reverse so the both direction
-            CreateMap<Seller, SellerDto>();
-
             CreateMap<AppUser, UserDto>();
-            CreateMap<AppUser, UserDto>().ReverseMap(); ;
+            CreateMap<AppUser, UserDto>().ReverseMap();
+
+            CreateMap<Auction, AuctionDto>();
+            CreateMap<Auction, AuctionDto>().ReverseMap();
+
+            CreateMap<Bid, BidDto>().ReverseMap(); //reverse so the both direction
+            CreateMap<Seller, SellerDto>();
         }
     }
 }

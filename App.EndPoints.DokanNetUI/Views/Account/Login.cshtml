@@ -8,6 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
+        <div asp-validation-summary="All"></div>
         <form asp-action="login" method="post">
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -33,7 +34,9 @@
 
 
 <div>
-
     <a asp-controller="Home" asp-action="Index">بازگشت</a>
-
 </div>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
