@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.AppServices.Admins.Queries
 {
-    public interface IGetUserRoles
+    public interface IGetUserRolesByUserName
     {
         Task<List<string>> Execute(string userName ,CancellationToken cancellationToken);
     }

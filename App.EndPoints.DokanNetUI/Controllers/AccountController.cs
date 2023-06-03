@@ -15,20 +15,20 @@ namespace App.EndPoints.DokanNetUI.Controllers
         private readonly IRegisterUser _registerUser;
         private readonly ILoginUser _loginUser;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IGetUserRoles _getUserRoles;
+        private readonly IGetUserRolesByUserName _getUserRolesByUserName;
 
 
         private readonly IMapper _mapper;
 
         public AccountController(IRegisterUser registerUser, ILoginUser loginUser,
-                            SignInManager<AppUser> signInManager, IMapper mapper,
-                            IGetUserRoles getUserRoles)
+                                 SignInManager<AppUser> signInManager, IMapper mapper,
+                                 IGetUserRolesByUserName getUserRolesByUserName)
         {
             _registerUser = registerUser;
             _mapper = mapper;
             _signInManager = signInManager;
             _loginUser = loginUser;
-            _getUserRoles = getUserRoles;
+            _getUserRolesByUserName = getUserRolesByUserName;
         }
 
 
@@ -75,7 +75,7 @@ namespace App.EndPoints.DokanNetUI.Controllers
                 if (result.Succeeded)
                 {
                     //check this user role is Admin or not?!
-                    if ((await _getUserRoles.Execute(model.Email, cancellationToken)).Contains("AdminRole"))
+                    if ((await _getUserRolesByUserName.Execute(model.Email, cancellationToken)).Contains("AdminRole"))
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }

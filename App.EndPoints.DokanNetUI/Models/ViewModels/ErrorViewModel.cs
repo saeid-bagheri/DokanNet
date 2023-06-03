@@ -1,4 +1,4 @@
-namespace App.EndPoints.DokanNetUI.Models
+namespace App.EndPoints.DokanNetUI.Models.ViewModels
 {
     public class ErrorViewModel
     {

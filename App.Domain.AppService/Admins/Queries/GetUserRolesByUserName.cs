@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace App.Domain.AppService.Admins.Queries
 {
-    public class GetUserRoles : IGetUserRoles
+    public class GetUserRolesByUserName : IGetUserRolesByUserName
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public GetUserRoles(UserManager<AppUser> userManager)
+        public GetUserRolesByUserName(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }

@@ -15,7 +15,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
- 
+
     <!-- Theme style -->
     <link rel="stylesheet" href="~/dist/css/style.css">
     <link rel="stylesheet" href="~/dist/css/font-awesome/css/font-awesome.min.css">
@@ -32,6 +32,12 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- For Modal -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -71,7 +77,7 @@
                                 </li>
                                 <li><a href="#"><i class="icon-profile-male"></i>پروفایل من</a></li>
                                 @*<li><a href="#"><i class="icon-wallet"></i> My Balance</a></li>*@
-@*                                <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
+                                @*                                <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#"><i class="icon-gears"></i> Account Setting</a></li>
                                 <li role="separator" class="divider"></li>*@
@@ -101,7 +107,7 @@
                     <li class="active treeview">
                         <a href="#"> <i class="fa fa-dashboard"></i> <span>داشبورد</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Users">مدیریت کاربران</a></li>
+                            <li class="active"><a asp-area="Admin" asp-controller="User" asp-action="Index">مدیریت کاربران</a></li>
                             <li><a href="#">مدیریت نظرات</a></li>
                             <li><a href="#">مدیریت فروشگاه ها</a></li>
                             <li><a href="#">مدیریت محصولات</a></li>
@@ -134,10 +140,10 @@
                 </span>
             </div>
 
-@*            <!-- /.content-wrapper -->
+            @*            <!-- /.content-wrapper -->
             <footer class="main-footer">
-                <div class="pull-left hidden-xs">Version 1.2</div>
-                Copyright © 2023 Yourdomian. All rights reserved.
+            <div class="pull-left hidden-xs">Version 1.2</div>
+            Copyright © 2023 Yourdomian. All rights reserved.
             </footer>*@
         </div>
     </div>

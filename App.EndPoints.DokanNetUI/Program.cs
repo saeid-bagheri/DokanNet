@@ -4,7 +4,7 @@ using App.Domain.Core.AppServices.Admins.Commands;
 using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
-using App.EndPoints.DokanNetUI.Models;
+using App.EndPoints.DokanNetUI.AutoMapper;
 using App.Infrastructures.Data.Repositories;
 using App.Infrastructures.Data.Repositories.AutoMapper;
 using App.Infrastructures.Data.Repositories.Repositories;
@@ -54,7 +54,7 @@ builder.Services.AddIdentity<AppUser,IdentityRole<int>>(options =>
 #region config autoMapper
 var configMapper = new MapperConfiguration(cfg =>
 {
-    cfg.AddProfile(new AutoMapperProfileDto());
+    cfg.AddProfile(new AutoMappingInfrastructures());
     cfg.AddProfile(new AutoMappingUI());
 });
 var mapper = configMapper.CreateMapper();
@@ -78,7 +78,7 @@ builder.Services.AddScoped<IGetProductById, GetProductById>();
 builder.Services.AddScoped<IGetStoreById, GetStoreById>();
 builder.Services.AddScoped<IGetStores, GetStores>();
 builder.Services.AddScoped<IGetUserById, GetUserById>();
-builder.Services.AddScoped<IGetUserRoles, GetUserRoles>();
+builder.Services.AddScoped<IGetUserRolesByUserName, GetUserRolesByUserName>();
 builder.Services.AddScoped<IGetUsers, GetUsers>();
 
 //repositories

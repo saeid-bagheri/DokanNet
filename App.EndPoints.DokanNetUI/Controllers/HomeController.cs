@@ -1,5 +1,5 @@
 ﻿using App.Domain.Core.Entities;
-using App.EndPoints.DokanNetUI.Models;
+using App.EndPoints.DokanNetUI.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

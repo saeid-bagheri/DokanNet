@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace App.Infrastructures.Data.Repositories.AutoMapper
 {
-    public class AutoMapperProfileDto : Profile
+    public class AutoMappingInfrastructures : Profile
     {
-        public AutoMapperProfileDto()
+        public AutoMappingInfrastructures()
         {
 
             CreateMap<AppUser, UserDto>();
