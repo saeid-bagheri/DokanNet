@@ -1,8 +1,10 @@
 ﻿using App.Domain.Core.AppServices.Admins.Commands;
+using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
 using App.EndPoints.DokanNetUI.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,15 +15,20 @@ namespace App.EndPoints.DokanNetUI.Controllers
         private readonly IRegisterUser _registerUser;
         private readonly ILoginUser _loginUser;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IGetUserRoles _getUserRoles;
+
+
         private readonly IMapper _mapper;
 
         public AccountController(IRegisterUser registerUser, ILoginUser loginUser,
-                            SignInManager<AppUser> signInManager, IMapper mapper)
+                            SignInManager<AppUser> signInManager, IMapper mapper,
+                            IGetUserRoles getUserRoles)
         {
             _registerUser = registerUser;
             _mapper = mapper;
             _signInManager = signInManager;
             _loginUser = loginUser;
+            _getUserRoles = getUserRoles;
         }
 
 
@@ -37,12 +44,7 @@ namespace App.EndPoints.DokanNetUI.Controllers
                 var resultRegister = await _registerUser.Execute(_mapper.Map<UserDto>(model), cancellationToken);
                 if (resultRegister.Succeeded)
                 {
-                    var resultLogin = await _loginUser.Execute(_mapper.Map<UserDto>(model), cancellationToken);
-                    if (resultLogin.Succeeded)
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    ModelState.AddModelError(string.Empty, "خطا در ورود به سایت");
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                 {
@@ -72,6 +74,11 @@ namespace App.EndPoints.DokanNetUI.Controllers
                 var result = await _loginUser.Execute(_mapper.Map(model, new UserDto()), cancellationToken);
                 if (result.Succeeded)
                 {
+                    //check this user role is Admin or not?!
+                    if ((await _getUserRoles.Execute(model.Email, cancellationToken)).Contains("AdminRole"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else

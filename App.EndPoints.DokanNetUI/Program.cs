@@ -78,6 +78,7 @@ builder.Services.AddScoped<IGetProductById, GetProductById>();
 builder.Services.AddScoped<IGetStoreById, GetStoreById>();
 builder.Services.AddScoped<IGetStores, GetStores>();
 builder.Services.AddScoped<IGetUserById, GetUserById>();
+builder.Services.AddScoped<IGetUserRoles, GetUserRoles>();
 builder.Services.AddScoped<IGetUsers, GetUsers>();
 
 //repositories

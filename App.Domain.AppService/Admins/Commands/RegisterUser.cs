@@ -26,9 +26,6 @@ namespace App.Domain.AppService.Admins.Commands
                 UserName = model.Email,
                 CreatedAt = DateTime.Now,
                 Buyer = new Buyer()
-                {
-                    AppUserId = user.Id
-                }
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
