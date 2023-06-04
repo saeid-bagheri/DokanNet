@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230530090802_add-isdeleted-to-appUser")]
-    partial class addisdeletedtoappUser
+    [Migration("20230603235635_Init-AND-SeedData")]
+    partial class InitANDSeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,6 +130,26 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "54e8dfb5-8700-4936-a2cd-4b0369afa909",
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 480, DateTimeKind.Local).AddTicks(425),
+                            Email = "saeidbagheri034@gmail.com",
+                            EmailConfirmed = false,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SAEIDBAGHERI034@GMAIL.COM",
+                            NormalizedUserName = "SAEIDBAGHERI034",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPNQBpPc+hBWMEWr7A+JDgCPSLERQ26XfmIkOwMslgTLkV+ruPRAijaQcLa5/PL7UA==",
+                            PhoneNumber = "09389059421",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "SaeidBagheri034"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Auction", b =>
@@ -255,6 +275,20 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Buyers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "تهران",
+                            AppUserId = 1,
+                            CityId = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(557),
+                            FirstName = "سعید",
+                            IsDeleted = false,
+                            LastName = "باقری",
+                            Mobile = "09389059421"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Category", b =>
@@ -285,6 +319,15 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(345),
+                            IsDeleted = false,
+                            Title = "پوشاک"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.City", b =>
@@ -303,6 +346,13 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "تهران"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Comment", b =>
@@ -460,6 +510,23 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Medals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "طلا"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "نقره"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "برنز"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Product", b =>
@@ -512,6 +579,36 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasIndex("StoreId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(467),
+                            IsAuction = false,
+                            IsConfirmed = true,
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Price = 500000,
+                            Stock = 10,
+                            StoreId = 1,
+                            Title = "شلوار لی"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(471),
+                            IsAuction = false,
+                            IsConfirmed = true,
+                            IsDeleted = false,
+                            IsEnabled = true,
+                            Price = 300000,
+                            Stock = 15,
+                            StoreId = 1,
+                            Title = "پیراهن مردانه"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Seller", b =>
@@ -564,7 +661,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("MedalId")
+                    b.Property<int?>("MedalId")
                         .HasColumnType("int");
 
                     b.Property<string>("Mobile")
@@ -589,6 +686,21 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasIndex("MedalId");
 
                     b.ToTable("Sellers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "تهران",
+                            AppUserId = 1,
+                            CityId = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(521),
+                            FeePercentage = 5m,
+                            FirstName = "سعید",
+                            IsDeleted = false,
+                            LastName = "باقری",
+                            Mobile = "09389059421"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Store", b =>
@@ -617,6 +729,15 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(598),
+                            IsClosed = false,
+                            Title = "لباسفروشی"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -647,6 +768,26 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "AdminRole",
+                            NormalizedName = "ADMINROLE"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "SellerRole",
+                            NormalizedName = "SELLERROLE"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "BuyerRole",
+                            NormalizedName = "BUYERROLE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -731,6 +872,23 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -924,7 +1082,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasOne("App.Domain.Core.Entities.Medal", "Medal")
                         .WithMany("Sellers")
                         .HasForeignKey("MedalId")
-                        .IsRequired()
                         .HasConstraintName("FK_Sellers_Medals");
 
                     b.Navigation("AppUser");

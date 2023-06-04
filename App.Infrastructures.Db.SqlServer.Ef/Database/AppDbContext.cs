@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using App.Domain.Core.Entities;
+using App.Infrastructures.Db.SqlServer.Ef.SeedData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +56,9 @@ public partial class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Seed();
+
+
 
         modelBuilder.Entity<Admin>(entity =>
         {

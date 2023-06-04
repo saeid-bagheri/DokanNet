@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitANDSeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +35,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -235,7 +239,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: false),
                     ProfileImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -273,7 +277,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     CityId = table.Column<int>(type: "int", nullable: false),
                     ProfileImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Biography = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MedalId = table.Column<int>(type: "int", nullable: false),
+                    MedalId = table.Column<int>(type: "int", nullable: true),
                     FeePercentage = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -516,6 +520,75 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         column: x => x.BuyerId,
                         principalTable: "Buyers",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, null, "AdminRole", "ADMINROLE" },
+                    { 2, null, "SellerRole", "SELLERROLE" },
+                    { 3, null, "BuyerRole", "BUYERROLE" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DeletedAt", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "54e8dfb5-8700-4936-a2cd-4b0369afa909", new DateTime(2023, 6, 4, 3, 26, 35, 480, DateTimeKind.Local).AddTicks(425), null, "saeidbagheri034@gmail.com", false, false, false, null, "SAEIDBAGHERI034@GMAIL.COM", "SAEIDBAGHERI034", "AQAAAAIAAYagAAAAEPNQBpPc+hBWMEWr7A+JDgCPSLERQ26XfmIkOwMslgTLkV+ruPRAijaQcLa5/PL7UA==", "09389059421", false, null, false, "SaeidBagheri034" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "ParentId", "Title" },
+                values: new object[] { 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(345), null, false, null, "پوشاک" });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "Title" },
+                values: new object[] { 1, "تهران" });
+
+            migrationBuilder.InsertData(
+                table: "Medals",
+                columns: new[] { "Id", "Title" },
+                values: new object[,]
+                {
+                    { 1, "طلا" },
+                    { 2, "نقره" },
+                    { 3, "برنز" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 1 },
+                    { 3, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Buyers",
+                columns: new[] { "Id", "Address", "AppUserId", "CityId", "CreatedAt", "DeletedAt", "FirstName", "IsDeleted", "LastName", "Mobile", "ProfileImgUrl" },
+                values: new object[] { 1, "تهران", 1, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(557), null, "سعید", false, "باقری", "09389059421", null });
+
+            migrationBuilder.InsertData(
+                table: "Sellers",
+                columns: new[] { "Id", "Address", "AppUserId", "Biography", "Birthday", "CardNumber", "CityId", "CreatedAt", "DeletedAt", "FeePercentage", "FirstName", "IsDeleted", "LastName", "MedalId", "Mobile", "ProfileImgUrl", "ShebaNumber" },
+                values: new object[] { 1, "تهران", 1, null, null, null, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(521), null, 5m, "سعید", false, "باقری", null, "09389059421", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Stores",
+                columns: new[] { "Id", "ClosedAt", "CreatedAt", "ImageUrl", "IsClosed", "Title" },
+                values: new object[] { 1, null, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(598), null, false, "لباسفروشی" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "CreatedAt", "DeletedAt", "IsAuction", "IsConfirmed", "IsDeleted", "IsEnabled", "Price", "Stock", "StoreId", "Title" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(467), null, false, true, false, true, 500000, 10, 1, "شلوار لی" },
+                    { 2, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(471), null, false, true, false, true, 300000, 15, 1, "پیراهن مردانه" }
                 });
 
             migrationBuilder.CreateIndex(

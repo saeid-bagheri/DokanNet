@@ -27,7 +27,7 @@ public partial class Seller
 
     public string? Biography { get; set; }
 
-    public int MedalId { get; set; }
+    public int? MedalId { get; set; }
 
     public decimal FeePercentage { get; set; }
 
@@ -48,7 +48,7 @@ public partial class Seller
 
     public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
 
-    public virtual Medal Medal { get; set; } = null!;
+    public virtual Medal? Medal { get; set; }
 
     public virtual Store? Store { get; set; }
     #endregion navigations
