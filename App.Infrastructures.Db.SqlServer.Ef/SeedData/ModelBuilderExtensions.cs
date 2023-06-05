@@ -26,6 +26,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 EmailConfirmed = false,
                 PhoneNumber = "09389059421",
                 PhoneNumberConfirmed = false,
+                LockoutEnabled = false,
+                SecurityStamp = "54e8dfb5-8700-4936-a2cd-4b0369afa909",
                 IsDeleted = false
             };
             PasswordHasher<AppUser> passwordHasher = new PasswordHasher<AppUser>();
@@ -57,7 +59,39 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                     Title = "پوشاک",
                     IsDeleted = false,
                     CreatedAt = DateTime.Now
+                },
+                new Category()
+                {
+                    Id = 2,
+                    Title = "ابزار",
+                    IsDeleted = false,
+                    CreatedAt = DateTime.Now
+                },
+                new Category()
+                {
+                    Id = 3,
+                    Title = "ابزار برقی",
+                    ParentId = 2,
+                    IsDeleted = false,
+                    CreatedAt = DateTime.Now
+                },
+                new Category()
+                {
+                    Id = 4,
+                    Title = "ابزار غیر برقی",
+                    ParentId = 2,
+                    IsDeleted = false,
+                    CreatedAt = DateTime.Now
+                },
+                new Category()
+                {
+                    Id = 5,
+                    Title = "لباس مردانه",
+                    ParentId = 1,
+                    IsDeleted = false,
+                    CreatedAt = DateTime.Now
                 });
+
 
 
             //city
@@ -83,7 +117,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 {
                     Id = 1,
                     Title = "شلوار لی",
-                    CategoryId = 1,
+                    CategoryId = 5,
                     StoreId = 1,
                     Stock = 10,
                     IsConfirmed = true,
@@ -96,8 +130,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 new Product()
                 {
                     Id = 2,
-                    Title = "پیراهن مردانه",
-                    CategoryId = 1,
+                    Title = "پیراهن مردانه مدل یقه دار",
+                    CategoryId = 5,
                     StoreId = 1,
                     Stock = 15,
                     IsConfirmed = true,

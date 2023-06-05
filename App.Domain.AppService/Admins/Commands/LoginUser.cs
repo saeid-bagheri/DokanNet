@@ -21,7 +21,7 @@ namespace App.Domain.AppService.Admins.Commands
 
         public async Task<SignInResult> Execute(UserDto model, CancellationToken cancellationToken)
         {
-            return await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+            return await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
         }
     }
 }

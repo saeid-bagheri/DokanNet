@@ -4,6 +4,7 @@ using App.Infrastructures.Db.SqlServer.Ef.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230604012432_modify-user1")]
+    partial class modifyuser1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,15 +136,15 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "68838325-9f40-4d24-94da-f7c6e9346fb3",
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 42, 999, DateTimeKind.Local).AddTicks(1274),
+                            ConcurrencyStamp = "5a2a7383-1457-44cc-8639-30625d91d88a",
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 531, DateTimeKind.Local).AddTicks(1005),
                             Email = "saeidbagheri034@gmail.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SAEIDBAGHERI034@GMAIL.COM",
                             NormalizedUserName = "SAEIDBAGHERI034",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJIU+TFcOUyogzuuAENkQB2e4WrYxxYdwYT6kBGD5zILYFsIirx14wUxcEUROsVnnw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDdc0ip32fLvIysBfsC8gS48ReRcCrVGE2mcxRRb2UsViZL71vVdm91uaCBqgggQlA==",
                             PhoneNumber = "09389059421",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "54e8dfb5-8700-4936-a2cd-4b0369afa909",
@@ -238,6 +241,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("CityId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -280,7 +284,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Address = "تهران",
                             AppUserId = 1,
                             CityId = 1,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4806),
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 613, DateTimeKind.Local).AddTicks(3447),
                             FirstName = "سعید",
                             IsDeleted = false,
                             LastName = "باقری",
@@ -321,40 +325,9 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4641),
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 613, DateTimeKind.Local).AddTicks(3224),
                             IsDeleted = false,
                             Title = "پوشاک"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4659),
-                            IsDeleted = false,
-                            Title = "ابزار"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4660),
-                            IsDeleted = false,
-                            ParentId = 2,
-                            Title = "ابزار برقی"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4662),
-                            IsDeleted = false,
-                            ParentId = 2,
-                            Title = "ابزار غیر برقی"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4663),
-                            IsDeleted = false,
-                            ParentId = 1,
-                            Title = "لباس مردانه"
                         });
                 });
 
@@ -612,8 +585,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 5,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4742),
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 613, DateTimeKind.Local).AddTicks(3351),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -626,8 +599,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 2,
-                            CategoryId = 5,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4746),
+                            CategoryId = 1,
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 613, DateTimeKind.Local).AddTicks(3354),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -635,7 +608,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Price = 300000,
                             Stock = 15,
                             StoreId = 1,
-                            Title = "پیراهن مردانه مدل یقه دار"
+                            Title = "پیراهن مردانه"
                         });
                 });
 
@@ -722,7 +695,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Address = "تهران",
                             AppUserId = 1,
                             CityId = 1,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4780),
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 613, DateTimeKind.Local).AddTicks(3411),
                             FeePercentage = 5m,
                             FirstName = "سعید",
                             IsDeleted = false,
@@ -762,7 +735,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 5, 19, 25, 43, 84, DateTimeKind.Local).AddTicks(4824),
+                            CreatedAt = new DateTime(2023, 6, 4, 4, 54, 32, 613, DateTimeKind.Local).AddTicks(3487),
                             IsClosed = false,
                             Title = "لباسفروشی"
                         });
@@ -998,6 +971,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     b.HasOne("App.Domain.Core.Entities.City", "City")
                         .WithMany("Buyers")
                         .HasForeignKey("CityId")
+                        .IsRequired()
                         .HasConstraintName("FK_Buyers_Cities");
 
                     b.Navigation("AppUser");

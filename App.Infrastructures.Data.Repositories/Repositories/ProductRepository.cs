@@ -45,12 +45,15 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var records = new List<ProductDto>();
             records = await _context.Products
                 .Where(P => P.IsDeleted == false)
+                .Include(p => p.Category)
+                .Include(p => p.Store)
                 .Select(p => new ProductDto
                 {
                     Id = p.Id,
                     Title = p.Title,
-                    CategoryId = p.CategoryId,
+                    CategoryTitle = p.Category.Title,
                     StoreId = p.StoreId,
+                    StoreTitle = p.Store.Title,
                     Stock = p.Stock,
                     IsConfirmed = p.IsConfirmed,
                     IsAuction = p.IsAuction,
@@ -58,7 +61,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
                     CreatedAt = p.CreatedAt
-                }).ToListAsync(cancellationToken);
+                })
+                .ToListAsync(cancellationToken);
             return records;
         }
 
@@ -108,12 +112,15 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<ProductDto> GetById(int id, CancellationToken cancellationToken)
         {
             var entity = await _context.Products
-                .Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+                .Where(p => p.Id == id)
+                .Include(p => p.Category)
+                .Include(p => p.Store)
+                .FirstOrDefaultAsync(cancellationToken);
             var record = new ProductDto
             {
                 Id = entity.Id,
                 Title = entity.Title,
-                CategoryId = entity.CategoryId,
+                CategoryTitle = entity.Category.Title,
                 StoreId = entity.StoreId,
                 Stock = entity.Stock,
                 IsConfirmed = entity.IsConfirmed,
@@ -131,8 +138,6 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var product = await _context.Products
                 .Where(p => p.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
             product.Title = entity.Title;
-            product.CategoryId = entity.CategoryId;
-            product.StoreId = entity.StoreId;
             product.Stock = entity.Stock;
             product.IsConfirmed = entity.IsConfirmed;
             product.IsAuction = entity.IsAuction;

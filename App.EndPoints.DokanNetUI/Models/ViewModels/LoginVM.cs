@@ -5,9 +5,8 @@ namespace App.EndPoints.DokanNetUI.Models.ViewModels
     public class LoginVM
     {
         [Required(ErrorMessage ="وارد  کردن {0} اجباری است ")]
-        [EmailAddress(ErrorMessage ="ایمیل نامعتبر است")]
-        [Display(Name ="آدرس ایمیل")]
-        public string Email { get; set; }
+        [Display(Name ="نام کاربری")]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
         [DataType(DataType.Password)]

@@ -32,7 +32,7 @@ public partial class Buyer
 
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 
-    public virtual City City { get; set; } = null!;
+    public virtual City? City { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

@@ -1,0 +1,63 @@
+﻿@model ProductVM
+
+@{
+    ViewData["Title"] = "ویرایش محصول";
+    Layout = "_AdminLayout";
+}
+
+<h3>ویرایش محصول</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-action="Update" method="post">
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input readonly asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger" class="text-danger"></span>
+            </div>
+            <div class="form-group checkbox">
+                <label asp-for="IsConfirmed" class="control-label mx-2"></label>
+                <input type="checkbox" asp-for="IsConfirmed" class="form-check-input" />
+                <span asp-validation-for="IsConfirmed" class="text-danger"></span>
+            </div>
+            <div class="form-group checkbox">
+                <label asp-for="IsAuction" class="control-label mx-2"></label>
+                <input type="checkbox" asp-for="IsAuction" class="form-check-input" />
+                <span asp-validation-for="IsAuction" class="text-danger"></span>
+            </div>
+            <div class="form-group checkbox">
+                <label asp-for="IsEnabled" class="control-label mx-2"></label>
+                <input type="checkbox" asp-for="IsEnabled" class="form-check-input" />
+                <span asp-validation-for="IsEnabled" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ویرایش کردن" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a class="btn btn-light my-2" asp-action="Index">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

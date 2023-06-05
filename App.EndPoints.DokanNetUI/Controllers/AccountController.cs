@@ -75,7 +75,7 @@ namespace App.EndPoints.DokanNetUI.Controllers
                 if (result.Succeeded)
                 {
                     //check this user role is Admin or not?!
-                    if ((await _getUserRolesByUserName.Execute(model.Email, cancellationToken)).Contains("AdminRole"))
+                    if ((await _getUserRolesByUserName.Execute(model.UserName, cancellationToken)).Contains("AdminRole"))
                     {
                         return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                     }

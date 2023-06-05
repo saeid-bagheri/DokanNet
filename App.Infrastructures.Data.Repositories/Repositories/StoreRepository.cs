@@ -25,6 +25,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var record = new Store
             {
+                Id = entity.Id,
                 Title = entity.Title,
                 ImageUrl = entity.ImageUrl,
                 IsClosed = entity.IsClosed,

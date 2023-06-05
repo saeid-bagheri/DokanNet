@@ -22,8 +22,7 @@ namespace App.Domain.AppService.Admins.Commands
         {
             var user = new AppUser()
             {
-                Email = model.Email,
-                UserName = model.Email,
+                UserName = model.UserName,
                 CreatedAt = DateTime.Now,
                 Buyer = new Buyer()
             };

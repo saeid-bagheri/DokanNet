@@ -3,11 +3,14 @@ using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DtoModels;
 using App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
 namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles ="AdminRole")]
     public class UserController : Controller
     {
         private readonly IGetUsers _getUsers;
@@ -28,22 +31,18 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         }
 
 
-        [Area("Admin")]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var users = await _getUsers.Execute(cancellationToken);
+            var users = _mapper.Map<List<UserVM>>(await _getUsers.Execute(cancellationToken));
             return View(users);
         }
 
-        [Area("Admin")]
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
         {
-            var user = await _getUserById.Execute(id, cancellationToken);
-            var userVM = _mapper.Map<UpdateUserVM>(user);
-            return View(userVM);
+            var user = _mapper.Map<UpdateUserVM>(await _getUserById.Execute(id, cancellationToken));
+            return View(user);
         }
 
-        [Area("Admin")]
         [HttpPost]
         public async Task<IActionResult> Update(UpdateUserVM model, CancellationToken cancellationToken)
         {
@@ -54,7 +53,6 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [Area("Admin")]
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             await _deleteUser.Execute(id, cancellationToken);

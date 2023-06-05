@@ -80,6 +80,7 @@ builder.Services.AddScoped<IGetStores, GetStores>();
 builder.Services.AddScoped<IGetUserById, GetUserById>();
 builder.Services.AddScoped<IGetUserRolesByUserName, GetUserRolesByUserName>();
 builder.Services.AddScoped<IGetUsers, GetUsers>();
+builder.Services.AddScoped<IGetProducts, GetProducts>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

@@ -9,8 +9,12 @@ namespace App.Domain.Core.DtoModels
         public string Title { get; set; } = null!;
 
         public int CategoryId { get; set; }
+        public string? CategoryTitle { get; set; }
 
         public int StoreId { get; set; }
+        public string? StoreTitle { get; set; }
+
+        public string? SellerName { get; set; }
 
         public int Stock { get; set; }
 
