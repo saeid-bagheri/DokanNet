@@ -11,6 +11,7 @@ namespace App.Domain.Core.DataAccess
     {
         Task<UserDto> GetById(int id, CancellationToken cancellationToken);
         Task<List<UserDto>> GetAll(CancellationToken cancellationToken);
+        Task<List<string>> GetRolesByUserName(string userName, CancellationToken cancellationToken);
         Task Update(UserDto entity, CancellationToken cancellationToken);
         Task Delete(int id, CancellationToken cancellationToken);
     }

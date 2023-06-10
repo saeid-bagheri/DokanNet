@@ -5,7 +5,7 @@ namespace App.EndPoints.DokanNetUI.Models.ViewModels
     public class RegisterVM
     {
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
-        [Display(Name = "نام کاری")]
+        [Display(Name = "نام کاربری")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]

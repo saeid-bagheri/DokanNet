@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
 {
     /// <inheritdoc />
-    public partial class InitANDSeedData : Migration
+    public partial class initseedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -239,7 +239,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: false),
+                    CityId = table.Column<int>(type: "int", nullable: true),
                     ProfileImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -535,12 +535,25 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DeletedAt", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "54e8dfb5-8700-4936-a2cd-4b0369afa909", new DateTime(2023, 6, 4, 3, 26, 35, 480, DateTimeKind.Local).AddTicks(425), null, "saeidbagheri034@gmail.com", false, false, false, null, "SAEIDBAGHERI034@GMAIL.COM", "SAEIDBAGHERI034", "AQAAAAIAAYagAAAAEPNQBpPc+hBWMEWr7A+JDgCPSLERQ26XfmIkOwMslgTLkV+ruPRAijaQcLa5/PL7UA==", "09389059421", false, null, false, "SaeidBagheri034" });
+                values: new object[,]
+                {
+                    { 1, 0, "0699177b-fadc-4b59-8a63-e3cf520e493f", new DateTime(2023, 6, 6, 1, 25, 21, 500, DateTimeKind.Local).AddTicks(4890), null, "saeidbagheri034@gmail.com", false, false, false, null, "SAEIDBAGHERI034@GMAIL.COM", "SAEIDBAGHERI034", "AQAAAAIAAYagAAAAEAgL2pkEGeG7bHFMWZhfYpBv94RgYgNsnQrnnz+4COvT1eS0lxoxV8BI2McXV61EuQ==", "09389059421", false, "54e8dfb5-8700-4936-a2cd-4b0369afa909", false, "SaeidBagheri034" },
+                    { 2, 0, "1fb6ea3f-34a4-470e-8af2-ba879c61cc23", new DateTime(2023, 6, 6, 1, 25, 21, 587, DateTimeKind.Local).AddTicks(2073), null, "keyvanhafezi@gmail.com", false, false, false, null, "KEYVANHAFEZI@GMAIL.COM", "KEYVANHAFEZI", "AQAAAAIAAYagAAAAEHzjQbjxl77EMw3VVVbQmobSPuj4ltgdvk3OqwZ4IEfwmrDFbPGReS1Yg1z/2XKNPQ==", "09199999999", false, null, false, "KeyvanHafezi" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "ParentId", "Title" },
-                values: new object[] { 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(345), null, false, null, "پوشاک" });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1407), null, false, null, "پوشاک" },
+                    { 2, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1424), null, false, null, "ابزار" },
+                    { 3, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1565), null, false, 2, "ابزار برقی" },
+                    { 4, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1567), null, false, 2, "ابزار غیر برقی" },
+                    { 5, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1570), null, false, 1, "لباس مردانه" },
+                    { 6, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1575), null, false, null, "لوازم الکترونیک" },
+                    { 7, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1577), null, false, 6, "موبایل" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Cities",
@@ -564,31 +577,48 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 {
                     { 1, 1 },
                     { 2, 1 },
-                    { 3, 1 }
+                    { 3, 1 },
+                    { 2, 2 },
+                    { 3, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Buyers",
                 columns: new[] { "Id", "Address", "AppUserId", "CityId", "CreatedAt", "DeletedAt", "FirstName", "IsDeleted", "LastName", "Mobile", "ProfileImgUrl" },
-                values: new object[] { 1, "تهران", 1, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(557), null, "سعید", false, "باقری", "09389059421", null });
+                values: new object[,]
+                {
+                    { 1, "تهران", 1, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1926), null, "سعید", false, "باقری", "09389059421", null },
+                    { 2, "تهران پونک", 2, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1932), null, "کیوان", false, "حافظی", "09366666666", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Sellers",
                 columns: new[] { "Id", "Address", "AppUserId", "Biography", "Birthday", "CardNumber", "CityId", "CreatedAt", "DeletedAt", "FeePercentage", "FirstName", "IsDeleted", "LastName", "MedalId", "Mobile", "ProfileImgUrl", "ShebaNumber" },
-                values: new object[] { 1, "تهران", 1, null, null, null, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(521), null, 5m, "سعید", false, "باقری", null, "09389059421", null, null });
+                values: new object[,]
+                {
+                    { 1, "تهران", 1, null, null, null, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1856), null, 5m, "سعید", false, "باقری", null, "09389059421", null, null },
+                    { 2, "تهران پونک", 2, null, null, null, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1861), null, 5m, "کیوان", false, "حافظی", null, "09366666666", null, null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Stores",
                 columns: new[] { "Id", "ClosedAt", "CreatedAt", "ImageUrl", "IsClosed", "Title" },
-                values: new object[] { 1, null, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(598), null, false, "لباسفروشی" });
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1969), null, false, "همه چی فروشی" },
+                    { 2, null, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1972), null, false, "موبایل کیوان" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "DeletedAt", "IsAuction", "IsConfirmed", "IsDeleted", "IsEnabled", "Price", "Stock", "StoreId", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(467), null, false, true, false, true, 500000, 10, 1, "شلوار لی" },
-                    { 2, 1, new DateTime(2023, 6, 4, 3, 26, 35, 562, DateTimeKind.Local).AddTicks(471), null, false, true, false, true, 300000, 15, 1, "پیراهن مردانه" }
+                    { 1, 5, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1776), null, false, true, false, true, 500000, 10, 1, "شلوار لی" },
+                    { 2, 5, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1781), null, false, true, false, true, 300000, 15, 1, "پیراهن مردانه مدل یقه دار" },
+                    { 3, 3, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1785), null, false, true, false, true, 900000, 4, 1, "دریل مدل 2911" },
+                    { 4, 4, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1789), null, false, true, false, true, 150000, 7, 1, "انبردست رونیکس مدل ROX-1168" },
+                    { 5, 7, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1792), null, false, true, false, true, 9500000, 3, 2, "موبایل شیائومی redmi note 11" }
                 });
 
             migrationBuilder.CreateIndex(

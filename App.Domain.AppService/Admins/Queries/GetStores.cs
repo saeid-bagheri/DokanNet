@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DtoModels;
+using App.Domain.Core.Entities;
 using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,22 @@ namespace App.Domain.AppService.Admins.Queries
     public class GetStores : IGetStores
     {
         private readonly IStoreRepository _storeRepository;
+        private readonly ISellerRepository _sellerRepository;
 
-        public GetStores(IStoreRepository storeRepository)
+        public GetStores(IStoreRepository storeRepository, ISellerRepository sellerRepository)
         {
             _storeRepository = storeRepository;
+            _sellerRepository = sellerRepository;
         }
         public async Task<List<StoreDto>> Execute(CancellationToken cancellationToken)
         {
-            return await _storeRepository.GetAll(cancellationToken);
+            var stores = await _storeRepository.GetAll(cancellationToken);
+            foreach (var store in stores)
+            {
+                store.SellerName = (await _sellerRepository.GetById(store.Id, cancellationToken)).FirstName + " " +
+                                        (await _sellerRepository.GetById(store.Id, cancellationToken)).LastName;
+            }
+            return stores;
         }
     }
 }

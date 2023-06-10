@@ -20,7 +20,12 @@ namespace App.Domain.AppService.Admins.Queries
         }
         public async Task<List<UserDto>> Execute(CancellationToken cancellationToken)
         {
-            return await _userRepository.GetAll(cancellationToken);
+            var users = await _userRepository.GetAll(cancellationToken);
+            foreach (var user in users)
+            {
+                user.Roles =await _userRepository.GetRolesByUserName(user.UserName, cancellationToken);
+            }
+            return users;
         }
     }
 }

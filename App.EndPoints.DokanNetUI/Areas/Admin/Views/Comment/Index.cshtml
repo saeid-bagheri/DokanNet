@@ -1,7 +1,7 @@
-﻿@model List<ProductVM>
+﻿@model List<CommentVM>
 
 @{
-    ViewData["Title"] = "محصولات";
+    ViewData["Title"] = "دیدگاه ها";
     Layout = "_AdminLayout";
 }
 
@@ -10,14 +10,11 @@
     <thead>
         <tr class="bg-info text-white">
             <th>شماره</th>
+            <th>شرح دیدگاه</th>
+            <th>امتیاز</th>
+            <th>نام خریدار</th>
             <th>نام محصول</th>
-            <th>دسته بندی</th>
-            <th>نام غرفه دار</th>
-            <th>نام غرفه</th>
             <th>تایید شده</th>
-            <th>مزایده ای</th>
-            <th>فعال</th>
-            <th>قیمت (تومان)</th>
 
             <th> عملیات</th>
         </tr>
@@ -31,34 +28,26 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CategoryTitle)
+                    @Html.DisplayFor(modelItem => item.Score)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SellerName)
+                    @Html.DisplayFor(modelItem => item.BuyerName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StoreTitle)
+                    @Html.DisplayFor(modelItem => item.ProductName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsConfirmed)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsAuction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a asp-route-Id="@item.Id" asp-controller="Product" asp-action="Update" class="btn btn-info text-white">ویرایش</a>
-                    <a data-toggle="modal" data-id=@item.Id data-target="#deleteModal" class="deleteProduct btn btn-danger"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span>حذف</a>
-                </td>
-
+                @if (!item.IsConfirmed)
+                {
+                    <td>
+                        <a asp-route-Id="@item.Id" asp-controller="Comment" asp-action="Confirm" class="btn btn-info text-white">تایید دیدگاه</a>
+                    </td>
+                }
             </tr>
         }
 

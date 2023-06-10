@@ -107,12 +107,11 @@
                     <li class="active treeview">
                         <a href="#"> <i class="fa fa-dashboard"></i> <span>داشبورد</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a asp-area="Admin" asp-controller="User" asp-action="Index">مدیریت کاربران</a></li>
+                            <li><a asp-area="Admin" asp-controller="User" asp-action="Index">مدیریت کاربران</a></li>
                             <li><a asp-area="Admin" asp-controller="Product" asp-action="Index">مدیریت محصولات</a></li>
-                            <li><a href="#">مدیریت غرفه ها</a></li>
-                            <li><a href="#">مدیریت نظرات</a></li>
+                            <li><a asp-area="Admin" asp-controller="Store" asp-action="Index">مدیریت غرفه ها</a></li>
+                            <li><a asp-area="Admin" asp-controller="Comment" asp-action="Index">مدیریت نظرات</a></li>
                             <li><a href="#">کمیسیون فروشندگان</a></li>
-                            <li><a href="#">اختصاص مدال برای فروشندگان</a></li>
                         </ul>
                     </li>
 

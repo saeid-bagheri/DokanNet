@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AppServices\Buyers\Queries\" />
-    <Folder Include="AppServices\Buyers\Commands\" />
-    <Folder Include="AppServices\Sellers\Queries\" />
+    <Folder Include="Services\Buyers\Queries\" />
+    <Folder Include="Services\Buyers\Commands\" />
+    <Folder Include="Services\Sellers\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

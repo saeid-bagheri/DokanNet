@@ -14,6 +14,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels
         [Display(Name = "آدرس ایمیل")]
         public string? Email { get; set; } = string.Empty;
 
+        public List<string>? Roles { get; set; } = new List<string>();
+
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^09\d{9}$", ErrorMessage = "لطفاً یک شماره موبایل معتبر وارد کنید")]
         [Display(Name = "شماره موبایل")]

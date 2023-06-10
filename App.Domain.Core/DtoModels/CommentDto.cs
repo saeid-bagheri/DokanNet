@@ -18,8 +18,10 @@ namespace App.Domain.Core.DtoModels
         public bool IsConfirmed { get; set; }
 
         public int BuyerId { get; set; }
+        public string? BuyerName { get; set; }
 
         public int ProductId { get; set; }
+        public string? ProductName { get; set; }
 
         public bool IsDeleted { get; set; }
 

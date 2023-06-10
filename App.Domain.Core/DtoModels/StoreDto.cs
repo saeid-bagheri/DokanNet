@@ -13,6 +13,8 @@ namespace App.Domain.Core.DtoModels
 
         public string Title { get; set; } = null!;
 
+        public string? SellerName { get; set; } = null!;
+
         public string? ImageUrl { get; set; }
 
         public bool IsClosed { get; set; }

@@ -40,8 +40,10 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<StoreDto>();
             records = await _context.Stores
+                .Where(s => s.IsClosed == false)
                 .Select(s => new StoreDto
                 {
+                    Id = s.Id,
                     Title = s.Title,
                     ImageUrl = s.ImageUrl,
                     IsClosed = s.IsClosed,

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Domain.AppService\App.Domain.AppService.csproj" />
+    <ProjectReference Include="..\App.Domain.AppService\App.Domain.Service.csproj" />
     <ProjectReference Include="..\App.Domain.Core\App.Domain.Core.csproj" />
     <ProjectReference Include="..\App.Infrastructures.Data.Repositories\App.Infrastructures.Data.Repositories.csproj" />
   </ItemGroup>
@@ -31,6 +31,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Seller\Controllers\" />
+    <Folder Include="Areas\Seller\Data\" />
+    <Folder Include="Areas\Seller\Models\" />
+    <Folder Include="Areas\Seller\Views\" />
   </ItemGroup>
 
 </Project>

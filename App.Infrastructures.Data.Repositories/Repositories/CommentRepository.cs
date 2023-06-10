@@ -43,16 +43,18 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var records = new List<CommentDto>();
             records = await _context.Comments
                 .Where(c => c.IsDeleted == false)
+                .Include(c => c.Buyer)
+                .Include(c => c.Product)
                 .Select(c => new CommentDto
                 {
+                    Id = c.Id,
                     Description = c.Description,
                     Score = c.Score,
-                    BuyerId = c.BuyerId,
-                    ProductId = c.ProductId,
+                    BuyerName = c.Buyer.FirstName + " " + c.Buyer.LastName,
+                    ProductName = c.Product.Title,
                     CreatedAt = c.CreatedAt,
                     IsConfirmed = c.IsConfirmed,
-                    IsDeleted = c.IsDeleted,
-                    DeletedAt = c.DeletedAt
+                    IsDeleted = c.IsDeleted
                 }).ToListAsync(cancellationToken);
             return records;
         }

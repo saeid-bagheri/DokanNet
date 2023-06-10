@@ -39,12 +39,12 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<UpdateUserVM>(await _getUserById.Execute(id, cancellationToken));
+            var user = _mapper.Map<UserVM>(await _getUserById.Execute(id, cancellationToken));
             return View(user);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateUserVM model, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(UserVM model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {

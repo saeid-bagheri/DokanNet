@@ -55,6 +55,17 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             return _mapper.Map<UserDto>(record);
         }
 
+        public async Task<List<string>> GetRolesByUserName(string userName, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user is not null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                return roles.ToList();
+            }
+            return new List<string>();
+        }
+
         public async Task Update(UserDto entity, CancellationToken cancellationToken)
         {
             var record = await _context.Users

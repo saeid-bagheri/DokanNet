@@ -14,6 +14,7 @@ namespace App.Domain.Core.DtoModels
         public string? PhoneNumber { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedAt { get; set; }
+        public List<string>? Roles { get; set; } = new List<string>();
 
         #region Navigation properties
 

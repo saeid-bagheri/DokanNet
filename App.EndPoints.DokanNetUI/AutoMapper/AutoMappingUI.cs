@@ -12,10 +12,13 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<RegisterVM, UserDto>().ReverseMap();
             CreateMap<LoginVM, UserDto>().ReverseMap();
 
-            CreateMap<UpdateUserVM, UserDto>().ReverseMap();
             CreateMap<UserVM, UserDto>().ReverseMap();
 
             CreateMap<ProductVM, ProductDto>().ReverseMap();
+
+            CreateMap<StoreVM, StoreDto>().ReverseMap();
+
+            CreateMap<CommentVM, CommentDto>().ReverseMap();
         }
     }
 }

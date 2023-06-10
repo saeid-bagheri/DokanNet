@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{0593C0DE-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8BF13D5B-2F23-41F6-AF1F-1AAA8EAC7484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain.Core", "App.Domain.Core\App.Domain.Core.csproj", "{8E68EBA9-D989-45ED-8A90-FD85B6432000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Core", "App.Domain.Core\App.Domain.Core.csproj", "{8E68EBA9-D989-45ED-8A90-FD85B6432000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain.AppService", "App.Domain.AppService\App.Domain.AppService.csproj", "{A751FE22-D2A7-4ECA-9316-6A57D30ABD9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Service", "App.Domain.AppService\App.Domain.Service.csproj", "{A751FE22-D2A7-4ECA-9316-6A57D30ABD9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructures.Data.Repositories", "App.Infrastructures.Data.Repositories\App.Infrastructures.Data.Repositories.csproj", "{72F3F7AF-DB3A-413E-B1C0-19DC76C07DEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Infrastructures.Data.Repositories", "App.Infrastructures.Data.Repositories\App.Infrastructures.Data.Repositories.csproj", "{72F3F7AF-DB3A-413E-B1C0-19DC76C07DEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructures.Db.SqlServer.Ef", "App.Infrastructures.Db.SqlServer.Ef\App.Infrastructures.Db.SqlServer.Ef.csproj", "{ED7A5FBB-A109-481D-BB89-8DAEE86B3163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Infrastructures.Db.SqlServer.Ef", "App.Infrastructures.Db.SqlServer.Ef\App.Infrastructures.Db.SqlServer.Ef.csproj", "{ED7A5FBB-A109-481D-BB89-8DAEE86B3163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.EndPoints.DokanNetUI", "App.EndPoints.DokanNetUI\App.EndPoints.DokanNetUI.csproj", "{20A0ECE0-5B65-49ED-A368-456893D0FEE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.EndPoints.DokanNetUI", "App.EndPoints.DokanNetUI\App.EndPoints.DokanNetUI.csproj", "{20A0ECE0-5B65-49ED-A368-456893D0FEE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

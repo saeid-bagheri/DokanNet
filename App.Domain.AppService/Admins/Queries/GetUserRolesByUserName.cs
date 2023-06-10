@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.AppServices.Admins.Queries;
+using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,22 +13,16 @@ namespace App.Domain.AppService.Admins.Queries
 {
     public class GetUserRolesByUserName : IGetUserRolesByUserName
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IUserRepository _userRepository;
 
-        public GetUserRolesByUserName(UserManager<AppUser> userManager)
+        public GetUserRolesByUserName(IUserRepository userRepository)
         {
-            _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         public async Task<List<string>> Execute(string userName, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByNameAsync(userName);
-            if (user is not null)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-                return roles.ToList();
-            }
-            return new List<string>();
+            return await _userRepository.GetRolesByUserName(userName, cancellationToken);
         }
     }
 }

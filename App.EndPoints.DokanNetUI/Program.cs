@@ -4,6 +4,8 @@ using App.Domain.Core.AppServices.Admins.Commands;
 using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
+using App.Domain.Core.Services.Admins.Queries;
+using App.Domain.Service.Admins.Queries;
 using App.EndPoints.DokanNetUI.AutoMapper;
 using App.Infrastructures.Data.Repositories;
 using App.Infrastructures.Data.Repositories.AutoMapper;
@@ -81,6 +83,7 @@ builder.Services.AddScoped<IGetUserById, GetUserById>();
 builder.Services.AddScoped<IGetUserRolesByUserName, GetUserRolesByUserName>();
 builder.Services.AddScoped<IGetUsers, GetUsers>();
 builder.Services.AddScoped<IGetProducts, GetProducts>();
+builder.Services.AddScoped<IGetComments, GetComments>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
