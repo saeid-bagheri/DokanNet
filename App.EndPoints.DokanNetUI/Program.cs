@@ -76,14 +76,15 @@ builder.Services.AddScoped<IRegisterUser, RegisterUser>();
 builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<IUpdateStore, UpdateStore>();
 builder.Services.AddScoped<IUpdateUser, UpdateUser>();
+builder.Services.AddScoped<IGetComments, GetComments>();
 builder.Services.AddScoped<IGetProductById, GetProductById>();
+builder.Services.AddScoped<IGetProducts, GetProducts>();
 builder.Services.AddScoped<IGetStoreById, GetStoreById>();
 builder.Services.AddScoped<IGetStores, GetStores>();
 builder.Services.AddScoped<IGetUserById, GetUserById>();
 builder.Services.AddScoped<IGetUserRolesByUserName, GetUserRolesByUserName>();
 builder.Services.AddScoped<IGetUsers, GetUsers>();
-builder.Services.AddScoped<IGetProducts, GetProducts>();
-builder.Services.AddScoped<IGetComments, GetComments>();
+builder.Services.AddScoped<IGetInvoices, GetInvoices>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

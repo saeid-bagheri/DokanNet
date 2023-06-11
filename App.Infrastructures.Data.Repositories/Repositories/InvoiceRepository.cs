@@ -40,13 +40,18 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<InvoiceDto>();
             records = await _context.Invoices
+                .Where(i => i.IsFinal == true)
+                .Include(i => i.Buyer)
+                .Include(i => i.Seller)
                 .Select(i => new InvoiceDto
                 {
                     Id = i.Id,
                     TotalAmount = i.TotalAmount,
                     SiteCommission = i.SiteCommission,
                     BuyerId = i.BuyerId,
+                    BuyerName = i.Buyer.FirstName + " " + i.Buyer.LastName,
                     SellerId = i.SellerId,
+                    SellerName = i.Seller.FirstName + " " + i.Seller.LastName,
                     IsFinal = i.IsFinal,
                     CreatedAt = i.CreatedAt
                 }).ToListAsync(cancellationToken);

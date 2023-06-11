@@ -17,16 +17,19 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         private readonly IGetProductById _getProductById;
         private readonly IUpdateProduct _updateProduct;
         private readonly IDeleteProduct _deleteProduct;
+        private readonly IConfirmProduct _confirmProduct;
         private readonly IMapper _mapper;
 
         public ProductController(IGetProducts getProducts, IGetProductById getProductById,
-                                 IMapper mapper, IUpdateProduct updateProduct, IDeleteProduct deleteProduct)
+                                 IMapper mapper, IUpdateProduct updateProduct,
+                                 IDeleteProduct deleteProduct, IConfirmProduct confirmProduct)
         {
             _getProducts = getProducts;
             _getProductById = getProductById;
             _mapper = mapper;
             _updateProduct = updateProduct;
             _deleteProduct = deleteProduct;
+            _confirmProduct = confirmProduct;
         }
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
@@ -53,6 +56,12 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             await _deleteProduct.Execute(id, cancellationToken);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Confirm(int id, CancellationToken cancellationToken)
+        {
+            await _confirmProduct.Execute(id, cancellationToken);
             return RedirectToAction("Index");
         }
 

@@ -19,6 +19,8 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<StoreVM, StoreDto>().ReverseMap();
 
             CreateMap<CommentVM, CommentDto>().ReverseMap();
+
+            CreateMap<InvoiceVM, InvoiceDto>().ReverseMap();
         }
     }
 }

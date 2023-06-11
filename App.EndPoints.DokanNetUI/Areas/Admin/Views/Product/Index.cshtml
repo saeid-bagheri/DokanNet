@@ -57,6 +57,10 @@
                 <td>
                     <a asp-route-Id="@item.Id" asp-controller="Product" asp-action="Update" class="btn btn-info text-white">ویرایش</a>
                     <a data-toggle="modal" data-id=@item.Id data-target="#deleteModal" class="deleteProduct btn btn-danger"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span>حذف</a>
+                    @if (!item.IsConfirmed)
+                    {
+                        <a asp-route-Id="@item.Id" asp-controller="Product" asp-action="Confirm" class="btn btn-info text-white">تایید</a>
+                    }
                 </td>
 
             </tr>

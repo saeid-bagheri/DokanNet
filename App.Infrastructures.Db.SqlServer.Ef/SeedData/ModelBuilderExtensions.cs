@@ -54,8 +54,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
 
             //role
             modelBuilder.Entity<IdentityRole<int>>().HasData(
-                new IdentityRole<int>() { Id = 1, Name = "AdminRole", NormalizedName = "ADMINROLE"},
-                new IdentityRole<int>() { Id = 2, Name = "SellerRole", NormalizedName = "SELLERROLE"},
+                new IdentityRole<int>() { Id = 1, Name = "AdminRole", NormalizedName = "ADMINROLE" },
+                new IdentityRole<int>() { Id = 2, Name = "SellerRole", NormalizedName = "SELLERROLE" },
                 new IdentityRole<int>() { Id = 3, Name = "BuyerRole", NormalizedName = "BUYERROLE" }
                 );
 
@@ -329,6 +329,55 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                     IsDeleted = false,
                     CreatedAt = DateTime.Now
                 });
+
+            //invoiceProduct
+            modelBuilder.Entity<InvoiceProduct>().HasData(
+                new InvoiceProduct()
+                {
+                    Id = 1,
+                    InvoiceId = 1,
+                    ProductId = 1,
+                    CountOfProducts = 1
+                },
+                new InvoiceProduct()
+                {
+                    Id = 2,
+                    InvoiceId = 1,
+                    ProductId = 2,
+                    CountOfProducts = 2
+                },
+                new InvoiceProduct()
+                {
+                    Id = 3,
+                    InvoiceId = 2,
+                    ProductId = 5,
+                    CountOfProducts = 1
+                }
+                );
+
+            //invoice
+            modelBuilder.Entity<Invoice>().HasData(
+                new Invoice()
+                {
+                    Id = 1,
+                    TotalAmount = 1100000,
+                    SiteCommission = 55000,
+                    BuyerId = 1,
+                    SellerId = 1,
+                    IsFinal = true,
+                    CreatedAt = DateTime.Now
+                },
+                new Invoice()
+                {
+                    Id = 2,
+                    TotalAmount = 9500000,
+                    SiteCommission = 475000,
+                    BuyerId = 2,
+                    SellerId = 2,
+                    IsFinal = true,
+                    CreatedAt = DateTime.Now
+                }
+                );
 
 
         }

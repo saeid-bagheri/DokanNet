@@ -1,0 +1,54 @@
+﻿@model List<InvoiceVM>
+
+@{
+    ViewData["Title"] = "فاکتورهای فروش";
+    Layout = "_AdminLayout";
+}
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr class="bg-info text-white">
+            <th>شماره</th>
+            <th>مبلغ کل فاکتور (تومان)</th>
+            <th>کمیسیون سایت (تومان)</th>
+            <th>نام غرفه دار</th>
+            <th>نام خریدار</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            int TotalRevenue = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiteCommission)
+                    @{
+                        TotalRevenue += item.SiteCommission;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuyerName)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+<div class="text-center my-3">
+    <span class="text-bold text-success border-2 border border-success">درآمد سایت : @TotalRevenue تومان</span>
+</div>

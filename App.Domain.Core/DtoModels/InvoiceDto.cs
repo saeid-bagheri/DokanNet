@@ -16,8 +16,10 @@ namespace App.Domain.Core.DtoModels
         public int SiteCommission { get; set; }
 
         public int BuyerId { get; set; }
+        public string? BuyerName { get; set; }
 
         public int SellerId { get; set; }
+        public string? SellerName { get; set; }
 
         public bool IsFinal { get; set; }
 
