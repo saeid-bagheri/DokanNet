@@ -7,8 +7,6 @@ public partial class Buyer
 {
     public int Id { get; set; }
 
-    public int AppUserId { get; set; }
-
     public string? FirstName { get; set; }
 
     public string? LastName { get; set; }
@@ -28,7 +26,7 @@ public partial class Buyer
     public DateTime CreatedAt { get; set; }
 
     #region navigations
-    public AppUser? AppUser { get; set; }
+    public virtual AppUser IdNavigation { get; set; } = null!;
 
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 

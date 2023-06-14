@@ -7,8 +7,6 @@ public partial class Seller
 {
     public int Id { get; set; }
 
-    public int AppUserId { get; set; }
-
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
@@ -40,7 +38,7 @@ public partial class Seller
     public DateTime CreatedAt { get; set; }
 
     #region navigations
-    public AppUser? AppUser { get; set; }
+    public virtual AppUser IdNavigation { get; set; } = null!;
 
     public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 

@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Buyers\Queries\" />
+    <Folder Include="Services\Application\Commands\" />
     <Folder Include="Services\Buyers\Commands\" />
+    <Folder Include="Services\Buyers\Queries\" />
     <Folder Include="Services\Sellers\Queries\" />
   </ItemGroup>
 

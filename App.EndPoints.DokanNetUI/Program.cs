@@ -4,8 +4,14 @@ using App.Domain.Core.AppServices.Admins.Commands;
 using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
+using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Admins.Queries;
+using App.Domain.Core.Services.Application.Queries;
+using App.Domain.Core.Services.Sellers.Commands;
+using App.Domain.Service.Admins.Commands;
 using App.Domain.Service.Admins.Queries;
+using App.Domain.Service.Application.Queries;
+using App.Domain.Service.Sellers.Commands;
 using App.EndPoints.DokanNetUI.AutoMapper;
 using App.Infrastructures.Data.Repositories;
 using App.Infrastructures.Data.Repositories.AutoMapper;
@@ -65,6 +71,9 @@ builder.Services.AddSingleton(mapper);
 
 #region dependency injection
 
+//application
+builder.Services.AddScoped<IGetCities, GetCities>();
+
 //admins
 builder.Services.AddScoped<ICloseStore, CloseStore>();
 builder.Services.AddScoped<IConfirmComment, ConfirmComment>();
@@ -82,9 +91,15 @@ builder.Services.AddScoped<IGetProducts, GetProducts>();
 builder.Services.AddScoped<IGetStoreById, GetStoreById>();
 builder.Services.AddScoped<IGetStores, GetStores>();
 builder.Services.AddScoped<IGetUserById, GetUserById>();
+builder.Services.AddScoped<IGetUserRolesByHttp, GetUserRolesByHttp>();
 builder.Services.AddScoped<IGetUserRolesByUserName, GetUserRolesByUserName>();
 builder.Services.AddScoped<IGetUsers, GetUsers>();
 builder.Services.AddScoped<IGetInvoices, GetInvoices>();
+builder.Services.AddScoped<ICreateSeller, CreateSeller>();
+builder.Services.AddScoped<IAddRoleToUser, AddRoleToUser>();
+
+//sellers
+builder.Services.AddScoped<ICreateStore, CreateStore>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
@@ -121,11 +136,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.MapAreaControllerRoute(
     areaName: "Admin",
     name: "Areas",
     pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 
+app.MapAreaControllerRoute(
+    areaName: "Seller",
+    name: "Areas",
+    pattern: "Seller/{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

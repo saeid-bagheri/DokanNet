@@ -133,7 +133,22 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 new City()
                 {
                     Id = 1,
+                    Title = "ارومیه"
+                },
+                new City()
+                {
+                    Id = 2,
                     Title = "تهران"
+                },
+                new City()
+                {
+                    Id = 3,
+                    Title = "رشت"
+                },
+                new City()
+                {
+                    Id = 4,
+                    Title = "قزوین"
                 });
 
 
@@ -223,7 +238,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 new Seller()
                 {
                     Id = 1,
-                    AppUserId = 1,
                     FirstName = "سعید",
                     LastName = "باقری",
                     Mobile = "09389059421",
@@ -236,7 +250,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 new Seller()
                 {
                     Id = 2,
-                    AppUserId = 2,
                     FirstName = "کیوان",
                     LastName = "حافظی",
                     Mobile = "09366666666",
@@ -253,7 +266,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 new Buyer()
                 {
                     Id = 1,
-                    AppUserId = 1,
                     FirstName = "سعید",
                     LastName = "باقری",
                     Mobile = "09389059421",
@@ -265,7 +277,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 new Buyer()
                 {
                     Id = 2,
-                    AppUserId = 2,
                     FirstName = "کیوان",
                     LastName = "حافظی",
                     Mobile = "09366666666",

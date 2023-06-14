@@ -25,7 +25,10 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Sellers_Medals");
 
-            builder.HasOne(x => x.AppUser).WithOne(x => x.Seller);
+            builder.HasOne(d => d.IdNavigation).WithOne(p => p.Seller)
+                .HasForeignKey<Seller>(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Sellers_AppUsers");
         }
     }
 }

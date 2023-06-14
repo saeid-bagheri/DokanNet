@@ -7,8 +7,6 @@ namespace App.Domain.Core.DtoModels
 
         public int Id { get; set; }
 
-        public int? UserId { get; set; }
-
         public string FirstName { get; set; } = null!;
 
         public string LastName { get; set; } = null!;

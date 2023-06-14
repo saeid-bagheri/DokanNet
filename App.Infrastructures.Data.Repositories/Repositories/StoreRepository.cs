@@ -29,7 +29,6 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 Title = entity.Title,
                 ImageUrl = entity.ImageUrl,
                 IsClosed = entity.IsClosed,
-                ClosedAt = entity.ClosedAt,
                 CreatedAt = entity.CreatedAt
             };
             await _context.Stores.AddAsync(record, cancellationToken);

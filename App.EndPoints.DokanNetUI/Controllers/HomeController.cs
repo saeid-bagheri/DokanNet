@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entities;
+using App.Domain.Core.Services.Application.Queries;
 using App.EndPoints.DokanNetUI.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +10,12 @@ namespace App.EndPoints.DokanNetUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        private readonly IGetCities _getCities;
 
-        public HomeController(ILogger<HomeController> logger,
-                              UserManager<AppUser> userManager,
-                              RoleManager<IdentityRole<int>> roleManager)
+        public HomeController(ILogger<HomeController> logger, IGetCities getCities)
         {
             _logger = logger;
-            _userManager = userManager;
-            _roleManager = roleManager;
+            _getCities = getCities;
         }
 
         public IActionResult Index()

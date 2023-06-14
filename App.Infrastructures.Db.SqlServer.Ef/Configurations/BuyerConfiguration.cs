@@ -9,16 +9,20 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Configurations
     {
         public void Configure(EntityTypeBuilder<Buyer> builder)
         {
-                builder.Property(e => e.FirstName).HasMaxLength(50);
-                builder.Property(e => e.LastName).HasMaxLength(50);
-                builder.Property(e => e.Mobile).HasMaxLength(11);
+            builder.Property(e => e.FirstName).HasMaxLength(50);
+            builder.Property(e => e.LastName).HasMaxLength(50);
+            builder.Property(e => e.Mobile).HasMaxLength(11);
 
-                builder.HasOne(d => d.City).WithMany(p => p.Buyers)
-                    .HasForeignKey(d => d.CityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Buyers_Cities");
+            builder.HasOne(d => d.City).WithMany(p => p.Buyers)
+                .HasForeignKey(d => d.CityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Buyers_Cities");
 
-                builder.HasOne(x => x.AppUser).WithOne(x => x.Buyer);
+
+            builder.HasOne(d => d.IdNavigation).WithOne(p => p.Buyer)
+                .HasForeignKey<Buyer>(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Buyers_AppUsers");
         }
     }
 }

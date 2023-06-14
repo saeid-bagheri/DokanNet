@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row top-menu justify-content-center">
                 <div class="col-lg-2 text-center d-none d-lg-block order-lg-2 order-3">
-                    <a class="btn btn-info" asp-area="" asp-controller="Home" asp-action="Index">دکان نت</a>
+                    <a class="btn btn-info h-100 w-50 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Home" asp-action="Index">دکان نت</a>
                 </div>
                 <div class="col-lg-6 text-center d-none d-lg-block order-lg-2 order-3">
                     <div class="top-menu-search ">
@@ -45,34 +45,35 @@
                 </div>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <div class="col-lg-4 col-4 order-lg-3 order-3">
-                        <div class="top-menu-btn">
-                            <ul class="nav">
-                                <li class="nav-item d-xl-block d-none">
-                                    <a class="auth-btn-index pointer btn-danger" asp-area="" asp-controller="Account" asp-action="Logout">
-                                        <i class="bi bi-person-circle"></i>خروج از حساب کاربری
+                    <div class="col-lg-4 text-center col-4 order-lg-3 order-3">
+                        <div class="top-menu-btn h-100">
+                            <ul class="nav h-100">
+                                <li class="nav-item d-xl-block d-none h-100 d-flex justify-content-center align-items-center">
+                                    <a class="auth-btn-index pointer btn-danger h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Logout">
+                                        <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>خروج از حساب کاربری
                                     </a>
                                 </li>
-                                <li class="nav-item d-xl-block d-none">
+                                <li class="nav-item d-xl-block d-none d-flex justify-content-center align-items-center">
                                     <span class="nav-link text-white danger-span-border">@User.Identity.Name</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
                 }
                 else
                 {
-                    <div class="col-lg-4 col-4 order-lg-3 order-3">
-                        <div class="top-menu-btn">
-                            <ul class="nav">
-                                <li class="nav-item d-xl-block d-none">
-                                    <a class="auth-btn-index pointer" asp-area="" asp-controller="Account" asp-action="Login">
-                                        <i class="bi bi-person-circle"></i>ورود به حساب کاربری
+                    <div class="col-lg-4 text-center col-4 order-lg-3 order-3">
+                        <div class="top-menu-btn h-100">
+                            <ul class="nav h-100">
+                                <li class="nav-item d-xl-block d-none h-100 d-flex justify-content-center align-items-center">
+                                    <a class="auth-btn-index pointer h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Login">
+                                        <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>ورود به حساب کاربری
                                     </a>
                                 </li>
-                                <li class="nav-item d-xl-block d-none">
-                                    <a class="auth-btn-index pointer" asp-area="" asp-controller="Account" asp-action="Register">
-                                        <i class="bi bi-person-circle"></i>ثبت نام
+                                <li class="nav-item d-xl-block d-none h-100 d-flex justify-content-center align-items-center">
+                                    <a class="auth-btn-index pointer h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Register">
+                                        <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>ثبت نام
                                     </a>
                                 </li>
                             </ul>
@@ -82,324 +83,9 @@
                 <div class="col-lg-12 col-4 order-lg-4 order-1 ">
                     <div class="top-menu-menu d-lg-flex d-none">
                         <ul class="navbar-nav">
-                            <li class="position-relative"></li>
-                            <li class="nav-item main-menu-head">
-                                <a href="" class="nav-link border-animate fromCenter fw-bold">
-                                    <i class="bi bi-list"></i> دسته بندی کالاها
-                                </a>
-                                <ul class="main-menu">
-                                    <li class="main-menu-sub-active-li">
-                                        <a href=""><i class="bi bi-phone"></i> موبایل</a>
-                                        <ul class="main-menu-sub back-menu"
-                                            style=" background: #fff url('img/other/labtop.png') no-repeat;">
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href=""><i class="bi bi-tablet"></i> تبلت</a>
-                                        <ul class="main-menu-sub back-menu"
-                                            style=" background: #fff url('img/other/labtop.png') no-repeat;">
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href=""><i class="bi bi-shield"></i>آنتی ویروس</a>
-                                        <ul class="main-menu-sub back-menu"
-                                            style=" background: #fff url('img/other/labtop.png') no-repeat;">
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href=""><i class="bi bi-laptop"></i>لبتاپ</a>
-                                        <ul class="main-menu-sub back-menu"
-                                            style=" background: #fff url('img/other/509-5092096_offering-high-quality-mobile-repair-service-main-image_prev_ui.png') no-repeat;">
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href=""><i class="bi bi-tag-fill"></i>پر فروش ترین ها</a>
-                                        <ul class="main-menu-sub back-menu"
-                                            style=" background: #fff url('img/other/tablet-menu.png') no-repeat;">
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                        </ul>
-                                    </li>
-
-                                </ul>
-                            </li>
                             <li class="nav-item">
                                 <a href="" class="nav-link border-animate fromCenter">
-                                    تبلت <i class="bi bi-tablet"></i>
-                                </a>
-                                <ul class="list-unstyled shadow-lg back-menu sub-menu"
-                                    style="background: #fff url('img/other/tablet-menu.png') no-repeat;">
-                                    <li><a href="" class="title">بـرند <i class="bi bi-chevron-left"></i></a></li>
-                                    <li><a href="">سامـسونگ</a></li>
-                                    <li><a href="">اپـل</a></li>
-                                    <li><a href="">شیـائومی</a></li>
-                                    <li><a href="">ال جی</a></li>
-                                    <li><a href="">وان پـلاس</a></li>
-                                    <li><a href="">جی ال ایـکس</a></li>
-                                    <li><a href="">هـو آوی</a></li>
-                                    <li><a href="">بلک بـری</a></li>
-                                    <li><a href="">توشـیبا</a></li>
-                                    <li><a href="">دایـناکورد</a></li>
-                                    <li>
-                                        <a href="" class="title">براساس رده بندی <i class="bi bi-chevron-left"></i></a>
-                                    </li>
-                                    <li><a href="">دکـمه ای</a></li>
-                                    <li><a href="">لـمسـی</a></li>
-                                    <li><a href="">نـظـامی</a></li>
-                                    <li><a href="">ضـد آب</a></li>
-                                    <li><a href="">مسـافرتی</a></li>
-                                    <li><a href="">خـارنی</a></li>
-                                    <li><a href="" class="title">براساس کشور <i class="bi bi-chevron-left"></i></a></li>
-                                    <li><a href="">ایران</a></li>
-                                    <li><a href="">ژاپن</a></li>
-                                    <li><a href="">فرانسه</a></li>
-                                    <li><a href="">کره جنوبی</a></li>
-                                    <li><a href="">آمریکا</a></li>
-                                    <li><a href="">سوئد</a></li>
-                                    <li><a href="">تایوان</a></li>
-                                    <li><a href="" class="title">براساس رنگ <i class="bi bi-chevron-left"></i></a></li>
-                                    <li><a href="">قرمز</a></li>
-                                    <li><a href="">قهوه ای</a></li>
-                                    <li><a href="">سبز</a></li>
-                                    <li><a href="">بنفش</a></li>
-                                    <li><a href="">نارنجی</a></li>
-                                    <li><a href="">نیلی</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link border-animate fromCenter">
-                                    لبتاپ <i class="bi bi-laptop"></i>
-                                </a>
-                                <ul class="list-unstyled shadow-lg back-menu sub-menu"
-                                    style="background: #fff url('img/other/labtop.png') no-repeat;">
-                                    <li><a href="" class="title">بـرند <i class="bi bi-chevron-left"></i></a></li>
-                                    <li><a href="">سامـسونگ</a></li>
-                                    <li><a href="">اپـل</a></li>
-                                    <li><a href="">شیـائومی</a></li>
-                                    <li><a href="">ال جی</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link border-animate fromCenter">
-                                    منو چند سطحی <i class="bi bi-menu-app"></i>
+                                   دسته بندی محصولات <i class="bi bi-list"></i>
                                 </a>
                                 <ul class="level-one">
                                     <li><a href="">منو شماره 1</a></li>
@@ -453,6 +139,16 @@
                                     <li><a href="contact-us.html">تماس با ما</a></li>
                                 </ul>
                             </li>
+                            @if (User.Identity.IsAuthenticated && !User.IsInRole("SellerRole"))
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="Seller" asp-controller="Store" asp-action="Create" class="nav-link border-animate fromCenter">
+                                        غرفه دار شوید
+                                        <i class="bi bi-shop"></i>
+                                    </a>
+                                </li>
+                            }
+
 
 
                         </ul>

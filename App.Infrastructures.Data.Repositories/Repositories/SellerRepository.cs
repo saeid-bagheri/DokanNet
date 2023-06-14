@@ -29,7 +29,18 @@ namespace App.Infrastructures.Data.Repositories.Repositories
 
         public async Task Create(SellerDto entity, CancellationToken cancellationToken)
         {
-            var record = _mapper.Map<Seller>(entity);
+            var record = new Seller()
+            {
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                Mobile = entity.Mobile,
+                Address = entity.Address,
+                CityId = entity.CityId,
+                FeePercentage = entity.FeePercentage,
+                IsDeleted = entity.IsDeleted,
+                CreatedAt = entity.CreatedAt
+            };
             await _context.Sellers.AddAsync(record, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }

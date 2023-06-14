@@ -232,9 +232,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 name: "Buyers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AppUserId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
@@ -249,11 +247,10 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 {
                     table.PrimaryKey("PK_Buyers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Buyers_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Buyers_AppUsers",
+                        column: x => x.Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Buyers_Cities",
                         column: x => x.CityId,
@@ -265,9 +262,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 name: "Sellers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AppUserId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
@@ -288,11 +283,10 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 {
                     table.PrimaryKey("PK_Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sellers_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Sellers_AppUsers",
+                        column: x => x.Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Sellers_Cities",
                         column: x => x.CityId,
@@ -537,8 +531,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DeletedAt", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "0699177b-fadc-4b59-8a63-e3cf520e493f", new DateTime(2023, 6, 6, 1, 25, 21, 500, DateTimeKind.Local).AddTicks(4890), null, "saeidbagheri034@gmail.com", false, false, false, null, "SAEIDBAGHERI034@GMAIL.COM", "SAEIDBAGHERI034", "AQAAAAIAAYagAAAAEAgL2pkEGeG7bHFMWZhfYpBv94RgYgNsnQrnnz+4COvT1eS0lxoxV8BI2McXV61EuQ==", "09389059421", false, "54e8dfb5-8700-4936-a2cd-4b0369afa909", false, "SaeidBagheri034" },
-                    { 2, 0, "1fb6ea3f-34a4-470e-8af2-ba879c61cc23", new DateTime(2023, 6, 6, 1, 25, 21, 587, DateTimeKind.Local).AddTicks(2073), null, "keyvanhafezi@gmail.com", false, false, false, null, "KEYVANHAFEZI@GMAIL.COM", "KEYVANHAFEZI", "AQAAAAIAAYagAAAAEHzjQbjxl77EMw3VVVbQmobSPuj4ltgdvk3OqwZ4IEfwmrDFbPGReS1Yg1z/2XKNPQ==", "09199999999", false, null, false, "KeyvanHafezi" }
+                    { 1, 0, "11dab4e8-576d-49d0-9b8c-38f930b4e5cb", new DateTime(2023, 6, 14, 16, 47, 38, 308, DateTimeKind.Local).AddTicks(2152), null, "saeidbagheri034@gmail.com", false, false, false, null, "SAEIDBAGHERI034@GMAIL.COM", "SAEIDBAGHERI034", "AQAAAAIAAYagAAAAEGHY/VU0Ojy4DEKaQdc1ERDtV9vy7UI23NPKrwCkEtvgk7Ry18hRM/FIHOtkqySQdg==", "09389059421", false, "54e8dfb5-8700-4936-a2cd-4b0369afa909", false, "SaeidBagheri034" },
+                    { 2, 0, "c261b5ad-8e20-420e-806c-5315f8a77475", new DateTime(2023, 6, 14, 16, 47, 38, 436, DateTimeKind.Local).AddTicks(3833), null, "keyvanhafezi@gmail.com", false, false, false, null, "KEYVANHAFEZI@GMAIL.COM", "KEYVANHAFEZI", "AQAAAAIAAYagAAAAEEVZxTRIEkYc3XxZdcDqF5AzriElSlslazfI1k6KEw3CUrG6QPAD6I45+hd88ozfWA==", "09199999999", false, null, false, "KeyvanHafezi" }
                 });
 
             migrationBuilder.InsertData(
@@ -546,19 +540,25 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "ParentId", "Title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1407), null, false, null, "پوشاک" },
-                    { 2, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1424), null, false, null, "ابزار" },
-                    { 3, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1565), null, false, 2, "ابزار برقی" },
-                    { 4, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1567), null, false, 2, "ابزار غیر برقی" },
-                    { 5, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1570), null, false, 1, "لباس مردانه" },
-                    { 6, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1575), null, false, null, "لوازم الکترونیک" },
-                    { 7, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1577), null, false, 6, "موبایل" }
+                    { 1, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9951), null, false, null, "پوشاک" },
+                    { 2, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9971), null, false, null, "ابزار" },
+                    { 3, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9974), null, false, 2, "ابزار برقی" },
+                    { 4, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9977), null, false, 2, "ابزار غیر برقی" },
+                    { 5, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9979), null, false, 1, "لباس مردانه" },
+                    { 6, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9980), null, false, null, "لوازم الکترونیک" },
+                    { 7, new DateTime(2023, 6, 14, 16, 47, 38, 556, DateTimeKind.Local).AddTicks(9983), null, false, 6, "موبایل" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Title" },
-                values: new object[] { 1, "تهران" });
+                values: new object[,]
+                {
+                    { 1, "ارومیه" },
+                    { 2, "تهران" },
+                    { 3, "رشت" },
+                    { 4, "قزوین" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Medals",
@@ -584,20 +584,29 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
 
             migrationBuilder.InsertData(
                 table: "Buyers",
-                columns: new[] { "Id", "Address", "AppUserId", "CityId", "CreatedAt", "DeletedAt", "FirstName", "IsDeleted", "LastName", "Mobile", "ProfileImgUrl" },
+                columns: new[] { "Id", "Address", "CityId", "CreatedAt", "DeletedAt", "FirstName", "IsDeleted", "LastName", "Mobile", "ProfileImgUrl" },
                 values: new object[,]
                 {
-                    { 1, "تهران", 1, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1926), null, "سعید", false, "باقری", "09389059421", null },
-                    { 2, "تهران پونک", 2, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1932), null, "کیوان", false, "حافظی", "09366666666", null }
+                    { 1, "تهران", 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(519), null, "سعید", false, "باقری", "09389059421", null },
+                    { 2, "تهران پونک", 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(524), null, "کیوان", false, "حافظی", "09366666666", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Sellers",
-                columns: new[] { "Id", "Address", "AppUserId", "Biography", "Birthday", "CardNumber", "CityId", "CreatedAt", "DeletedAt", "FeePercentage", "FirstName", "IsDeleted", "LastName", "MedalId", "Mobile", "ProfileImgUrl", "ShebaNumber" },
+                columns: new[] { "Id", "Address", "Biography", "Birthday", "CardNumber", "CityId", "CreatedAt", "DeletedAt", "FeePercentage", "FirstName", "IsDeleted", "LastName", "MedalId", "Mobile", "ProfileImgUrl", "ShebaNumber" },
                 values: new object[,]
                 {
-                    { 1, "تهران", 1, null, null, null, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1856), null, 5m, "سعید", false, "باقری", null, "09389059421", null, null },
-                    { 2, "تهران پونک", 2, null, null, null, 1, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1861), null, 5m, "کیوان", false, "حافظی", null, "09366666666", null, null }
+                    { 1, "تهران", null, null, null, 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(441), null, 5m, "سعید", false, "باقری", null, "09389059421", null, null },
+                    { 2, "تهران پونک", null, null, null, 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(446), null, 5m, "کیوان", false, "حافظی", null, "09366666666", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Invoices",
+                columns: new[] { "Id", "BuyerId", "CreatedAt", "IsFinal", "SellerId", "SiteCommission", "TotalAmount" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(848), true, 1, 55000, 1100000 },
+                    { 2, 2, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(851), true, 2, 475000, 9500000 }
                 });
 
             migrationBuilder.InsertData(
@@ -605,8 +614,8 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 columns: new[] { "Id", "ClosedAt", "CreatedAt", "ImageUrl", "IsClosed", "Title" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1969), null, false, "همه چی فروشی" },
-                    { 2, null, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1972), null, false, "موبایل کیوان" }
+                    { 1, null, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(572), null, false, "همه چی فروشی" },
+                    { 2, null, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(574), null, false, "موبایل کیوان" }
                 });
 
             migrationBuilder.InsertData(
@@ -614,11 +623,31 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "DeletedAt", "IsAuction", "IsConfirmed", "IsDeleted", "IsEnabled", "Price", "Stock", "StoreId", "Title" },
                 values: new object[,]
                 {
-                    { 1, 5, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1776), null, false, true, false, true, 500000, 10, 1, "شلوار لی" },
-                    { 2, 5, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1781), null, false, true, false, true, 300000, 15, 1, "پیراهن مردانه مدل یقه دار" },
-                    { 3, 3, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1785), null, false, true, false, true, 900000, 4, 1, "دریل مدل 2911" },
-                    { 4, 4, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1789), null, false, true, false, true, 150000, 7, 1, "انبردست رونیکس مدل ROX-1168" },
-                    { 5, 7, new DateTime(2023, 6, 6, 1, 25, 21, 681, DateTimeKind.Local).AddTicks(1792), null, false, true, false, true, 9500000, 3, 2, "موبایل شیائومی redmi note 11" }
+                    { 1, 5, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(346), null, false, true, false, true, 500000, 10, 1, "شلوار لی" },
+                    { 2, 5, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(353), null, false, true, false, true, 300000, 15, 1, "پیراهن مردانه مدل یقه دار" },
+                    { 3, 3, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(356), null, false, true, false, true, 900000, 4, 1, "دریل مدل 2911" },
+                    { 4, 4, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(360), null, false, true, false, true, 150000, 7, 1, "انبردست رونیکس مدل ROX-1168" },
+                    { 5, 7, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(363), null, false, true, false, true, 9500000, 3, 2, "موبایل شیائومی redmi note 11" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Comments",
+                columns: new[] { "Id", "BuyerId", "CreatedAt", "DeletedAt", "Description", "IsConfirmed", "IsDeleted", "ProductId", "Score" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(651), null, "راضی بودم خوب بود.", false, false, 1, 4 },
+                    { 2, 1, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(661), null, "جنسش بی کیفیت بود.", false, false, 2, 2 },
+                    { 3, 2, new DateTime(2023, 6, 14, 16, 47, 38, 557, DateTimeKind.Local).AddTicks(664), null, "قیمتش خیلی بالاست", false, false, 5, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "InvoiceProduct",
+                columns: new[] { "Id", "CountOfProducts", "InvoiceId", "ProductId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 1 },
+                    { 2, 2, 1, 2 },
+                    { 3, 1, 2, 5 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -687,12 +716,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 column: "BuyerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Buyers_AppUserId",
-                table: "Buyers",
-                column: "AppUserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Buyers_CityId",
                 table: "Buyers",
                 column: "CityId");
@@ -741,12 +764,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                 name: "IX_Products_StoreId",
                 table: "Products",
                 column: "StoreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sellers_AppUserId",
-                table: "Sellers",
-                column: "AppUserId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sellers_CityId",
