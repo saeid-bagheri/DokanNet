@@ -4,39 +4,65 @@ using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
+using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Controllers;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
 {
     [Area("Seller")]
-    public class StoreController : Controller
+    public class DashboardController : Controller
     {
         private readonly IGetCities _getCities;
         private readonly IMapper _mapper;
         private readonly ICreateSeller _createSeller;
         private readonly ICreateStore _createStore;
         private readonly IGetUserRolesByUserName _getUserRolesByUserName;
+        private readonly IGetStoreById _getStoreById;
+        private readonly IGetSellerById _getSellerById;
 
-        public StoreController(IGetCities getCities, IMapper mapper,
-                               ICreateSeller createSeller, IGetUserRolesByUserName getUserRolesByUserName, 
-                               ICreateStore createStore)
+        public DashboardController(IGetCities getCities, IMapper mapper,
+                               ICreateSeller createSeller, IGetUserRolesByUserName getUserRolesByUserName,
+                               ICreateStore createStore, IGetStoreById getStoreById, IGetSellerById getSellerById)
         {
             _getCities = getCities;
             _mapper = mapper;
             _createSeller = createSeller;
             _getUserRolesByUserName = getUserRolesByUserName;
             _createStore = createStore;
+            _getStoreById = getStoreById;
+            _getSellerById = getSellerById;
         }
 
-
-        public IActionResult Index()
+        [Authorize(Roles ="SellerRole")]
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View();
+            var seller = await _getSellerById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
+            var store = await _getStoreById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
+            var sellerStore = new DashboardVM()
+            {
+                Id = Convert.ToInt32(seller.Id),
+                FirstName = seller.FirstName,
+                LastName = seller.LastName,
+                Mobile = seller.Mobile,
+                CardNumber = seller.CardNumber,
+                ShebaNumber = seller.ShebaNumber,
+                CityName = seller.City.Title,
+                Birthday = seller.Birthday,
+                CreatedAt = seller.CreatedAt,
+                Biography = seller.Biography,
+                Address = seller.Address,
+                ProfileImgUrl = seller.ProfileImgUrl,
+                StoreTitle = store.Title,
+                Products = store.Products
+            };
+            return View(sellerStore);
         }
 
 

@@ -8,10 +8,12 @@ using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Admins.Queries;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
+using App.Domain.Core.Services.Sellers.Queries;
 using App.Domain.Service.Admins.Commands;
 using App.Domain.Service.Admins.Queries;
 using App.Domain.Service.Application.Queries;
 using App.Domain.Service.Sellers.Commands;
+using App.Domain.Service.Sellers.Queries;
 using App.EndPoints.DokanNetUI.AutoMapper;
 using App.Infrastructures.Data.Repositories;
 using App.Infrastructures.Data.Repositories.AutoMapper;
@@ -100,6 +102,8 @@ builder.Services.AddScoped<IAddRoleToUser, AddRoleToUser>();
 
 //sellers
 builder.Services.AddScoped<ICreateStore, CreateStore>();
+builder.Services.AddScoped<IGetSellerById, GetSellerById>();
+builder.Services.AddScoped<IUpdateSellerProfile, UpdateSellerProfile>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

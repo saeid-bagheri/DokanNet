@@ -16,5 +16,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels
 
         [Display(Name = "تصویر غرفه")]
         public string? ImageUrl { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

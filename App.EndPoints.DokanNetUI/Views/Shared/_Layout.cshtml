@@ -85,7 +85,7 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a href="" class="nav-link border-animate fromCenter">
-                                   دسته بندی محصولات <i class="bi bi-list"></i>
+                                    دسته بندی محصولات <i class="bi bi-list"></i>
                                 </a>
                                 <ul class="level-one">
                                     <li><a href="">منو شماره 1</a></li>
@@ -139,14 +139,26 @@
                                     <li><a href="contact-us.html">تماس با ما</a></li>
                                 </ul>
                             </li>
-                            @if (User.Identity.IsAuthenticated && !User.IsInRole("SellerRole"))
+                            @if (User.Identity.IsAuthenticated)
                             {
-                                <li class="nav-item">
-                                    <a asp-area="Seller" asp-controller="Store" asp-action="Create" class="nav-link border-animate fromCenter">
-                                        غرفه دار شوید
-                                        <i class="bi bi-shop"></i>
-                                    </a>
-                                </li>
+                                @if (User.IsInRole("SellerRole"))
+                                {
+                                    <li class="nav-item">
+                                        <a asp-area="Seller" asp-controller="Dashboard" asp-action="index" class="nav-link border-animate fromCenter">
+                                            غرفه ی من
+                                            <i class="bi bi-shop"></i>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a asp-area="Seller" asp-controller="Dashboard" asp-action="Create" class="nav-link border-animate fromCenter">
+                                            غرفه دار شوید
+                                            <i class="bi bi-shop"></i>
+                                        </a>
+                                    </li>
+                                }
                             }
 
 

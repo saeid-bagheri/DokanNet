@@ -55,7 +55,9 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<SellerDto> GetById(int id, CancellationToken cancellationToken)
         {
             var record = await _context.Sellers
-                .Where(s => s.Id == id).FirstOrDefaultAsync(cancellationToken);
+                .Where(s => s.Id == id)
+                .Include(s => s.City)
+                .FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map<SellerDto>(record);
         }
 
@@ -63,7 +65,20 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var record = await _context.Sellers
                 .Where(s => s.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
-            _mapper.Map(entity, record);
+
+            record.FirstName = entity.FirstName;
+            record.LastName = entity.LastName;
+            record.Mobile = entity.Mobile;
+            record.ShebaNumber = entity.ShebaNumber;
+            record.CardNumber = entity.CardNumber;
+            record.Address = entity.Address;
+            record.CityId = entity.CityId;
+            record.ProfileImgUrl = entity.ProfileImgUrl;
+            record.Biography = entity.Biography;
+            record.MedalId = entity.MedalId;
+            record.FeePercentage = entity.FeePercentage;
+            record.Birthday = entity.Birthday;
+
             await _context.SaveChangesAsync(cancellationToken);
         }
 

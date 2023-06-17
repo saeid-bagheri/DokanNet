@@ -15,16 +15,16 @@ namespace App.Domain.Service.Admins.Commands
 {
     public class CreateSeller : ICreateSeller
     {
-        private readonly IUserRepository _userRepository;
         private readonly ISellerRepository _sellerRepository;
+        private readonly IBuyerRepository _buyerRepository;
         private readonly UserManager<AppUser> _userManager;
 
-        public CreateSeller(IUserRepository userRepository, UserManager<AppUser> userManager, 
-                            ISellerRepository sellerRepository)
+        public CreateSeller(UserManager<AppUser> userManager, ISellerRepository sellerRepository,
+                            IBuyerRepository buyerRepository)
         {
-            _userRepository = userRepository;
             _userManager = userManager;
             _sellerRepository = sellerRepository;
+            _buyerRepository = buyerRepository;
         }
 
 
@@ -40,6 +40,18 @@ namespace App.Domain.Service.Admins.Commands
             //add this in appSetting
             model.FeePercentage = 5;
             await _sellerRepository.Create(model, cancellationToken);
+
+            //update buyer of this user
+            var buyer = new BuyerDto()
+            {
+                Id = model.Id,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Mobile = model.Mobile,
+                Address = model.Address,
+                CityId = model.CityId
+            };
+            await _buyerRepository.Update(buyer, cancellationToken);
         }
     }
 }

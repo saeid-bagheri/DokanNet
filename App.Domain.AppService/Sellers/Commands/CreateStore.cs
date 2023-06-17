@@ -17,11 +17,11 @@ namespace App.Domain.Service.Sellers.Commands
         {
             _storeRepository = storeRepository;
         }
-        public async Task Execute(StoreDto model, CancellationToken cancellationToken)
+        public async Task Execute(StoreDto entity, CancellationToken cancellationToken)
         {
-            model.IsClosed = false;
-            model.CreatedAt = DateTime.Now;
-            await _storeRepository.Create(model, cancellationToken);
+            entity.IsClosed = false;
+            entity.CreatedAt = DateTime.Now;
+            await _storeRepository.Create(entity, cancellationToken);
         }
     }
 }

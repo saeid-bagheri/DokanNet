@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.Services.Sellers.Commands
 {
-    public interface ICreateStore
+    public interface IUpdateSellerProfile
     {
-        Task Execute(StoreDto entity, CancellationToken cancellationToken);
+        Task Execute(SellerDto entity, CancellationToken cancellationToken);
     }
 }

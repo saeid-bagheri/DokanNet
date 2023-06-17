@@ -55,7 +55,9 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<StoreDto> GetById(int id, CancellationToken cancellationToken)
         {
             var entity = await _context.Stores
-                .Where(s => s.Id == id).FirstOrDefaultAsync(cancellationToken);
+                .Where(s => s.Id == id)
+                .Include(s => s.Products)
+                .FirstOrDefaultAsync(cancellationToken);
             var record = new StoreDto
             {
                 Id = entity.Id,
@@ -63,7 +65,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 ImageUrl = entity.ImageUrl,
                 IsClosed = entity.IsClosed,
                 ClosedAt = entity.ClosedAt,
-                CreatedAt = entity.CreatedAt
+                CreatedAt = entity.CreatedAt,
+                Products = entity.Products
             };
             return record;
         }

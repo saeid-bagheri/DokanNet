@@ -46,6 +46,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 PhoneNumber = "09199999999",
                 PhoneNumberConfirmed = false,
                 LockoutEnabled = false,
+                SecurityStamp = "KKNDWQL54F5NAZZM6LOLFGBUYZWSPKVU",
                 IsDeleted = false
             };
             user2.PasswordHash = passwordHasher.HashPassword(user2, "1368");

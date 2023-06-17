@@ -25,7 +25,7 @@ namespace App.Domain.Core.DtoModels
 
         public string? Biography { get; set; }
 
-        public int MedalId { get; set; }
+        public int? MedalId { get; set; }
 
         public decimal FeePercentage { get; set; }
 
@@ -45,7 +45,7 @@ namespace App.Domain.Core.DtoModels
 
         public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
 
-        public virtual Medal Medal { get; set; } = null!;
+        public virtual Medal? Medal { get; set; } = null!;
 
         public virtual Store? Store { get; set; }
 
