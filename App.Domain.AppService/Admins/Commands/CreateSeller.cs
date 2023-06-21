@@ -18,13 +18,15 @@ namespace App.Domain.Service.Admins.Commands
         private readonly ISellerRepository _sellerRepository;
         private readonly IBuyerRepository _buyerRepository;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         public CreateSeller(UserManager<AppUser> userManager, ISellerRepository sellerRepository,
-                            IBuyerRepository buyerRepository)
+                            IBuyerRepository buyerRepository, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _sellerRepository = sellerRepository;
             _buyerRepository = buyerRepository;
+            _signInManager = signInManager;
         }
 
 
@@ -34,12 +36,19 @@ namespace App.Domain.Service.Admins.Commands
             var user = await _userManager.FindByIdAsync(model.Id.ToString());
             await _userManager.AddToRoleAsync(user, "SellerRole");
 
+            //add role to coockie
+            await _signInManager.RefreshSignInAsync(user);
+
+
+
+
             //create new seller
             model.IsDeleted = false;
             model.CreatedAt = DateTime.Now;
             //add this in appSetting
             model.FeePercentage = 5;
             await _sellerRepository.Create(model, cancellationToken);
+
 
             //update buyer of this user
             var buyer = new BuyerDto()

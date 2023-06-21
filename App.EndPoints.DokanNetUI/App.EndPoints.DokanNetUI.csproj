@@ -32,6 +32,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Seller\Data\" />
+    <Folder Include="wwwroot\productImages\" />
   </ItemGroup>
 
 </Project>

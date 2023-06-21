@@ -8,8 +8,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Configurations
     {
         public void Configure(EntityTypeBuilder<Image> builder)
         {
-            builder.Property(e => e.Title).HasMaxLength(50);
-
             builder.HasOne(d => d.Product).WithMany(p => p.Images)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

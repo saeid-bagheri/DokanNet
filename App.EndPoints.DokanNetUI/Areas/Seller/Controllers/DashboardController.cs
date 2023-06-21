@@ -17,6 +17,7 @@ using System.Collections.Generic;
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
 {
     [Area("Seller")]
+    [Authorize(Roles ="SellerRole")]
     public class DashboardController : Controller
     {
         private readonly IGetCities _getCities;
@@ -40,12 +41,11 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
             _getSellerById = getSellerById;
         }
 
-        [Authorize(Roles ="SellerRole")]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             var seller = await _getSellerById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
             var store = await _getStoreById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
-            var sellerStore = new DashboardVM()
+            var dashboard = new DashboardVM()
             {
                 Id = Convert.ToInt32(seller.Id),
                 FirstName = seller.FirstName,
@@ -62,10 +62,10 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                 StoreTitle = store.Title,
                 Products = store.Products
             };
-            return View(sellerStore);
+            return View(dashboard);
         }
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Create(CancellationToken cancellationToken)
         {
             var createStoreVM = new CreateSellerAndStoreVM();
@@ -74,6 +74,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Create(CreateSellerAndStoreVM createSellerAndStoreVM, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
@@ -85,7 +86,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                     await _createStore.Execute(_mapper.Map<StoreDto>(createSellerAndStoreVM), cancellationToken);
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Dashboard");
         }
 
 

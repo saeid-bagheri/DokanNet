@@ -15,9 +15,9 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
 
             CreateMap<UserVM, UserDto>().ReverseMap();
 
-            CreateMap<ProductVM, ProductDto>().ReverseMap();
+            CreateMap<Areas.Admin.Models.ViewModels.ProductVM, ProductDto>().ReverseMap();
 
-            CreateMap<StoreVM, StoreDto>().ReverseMap();
+            CreateMap<Areas.Admin.Models.ViewModels.StoreVM, StoreDto>().ReverseMap();
 
             CreateMap<CommentVM, CommentDto>().ReverseMap();
 
@@ -26,6 +26,7 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<CreateSellerAndStoreVM, SellerDto>().ReverseMap();
             CreateMap<CreateSellerAndStoreVM, StoreDto>().ReverseMap();
             CreateMap<UpdateSellerProfileVM, SellerDto>().ReverseMap();
+            CreateMap<Areas.Seller.Models.ViewModels.ProductVM, ProductDto>().ReverseMap();
 
         }
     }

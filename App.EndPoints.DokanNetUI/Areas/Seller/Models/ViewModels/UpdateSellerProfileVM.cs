@@ -21,7 +21,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
         [Display(Name = "شماره موبایل")]
         public string Mobile { get; set; } = null!;
 
-        [RegularExpression(@"^[1-9][0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{3}$", ErrorMessage = "لطفاً یک شماره کارت معتبر وارد کنید")]
+        [RegularExpression(@"^(\d{16})$", ErrorMessage = "لطفاً یک شماره کارت معتبر وارد کنید")]
         [Display(Name = "شماره کارت")]
         public string? CardNumber { get; set; }
 

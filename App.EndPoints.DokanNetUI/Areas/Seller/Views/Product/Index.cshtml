@@ -1,0 +1,82 @@
+﻿@model List<ProductVM>
+@{
+    ViewData["Title"] = "محصولات من";
+    Layout = "_Layout";
+}
+
+@*set store id*@
+@{
+    int storeId = Convert.ToInt32(TempData["storeId"]);
+}
+
+<div class="text-center">
+    <div class="category-item my-2">
+        <div class="row">
+
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="product-box-item shadow-box">
+                        <div class="product-box-item-img">
+                            <a href="#">
+                                @if (product.Images.Count > 0)
+                                {
+                                    <img src="@product.Images[0].Url" alt="" class="img-fluid">
+                                }
+                                else
+                                {
+                                    <img src="img/product/wach3.jpg" alt="" class="img-fluid">
+                                }
+                            </a>
+                            <div class="product-box-item-hover">
+                                <div class="product-box-item-hover-cart">
+                                    <button class="product-box-item-hover-cart-btn">
+                                        <i class="bi bi-pencil-fill"></i> ویرایش محصول
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="product-box-item-desc">
+                                <div class="product-box-item-title my-1">
+                                    <h5>
+                                        @product.Title
+                                    </h5>
+                                </div>
+                                <div class="product-box-item-title text-danger">
+                                    <h6>
+                                        موجودی : @product.Stock
+                                    </h6>
+                                </div>
+                                @if (!product.IsConfirmed)
+                                {
+                                    <span class="badge bg-danger rounded-pill text-white my-flex-center">تایید نشده!</span>
+                                }
+                                <div class="product-box-price">
+                                    <div class="d-flex justify-content-between">
+                                        @if (product.IsAuction)
+                                        {
+                                            <span class="badge bg-info rounded-pill text-white my-flex-center">کالای مزایده ای</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-info rounded-pill text-white my-flex-center">کالای عادی</span>
+                                        }
+                                        <span class="new-price" style="color: #0f8a2e;">
+                                            قیمت: @product.Price تومان
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a class="btn btn-add-to-cart my-3" asp-area="Seller" asp-controller="Product" asp-action="Create" asp-route-id="@storeId">افزودن محصول</a>
+</div>

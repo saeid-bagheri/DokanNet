@@ -2,6 +2,7 @@ using App.Domain.AppService.Admins.Commands;
 using App.Domain.AppService.Admins.Queries;
 using App.Domain.Core.AppServices.Admins.Commands;
 using App.Domain.Core.AppServices.Admins.Queries;
+using App.Domain.Core.AppServices.Sellers.Commands;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
@@ -104,6 +105,11 @@ builder.Services.AddScoped<IAddRoleToUser, AddRoleToUser>();
 builder.Services.AddScoped<ICreateStore, CreateStore>();
 builder.Services.AddScoped<IGetSellerById, GetSellerById>();
 builder.Services.AddScoped<IUpdateSellerProfile, UpdateSellerProfile>();
+builder.Services.AddScoped<IGetProductsByStoreId, GetProductsByStoreId>();
+builder.Services.AddScoped<IGetCategories, GetCategories>();
+builder.Services.AddScoped<ICreateProduct, CreateProduct>();
+builder.Services.AddScoped<IAddImageToProduct, AddImageToProduct>();
+
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

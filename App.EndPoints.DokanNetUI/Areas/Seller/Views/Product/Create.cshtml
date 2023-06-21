@@ -1,0 +1,64 @@
+﻿@model ProductVM
+@{
+    ViewData["Title"] = "افزودن محصول";
+    Layout = "_Layout";
+}
+
+<h3>افزودن محصول</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="StoreId" class="control-label"></label>
+                <input hidden asp-for="StoreId" class="form-control" />
+                <span asp-validation-for="StoreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <br />
+                <select required asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, nameof(CityDto.Id), nameof(CityDto.Title)))" class="form-control">
+                    <option style="display:none;" value="">انتخاب کنید</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group checkbox">
+                <label asp-for="IsAuction" class="control-label mx-2"></label>
+                <input type="checkbox" asp-for="IsAuction" class="form-check-input" />
+                <span asp-validation-for="IsAuction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" type="file" class="form-control-file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="افزودن" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index" asp-route-id="@Model.StoreId">بازگشت</a>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

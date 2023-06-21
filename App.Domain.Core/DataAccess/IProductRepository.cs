@@ -10,7 +10,7 @@ namespace App.Domain.Core.DataAccess
 {
     public interface IProductRepository
     {
-        Task Create(ProductDto entity, CancellationToken cancellationToken);
+        Task<int> Create(ProductDto entity, CancellationToken cancellationToken);
         Task<ProductDto> GetById(int id, CancellationToken cancellationToken);
         Task<List<ProductDto>> GetAllByStoreId(int storeId, CancellationToken cancellationToken);
         Task<List<ProductDto>> GetAllByCategoryId(int categoryId, CancellationToken cancellationToken);

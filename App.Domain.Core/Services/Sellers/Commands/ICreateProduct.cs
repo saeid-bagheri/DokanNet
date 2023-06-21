@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using App.Domain.Core.DtoModels;
 
 namespace App.Domain.Core.AppServices.Sellers.Commands
 {
-    public interface IAddProductToStore
+    public interface ICreateProduct
     {
-        void Execute(AddProductToStoreInputModel model);
+        Task<int> Execute(ProductDto entity, CancellationToken cancellationToken);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace App.Domain.Core.DtoModels
 {
@@ -31,6 +32,8 @@ namespace App.Domain.Core.DtoModels
         public DateTime? DeletedAt { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public IFormFile? Image { get; set; }
 
         #region navigations
 

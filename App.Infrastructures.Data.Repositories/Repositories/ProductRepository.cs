@@ -21,7 +21,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         }
 
 
-        public async Task Create(ProductDto entity, CancellationToken cancellationToken)
+        public async Task<int> Create(ProductDto entity, CancellationToken cancellationToken)
         {
             var record = new Product
             {
@@ -38,6 +38,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             };
             await _context.Products.AddAsync(record, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
+            return record.Id;
         }
 
         public async Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)
@@ -71,6 +72,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var records = new List<ProductDto>();
             records = await _context.Products
                 .Where(p => p.StoreId == storeId && p.IsDeleted == false)
+                .Include(p => p.Category)
+                .Include(p => p.Images)
                 .Select(p => new ProductDto
                 {
                     Id = p.Id,
@@ -83,7 +86,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     IsEnabled = p.IsEnabled,
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    Images = p.Images
                 }).ToListAsync(cancellationToken);
             return records;
         }

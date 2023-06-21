@@ -52,7 +52,14 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var record = await _context.Buyers
                 .Where(b => b.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
-            _mapper.Map(entity, record);
+
+            record.FirstName = entity.FirstName;
+            record.LastName = entity.LastName;
+            record.Mobile = entity.Mobile;
+            record.Address = entity.Address;
+            record.CityId = entity.CityId;
+            record.ProfileImgUrl = entity.ProfileImgUrl;
+
             await _context.SaveChangesAsync(cancellationToken);
         }
 
