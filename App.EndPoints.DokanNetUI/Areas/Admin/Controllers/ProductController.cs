@@ -2,6 +2,8 @@
 using App.Domain.Core.AppServices.Admins.Commands;
 using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DtoModels;
+using App.Domain.Core.Services.Admins.Commands;
+using App.Domain.Core.Services.Application.Queries;
 using App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -18,11 +20,14 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         private readonly IUpdateProduct _updateProduct;
         private readonly IDeleteProduct _deleteProduct;
         private readonly IConfirmProduct _confirmProduct;
+        private readonly IGetCategories _getCategories;
+        private readonly IAddCategory _addCategory;
         private readonly IMapper _mapper;
 
         public ProductController(IGetProducts getProducts, IGetProductById getProductById,
                                  IMapper mapper, IUpdateProduct updateProduct,
-                                 IDeleteProduct deleteProduct, IConfirmProduct confirmProduct)
+                                 IDeleteProduct deleteProduct, IConfirmProduct confirmProduct,
+                                 IGetCategories getCategories, IAddCategory addCategory)
         {
             _getProducts = getProducts;
             _getProductById = getProductById;
@@ -30,6 +35,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
             _updateProduct = updateProduct;
             _deleteProduct = deleteProduct;
             _confirmProduct = confirmProduct;
+            _getCategories = getCategories;
+            _addCategory = addCategory;
         }
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
@@ -63,6 +70,23 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         {
             await _confirmProduct.Execute(id, cancellationToken);
             return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> AddCategory(CancellationToken cancellationToken)
+        {
+            var category = new CategoryVM()
+            {
+                Categories = await _getCategories.Execute(cancellationToken)
+            };
+            return View(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategory(CategoryVM categoryVM, CancellationToken cancellationToken)
+        {
+            await _addCategory.Execute(_mapper.Map<CategoryDto>(categoryVM), cancellationToken);
+            return RedirectToAction("AddCategory");
         }
 
     }

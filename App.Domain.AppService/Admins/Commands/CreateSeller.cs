@@ -30,10 +30,10 @@ namespace App.Domain.Service.Admins.Commands
         }
 
 
-        public async Task Execute(SellerDto model, CancellationToken cancellationToken)
+        public async Task Execute(SellerDto entity, CancellationToken cancellationToken)
         {
             //add seller role tp user roles
-            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+            var user = await _userManager.FindByIdAsync(entity.Id.ToString());
             await _userManager.AddToRoleAsync(user, "SellerRole");
 
             //add role to coockie
@@ -43,22 +43,22 @@ namespace App.Domain.Service.Admins.Commands
 
 
             //create new seller
-            model.IsDeleted = false;
-            model.CreatedAt = DateTime.Now;
+            entity.IsDeleted = false;
+            entity.CreatedAt = DateTime.Now;
             //add this in appSetting
-            model.FeePercentage = 5;
-            await _sellerRepository.Create(model, cancellationToken);
+            entity.FeePercentage = 5;
+            await _sellerRepository.Create(entity, cancellationToken);
 
 
             //update buyer of this user
             var buyer = new BuyerDto()
             {
-                Id = model.Id,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Mobile = model.Mobile,
-                Address = model.Address,
-                CityId = model.CityId
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                Mobile = entity.Mobile,
+                Address = entity.Address,
+                CityId = entity.CityId
             };
             await _buyerRepository.Update(buyer, cancellationToken);
         }

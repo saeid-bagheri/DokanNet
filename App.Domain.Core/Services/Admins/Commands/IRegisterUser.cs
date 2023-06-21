@@ -10,6 +10,6 @@ namespace App.Domain.Core.AppServices.Admins.Commands
 {
     public interface IRegisterUser
     {
-        Task<IdentityResult> Execute(UserDto model, CancellationToken cancellationToken);
+        Task<IdentityResult> Execute(UserDto entity, CancellationToken cancellationToken);
     }
 }

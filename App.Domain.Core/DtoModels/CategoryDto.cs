@@ -12,8 +12,11 @@ namespace App.Domain.Core.DtoModels
         public int Id { get; set; }
 
         public int? ParentId { get; set; }
+        public string? ParentTitle { get; set; }
 
         public string Title { get; set; } = null!;
+
+        public string? ImageUrl { get; set; }
 
         public bool IsDeleted { get; set; }
 

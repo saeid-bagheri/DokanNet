@@ -41,7 +41,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             return _mapper.Map<List<CategoryDto>>(records);
         }
 
-        public async Task<CategoryDto> GetById(int id, CancellationToken cancellationToken)
+        public async Task<CategoryDto> GetById(int? id, CancellationToken cancellationToken)
         {
             var record = await _context.Categories
                 .Where(c => c.Id == id).FirstOrDefaultAsync(cancellationToken);

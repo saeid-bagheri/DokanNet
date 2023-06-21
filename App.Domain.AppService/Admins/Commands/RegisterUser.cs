@@ -18,11 +18,11 @@ namespace App.Domain.AppService.Admins.Commands
         {
             _userManager = userManager;
         }
-        public async Task<IdentityResult> Execute(UserDto model, CancellationToken cancellationToken)
+        public async Task<IdentityResult> Execute(UserDto entity, CancellationToken cancellationToken)
         {
             var user = new AppUser()
             {
-                UserName = model.UserName,
+                UserName = entity.UserName,
                 CreatedAt = DateTime.Now,
                 Buyer = new Buyer()
                 {
@@ -30,7 +30,7 @@ namespace App.Domain.AppService.Admins.Commands
                     IsDeleted = false
                 }
             };
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, entity.Password);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "BuyerRole");

@@ -16,9 +16,9 @@ namespace App.Domain.Service.Buyers.Commands
         {
             _buyerRepository = buyerRepository;
         }
-        public async Task Execute(BuyerDto model, CancellationToken cancellationToken)
+        public async Task Execute(BuyerDto entity, CancellationToken cancellationToken)
         {
-            await _buyerRepository.Update(model, cancellationToken);
+            await _buyerRepository.Update(entity, cancellationToken);
         }
     }
 }

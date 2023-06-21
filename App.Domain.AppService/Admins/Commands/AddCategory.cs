@@ -1,5 +1,5 @@
 ﻿using App.Domain.Core.DtoModels;
-using App.Domain.Core.Services.Sellers.Queries;
+using App.Domain.Core.Services.Admins.Commands;
 using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Service.Sellers.Queries
+namespace App.Domain.Service.Admins.Commands
 {
-    public class GetCategories : IGetCategories
+    public class AddCategory : IAddCategory
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public GetCategories(ICategoryRepository categoryRepository)
+        public AddCategory(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
-        public async Task<List<CategoryDto>> Execute(CancellationToken cancellationToken)
+        public async Task Execute(CategoryDto entity, CancellationToken cancellationToken)
         {
-            return await _categoryRepository.GetAll(cancellationToken);
+            await _categoryRepository.Create(entity, cancellationToken);
         }
     }
 }

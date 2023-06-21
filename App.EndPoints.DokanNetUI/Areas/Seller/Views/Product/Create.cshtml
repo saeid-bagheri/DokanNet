@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <br />
-                <select required asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, nameof(CityDto.Id), nameof(CityDto.Title)))" class="form-control">
+                <select required asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, nameof(CategoryDto.Id), nameof(CategoryDto.Title)))" class="form-control">
                     <option style="display:none;" value="">انتخاب کنید</option>
                 </select>
             </div>

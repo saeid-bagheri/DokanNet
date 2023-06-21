@@ -19,9 +19,9 @@ namespace App.Domain.AppService.Admins.Commands
             _signInManager = signInManager;
         }
 
-        public async Task<SignInResult> Execute(UserDto model, CancellationToken cancellationToken)
+        public async Task<SignInResult> Execute(UserDto entity, CancellationToken cancellationToken)
         {
-            return await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
+            return await _signInManager.PasswordSignInAsync(entity.UserName, entity.Password, true, false);
         }
     }
 }

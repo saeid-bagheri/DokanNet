@@ -4,7 +4,9 @@
     ViewData["Title"] = "محصولات";
     Layout = "_AdminLayout";
 }
-
+<div class="my-2 text-center">
+    <a asp-controller="Product" asp-action="AddCategory" class="btn btn-primary text-white">اضافه کردن دسته بندی</a>
+</div>
 
 <table class="table table-striped table-bordered">
     <thead>
@@ -59,7 +61,7 @@
                     <a data-toggle="modal" data-id=@item.Id data-target="#deleteModal" class="deleteProduct btn btn-danger"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span>حذف</a>
                     @if (!item.IsConfirmed)
                     {
-                        <a asp-route-Id="@item.Id" asp-controller="Product" asp-action="Confirm" class="btn btn-info text-white">تایید</a>
+                        <a asp-route-Id="@item.Id" asp-controller="Product" asp-action="Confirm" class="btn btn-secondary text-white">تایید</a>
                     }
                 </td>
 

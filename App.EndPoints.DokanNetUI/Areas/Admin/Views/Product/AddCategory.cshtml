@@ -1,0 +1,80 @@
+﻿@model CategoryVM
+@{
+    ViewData["Title"] = "افزودن دسته بندی";
+    Layout = "_AdminLayout";
+}
+
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr class="bg-info text-white">
+            <th>شماره</th>
+            <th>نام دسته بندی</th>
+            <th>دسته بندی پدر</th>
+            <th>تصویر</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => category.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => category.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => category.ParentTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => category.ImageUrl)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+
+<h3>افزودن دسته بندی</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="AddCategory">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentId" class="control-label"></label>
+                <br />
+                <select required asp-for="ParentId" asp-items="@(new SelectList(Model.Categories, nameof(CategoryDto.Id), nameof(CategoryDto.Title)))" class="form-control">
+                    <option style="display:none;" value="">انتخاب کنید</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" type="file" class="form-control-file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="افزودن" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">بازگشت</a>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

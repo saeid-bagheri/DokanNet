@@ -11,6 +11,8 @@ public partial class Category
 
     public string Title { get; set; } = null!;
 
+    public string? ImageUrl { get; set; }
+
     public bool IsDeleted { get; set; }
 
     public DateTime? DeletedAt { get; set; }

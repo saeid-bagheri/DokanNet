@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.Services.Sellers.Queries
+namespace App.Domain.Core.Services.Admins.Commands
 {
-    public interface IGetCategories
+    public interface IAddCategory
     {
-        Task<List<CategoryDto>> Execute(CancellationToken cancellationToken);
+        Task Execute(CategoryDto entity, CancellationToken cancellationToken);
     }
 }

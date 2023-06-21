@@ -9,6 +9,6 @@ namespace App.Domain.Core.Services.Buyers.Commands
 {
     public interface IUpdateBuyer
     {
-        Task Execute(BuyerDto model, CancellationToken cancellationToken);
+        Task Execute(BuyerDto entity, CancellationToken cancellationToken);
     }
 }

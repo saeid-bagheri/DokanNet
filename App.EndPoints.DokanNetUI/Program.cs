@@ -76,6 +76,7 @@ builder.Services.AddSingleton(mapper);
 
 //application
 builder.Services.AddScoped<IGetCities, GetCities>();
+builder.Services.AddScoped<IGetCategories, GetCategories>();
 
 //admins
 builder.Services.AddScoped<ICloseStore, CloseStore>();
@@ -106,10 +107,9 @@ builder.Services.AddScoped<ICreateStore, CreateStore>();
 builder.Services.AddScoped<IGetSellerById, GetSellerById>();
 builder.Services.AddScoped<IUpdateSellerProfile, UpdateSellerProfile>();
 builder.Services.AddScoped<IGetProductsByStoreId, GetProductsByStoreId>();
-builder.Services.AddScoped<IGetCategories, GetCategories>();
 builder.Services.AddScoped<ICreateProduct, CreateProduct>();
 builder.Services.AddScoped<IAddImageToProduct, AddImageToProduct>();
-
+builder.Services.AddScoped<IAddCategory, AddCategory>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
