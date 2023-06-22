@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
 {
-    public class ProductVM
+    public class SellerProductVM
     {
         public int Id { get; set; }
         public int StoreId { get; set; }

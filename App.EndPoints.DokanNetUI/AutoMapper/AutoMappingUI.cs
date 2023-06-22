@@ -12,22 +12,22 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
         {
             CreateMap<RegisterVM, UserDto>().ReverseMap();
             CreateMap<LoginVM, UserDto>().ReverseMap();
-            CreateMap<UserVM, UserDto>().ReverseMap();
+            CreateMap<AdminUserVM, UserDto>().ReverseMap();
 
-            CreateMap<Areas.Admin.Models.ViewModels.ProductVM, ProductDto>().ReverseMap();
+            CreateMap<Areas.Admin.Models.ViewModels.AdminProductVM, ProductDto>().ReverseMap();
 
-            CreateMap<StoreVM, StoreDto>().ReverseMap();
+            CreateMap<AdminStoreVM, StoreDto>().ReverseMap();
 
-            CreateMap<CategoryVM, CategoryDto>().ReverseMap();
+            CreateMap<AdminCategoryVM, CategoryDto>().ReverseMap();
 
-            CreateMap<CommentVM, CommentDto>().ReverseMap();
+            CreateMap<AdminCommentVM, CommentDto>().ReverseMap();
 
-            CreateMap<InvoiceVM, InvoiceDto>().ReverseMap();
+            CreateMap<AdminInvoiceVM, InvoiceDto>().ReverseMap();
 
             CreateMap<CreateSellerAndStoreVM, SellerDto>().ReverseMap();
             CreateMap<CreateSellerAndStoreVM, StoreDto>().ReverseMap();
             CreateMap<UpdateSellerProfileVM, SellerDto>().ReverseMap();
-            CreateMap<Areas.Seller.Models.ViewModels.ProductVM, ProductDto>().ReverseMap();
+            CreateMap<Areas.Seller.Models.ViewModels.SellerProductVM, ProductDto>().ReverseMap();
 
         }
     }

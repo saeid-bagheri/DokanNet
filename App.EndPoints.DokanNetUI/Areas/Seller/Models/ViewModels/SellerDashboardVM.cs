@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
 {
-    public class DashboardVM
+    public class SellerDashboardVM
     {
         public int Id { get; set; }
 

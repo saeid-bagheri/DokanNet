@@ -1,16 +1,18 @@
-﻿using App.Domain.Core.DtoModels;
+﻿using App.Domain.Core.AppServices.Admins.Queries;
+using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
 {
     [Area("Seller")]
-    [Authorize(Roles ="SellerRole")]
+    [Authorize(Roles = "SellerRole")]
     public class ProfileController : Controller
     {
         private readonly IGetSellerById _getSellerById;
@@ -25,6 +27,28 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
             _getCities = getCities;
             _updateSellerProfile = updateSellerProfile;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
+        {
+            var seller = await _getSellerById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
+            var profile = new SellerProfileVM()
+            {
+                Id = Convert.ToInt32(seller.Id),
+                FirstName = seller.FirstName,
+                LastName = seller.LastName,
+                Mobile = seller.Mobile,
+                CardNumber = seller.CardNumber,
+                ShebaNumber = seller.ShebaNumber,
+                CityName = seller.City.Title,
+                Birthday = seller.Birthday,
+                CreatedAt = seller.CreatedAt,
+                Biography = seller.Biography,
+                Address = seller.Address,
+                ProfileImgUrl = seller.ProfileImgUrl
+            };
+            return View(profile);
         }
 
 
@@ -51,13 +75,14 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateSellerProfileVM updateSellerProfileVM, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(UpdateSellerProfileVM model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
-                await _updateSellerProfile.Execute(_mapper.Map<SellerDto>(updateSellerProfileVM), cancellationToken);
+                await _updateSellerProfile.Execute(_mapper.Map<SellerDto>(model), cancellationToken);
+                return RedirectToAction("Index", "Profile");
             }
-            return RedirectToAction("Index", "Dashboard");
+            return View(model);
         }
     }
 }

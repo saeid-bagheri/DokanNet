@@ -1,93 +1,16 @@
-﻿@model DashboardVM
+﻿@model SellerDashboardVM
 @{
     ViewData["Title"] = "غرفه من";
     Layout = "_Layout";
 }
+
 
 <div class="content">
     <div class="dashboard">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="ui-boxs">
-                        <div class="ui-box">
-                            <div class="ui-box-item">
-                                <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
-                                    <div class="dashboard-user-img-profile">
-                                        <img src="img/default-icon/user-profile.png" width="80" height="80"
-                                             class="img-fluid rounded-circle" alt="">
-                                    </div>
-                                    <div class="dashboard-user-info">
-                                        <h6 class="user-name">@Model.FirstName @Model.LastName</h6>
-                                    </div>
-                                    <div class="text-center my-2">
-                                        @Model.StoreTitle
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui-box">
-                            <div class="ui-box-item">
-                                <div class="ui-box-item-title" style="padding: 15px;">
-                                    <h4 class="fw-bold">
-                                        حساب کاربری شما
-                                    </h4>
-                                </div>
-                                <div class="ui-box-item-desc p-0">
-                                    <ul class="nav flex-column sidebar-menu">
-                                        <li class="nav-item active">
-                                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link text-muted">
-                                                <i class="bi bi-house"></i>
-                                                <span>داشبورد من</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="profile.html" class="nav-link text-muted">
-                                                <i class="bi bi-person-circle"></i>
-                                                <span>پروفایل من</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a asp-area="Seller" asp-controller="Product" asp-action="Index" asp-route-Id="@Model.Id" class="nav-link text-muted">
-                                                <i class="bi bi-shop"></i>
-                                                <span>محصولات من</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="favorite.html" class="nav-link text-muted">
-                                                <i class="bi bi-heart"></i>
-                                                <span>علاقه مندی ها</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="notification.html" class="nav-link text-muted">
-                                                <i class="bi bi-chat-dots"></i>
-                                                <span>اطلاعیه ها</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="comments.html" class="nav-link text-muted">
-                                                <i class="bi bi-pencil"></i>
-                                                <span>نقد و نظرات</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="address.html" class="nav-link text-muted">
-                                                <i class="bi bi-pin-map"></i>
-                                                <span>آدرس ها</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="last-seen.html" class="nav-link text-muted">
-                                                <i class="bi bi-eye"></i>
-                                                <span>بازدید های اخیر</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <partial name="~/Areas/Seller/Views/Shared/_PartialSellerDashboard.cshtml"></partial>
                 </div>
                 <div class="col-lg-9">
                     <div class="content-box" style="padding:40px 20px;">
@@ -205,5 +128,5 @@
 
 
 @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

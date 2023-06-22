@@ -17,7 +17,7 @@ using System.Collections.Generic;
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
 {
     [Area("Seller")]
-    [Authorize(Roles ="SellerRole")]
+    [Authorize(Roles = "SellerRole")]
     public class DashboardController : Controller
     {
         private readonly IGetCities _getCities;
@@ -45,7 +45,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         {
             var seller = await _getSellerById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
             var store = await _getStoreById.Execute(Convert.ToInt32(User.Identity.GetUserId()), cancellationToken);
-            var dashboard = new DashboardVM()
+            var dashboard = new SellerDashboardVM()
             {
                 Id = Convert.ToInt32(seller.Id),
                 FirstName = seller.FirstName,
@@ -62,6 +62,9 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                 StoreTitle = store.Title,
                 Products = store.Products
             };
+            TempData["SellerName"] = seller.FirstName + " " + seller.LastName;
+            TempData["StoreTitle"] = store.Title;
+            TempData["StoreId"] = dashboard.Id;
             return View(dashboard);
         }
 
@@ -75,18 +78,19 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Create(CreateSellerAndStoreVM createSellerAndStoreVM, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(CreateSellerAndStoreVM model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
                 if (!(await _getUserRolesByUserName.Execute(User.Identity.GetUserName(), cancellationToken)).Contains("SellerRole"))
                 {
-                    createSellerAndStoreVM.Id = Convert.ToInt32(User.Identity.GetUserId());
-                    await _createSeller.Execute(_mapper.Map<SellerDto>(createSellerAndStoreVM), cancellationToken);
-                    await _createStore.Execute(_mapper.Map<StoreDto>(createSellerAndStoreVM), cancellationToken);
+                    model.Id = Convert.ToInt32(User.Identity.GetUserId());
+                    await _createSeller.Execute(_mapper.Map<SellerDto>(model), cancellationToken);
+                    await _createStore.Execute(_mapper.Map<StoreDto>(model), cancellationToken);
                 }
+                return RedirectToAction("Index", "Dashboard");
             }
-            return RedirectToAction("Index", "Dashboard");
+            return View(model);
         }
 
 

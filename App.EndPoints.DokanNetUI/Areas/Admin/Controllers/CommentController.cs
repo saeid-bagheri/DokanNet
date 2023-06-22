@@ -24,7 +24,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var comments = _mapper.Map<List<CommentVM>>(await _getComments.Execute(cancellationToken));
+            var comments = _mapper.Map<List<AdminCommentVM>>(await _getComments.Execute(cancellationToken));
             return View(comments);
         }
 

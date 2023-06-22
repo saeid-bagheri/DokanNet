@@ -31,24 +31,25 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var stores = _mapper.Map<List<StoreVM>>(await _getStores.Execute(cancellationToken));
+            var stores = _mapper.Map<List<AdminStoreVM>>(await _getStores.Execute(cancellationToken));
             return View(stores);
         }
 
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<StoreVM>(await _getStoreById.Execute(id, cancellationToken));
+            var user = _mapper.Map<AdminStoreVM>(await _getStoreById.Execute(id, cancellationToken));
             return View(user);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(StoreVM model, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(AdminStoreVM model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
                 await _updateStore.Execute(_mapper.Map<StoreDto>(model), cancellationToken);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(model);
         }
 
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)

@@ -20,7 +20,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var invoices = _mapper.Map<List<InvoiceVM>>(await _getInvoices.Execute(cancellationToken));
+            var invoices = _mapper.Map<List<AdminInvoiceVM>>(await _getInvoices.Execute(cancellationToken));
             return View(invoices);
         }
     }

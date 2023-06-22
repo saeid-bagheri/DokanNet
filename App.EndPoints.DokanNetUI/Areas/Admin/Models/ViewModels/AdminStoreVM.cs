@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels
 {
-    public class StoreVM
+    public class AdminStoreVM
     {
         public int Id { get; set; }
 

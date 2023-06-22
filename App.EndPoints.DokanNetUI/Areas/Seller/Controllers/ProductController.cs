@@ -43,7 +43,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
-            var products = _mapper.Map<List<ProductVM>>(await _getProductsByStore.Execute(id, cancellationToken));
+            var products = _mapper.Map<List<SellerProductVM>>(await _getProductsByStore.Execute(id, cancellationToken));
             TempData["storeId"] = (await _getStoreById.Execute(id, cancellationToken)).Id;
             return View(products);
         }
@@ -51,7 +51,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
         {
-            var createProductVM = new ProductVM()
+            var createProductVM = new SellerProductVM()
             {
                 StoreId = (await _getStoreById.Execute(id, cancellationToken)).Id,
                 Categories = await _getCategories.Execute(cancellationToken)
@@ -60,17 +60,21 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductVM createProductVM, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(SellerProductVM model, CancellationToken cancellationToken)
         {
-            //create product
-            var productId = await _createProduct.Execute(_mapper.Map<ProductDto>(createProductVM), cancellationToken);
-
-            //add product image
-            if (createProductVM.Image is not null)
+            if (ModelState.IsValid)
             {
-                await _addImageToProduct.Execute(productId, createProductVM.Image, _hostingEnvironment.WebRootPath, cancellationToken);
+                //create product
+                var productId = await _createProduct.Execute(_mapper.Map<ProductDto>(model), cancellationToken);
+
+                //add product image
+                if (model.Image is not null)
+                {
+                    await _addImageToProduct.Execute(productId, model.Image, _hostingEnvironment.WebRootPath, cancellationToken);
+                }
+                return RedirectToAction("Index", new { id = model.StoreId });
             }
-            return RedirectToAction("Index", new { id = createProductVM.StoreId });
+            return View(model);
         }
 
     }

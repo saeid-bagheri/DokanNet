@@ -2,7 +2,7 @@
 
 namespace App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels
 {
-    public class UserVM
+    public class AdminUserVM
     {
         public int Id { get; set; }
 

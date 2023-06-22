@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="AdminRole")]
+    [Authorize(Roles = "AdminRole")]
     public class ProductController : Controller
     {
         private readonly IGetProducts _getProducts;
@@ -38,26 +38,29 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
             _getCategories = getCategories;
             _addCategory = addCategory;
         }
+
+
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var products = _mapper.Map<List<ProductVM>>(await _getProducts.Execute(cancellationToken));
+            var products = _mapper.Map<List<AdminProductVM>>(await _getProducts.Execute(cancellationToken));
             return View(products);
         }
 
         public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
         {
-            var product = _mapper.Map<ProductVM>(await _getProductById.Execute(id, cancellationToken));
+            var product = _mapper.Map<AdminProductVM>(await _getProductById.Execute(id, cancellationToken));
             return View(product);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(ProductVM model, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(AdminProductVM model, CancellationToken cancellationToken)
         {
             if (ModelState.IsValid)
             {
                 await _updateProduct.Execute(_mapper.Map<ProductDto>(model), cancellationToken);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(model);
         }
 
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
@@ -75,7 +78,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> AddCategory(CancellationToken cancellationToken)
         {
-            var category = new CategoryVM()
+            var category = new AdminCategoryVM()
             {
                 Categories = await _getCategories.Execute(cancellationToken)
             };
@@ -83,10 +86,14 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory(CategoryVM categoryVM, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddCategory(AdminCategoryVM model, CancellationToken cancellationToken)
         {
-            await _addCategory.Execute(_mapper.Map<CategoryDto>(categoryVM), cancellationToken);
-            return RedirectToAction("AddCategory");
+            if (ModelState.IsValid)
+            {
+                await _addCategory.Execute(_mapper.Map<CategoryDto>(model), cancellationToken);
+                return RedirectToAction("AddCategory");
+            }
+            return View(model);
         }
 
     }
