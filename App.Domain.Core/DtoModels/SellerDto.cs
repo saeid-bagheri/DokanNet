@@ -39,8 +39,6 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
-
         public virtual City City { get; set; } = null!;
 
         public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();

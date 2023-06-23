@@ -24,6 +24,7 @@ namespace App.Domain.Core.DtoModels
         public DateTime CreatedAt { get; set; }
 
         #region navigations
+        public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
         public virtual Seller IdNavigation { get; set; } = null!;
 

@@ -74,7 +74,7 @@ builder.Services.AddSingleton(mapper);
 
 #region dependency injection
 
-//application
+//Common
 builder.Services.AddScoped<IGetCities, GetCities>();
 builder.Services.AddScoped<IGetCategories, GetCategories>();
 
@@ -110,6 +110,9 @@ builder.Services.AddScoped<IGetProductsByStoreId, GetProductsByStoreId>();
 builder.Services.AddScoped<ICreateProduct, CreateProduct>();
 builder.Services.AddScoped<IAddImageToProduct, AddImageToProduct>();
 builder.Services.AddScoped<IAddCategory, AddCategory>();
+builder.Services.AddScoped<IGetAuctionsByStoreId, GetAuctionsByStoreId>();
+builder.Services.AddScoped<ICreateAuction, CreateAuction>();
+builder.Services.AddScoped<IGetAuctionProductsByStoreId, GetAuctionProductsByStoreId>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

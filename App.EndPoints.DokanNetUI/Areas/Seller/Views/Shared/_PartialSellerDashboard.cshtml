@@ -28,25 +28,25 @@
                     <li class="nav-item active">
                         <a asp-controller="Dashboard" asp-action="Index" class="nav-link text-muted">
                             <i class="bi bi-house"></i>
-                            <span>داشبورد من</span>
+                            <span>داشبورد</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a asp-controller="Profile" asp-action="Index" class="nav-link text-muted">
                             <i class="bi bi-person-circle"></i>
-                            <span>پروفایل من</span>
+                            <span>پروفایل</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a asp-area="Seller" asp-controller="Product" asp-action="Index" asp-route-Id="@TempData.Peek("StoreId")" class="nav-link text-muted">
                             <i class="bi bi-shop"></i>
-                            <span>محصولات من</span>
+                            <span>محصولات</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="favorite.html" class="nav-link text-muted">
-                            <i class="bi bi-heart"></i>
-                            <span>علاقه مندی ها</span>
+                        <a asp-area="Seller" asp-controller="Auction" asp-action="Index" asp-route-Id="@TempData.Peek("StoreId")" class="nav-link text-muted">
+                            <i class="bi bi-hammer"></i>
+                            <span>مزایده ها</span>
                         </a>
                     </li>
                     <li class="nav-item">

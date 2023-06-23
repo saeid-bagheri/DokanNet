@@ -6,6 +6,7 @@ using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,19 +45,19 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
             var products = _mapper.Map<List<SellerProductVM>>(await _getProductsByStore.Execute(id, cancellationToken));
-            TempData["storeId"] = (await _getStoreById.Execute(id, cancellationToken)).Id;
+            TempData["StoreId"] = id;
             return View(products);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
         {
-            var createProductVM = new SellerProductVM()
+            var sellerProductVM = new SellerProductVM()
             {
-                StoreId = (await _getStoreById.Execute(id, cancellationToken)).Id,
+                StoreId = id,
                 Categories = await _getCategories.Execute(cancellationToken)
             };
-            return View(createProductVM);
+            return View(sellerProductVM);
         }
 
         [HttpPost]

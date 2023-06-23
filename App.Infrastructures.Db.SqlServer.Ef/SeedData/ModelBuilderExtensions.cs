@@ -391,6 +391,21 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                 }
                 );
 
+            //auction
+            modelBuilder.Entity<Auction>().HasData(
+                new Auction()
+                {
+                    Id = 1,
+                    StoreId = 4,
+                    ProductId = 9,
+                    CountOfProducts = 1,
+                    Price = 200000,
+                    HasBuyer = false,
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddHours(1),
+                    CreatedAt = DateTime.Now
+                });
+
 
         }
     }

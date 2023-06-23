@@ -9,10 +9,10 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Configurations
     {
         public void Configure(EntityTypeBuilder<Auction> builder)
         {
-            builder.HasOne(d => d.Seller).WithMany(p => p.Auctions)
-                    .HasForeignKey(d => d.SellerId)
+            builder.HasOne(d => d.Store).WithMany(p => p.Auctions)
+                    .HasForeignKey(d => d.StoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Auctions_Sellers");
+                    .HasConstraintName("FK_Auctions_Stores");
 
             builder.HasOne(d => d.Product).WithMany(p => p.Auctions)
                     .HasForeignKey(d => d.ProductId)

@@ -7,7 +7,7 @@ public partial class Auction
 {
     public int Id { get; set; }
 
-    public int SellerId { get; set; }
+    public int StoreId { get; set; }
 
     public int ProductId { get; set; }
 
@@ -27,7 +27,7 @@ public partial class Auction
 
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 
-    public virtual Seller Seller { get; set; } = null!;
+    public virtual Store Store { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;
 

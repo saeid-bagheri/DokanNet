@@ -113,7 +113,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             return records;
         }
 
-        public async Task<ProductDto> GetById(int id, CancellationToken cancellationToken)
+        public async Task<ProductDto> GetById(int? id, CancellationToken cancellationToken)
         {
             var entity = await _context.Products
                 .Where(p => p.Id == id)

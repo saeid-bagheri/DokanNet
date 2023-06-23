@@ -29,7 +29,18 @@ namespace App.Infrastructures.Data.Repositories.Repositories
 
         public async Task Create(AuctionDto entity, CancellationToken cancellationToken)
         {
-            var record = _mapper.Map<Auction>(entity);
+
+            var record = new Auction
+            {
+                StoreId = entity.StoreId,
+                ProductId = entity.ProductId,
+                CountOfProducts = entity.CountOfProducts,
+                Price = entity.Price,
+                HasBuyer = entity.HasBuyer,
+                StartTime = entity.StartTime,
+                EndTime = entity.EndTime,
+                CreatedAt = entity.CreatedAt
+            };
             await _context.Auctions.AddAsync(record, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }
@@ -40,10 +51,12 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             return _mapper.Map<List<AuctionDto>>(records);
         }
 
-        public async Task<List<AuctionDto>> GetAllBySellerId(int sellerId, CancellationToken cancellationToken)
+        public async Task<List<AuctionDto>> GetAllByStoreId(int storeId, CancellationToken cancellationToken)
         {
             var records = await _context.Auctions
-                .Where(a => a.SellerId == sellerId).ToListAsync(cancellationToken);
+                .Where(a => a.StoreId == storeId)
+                .Include(a => a.Product)
+                .ToListAsync(cancellationToken);
             return _mapper.Map<List<AuctionDto>>(records);
         }
 

@@ -21,6 +21,8 @@ public partial class Store
 
     public virtual Seller IdNavigation { get; set; } = null!;
 
+    public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
+
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
     #endregion navigations

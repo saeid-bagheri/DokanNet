@@ -40,8 +40,6 @@ public partial class Seller
     #region navigations
     public virtual AppUser IdNavigation { get; set; } = null!;
 
-    public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
-
     public virtual City City { get; set; } = null!;
 
     public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();

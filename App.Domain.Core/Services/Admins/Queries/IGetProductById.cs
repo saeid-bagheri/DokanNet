@@ -9,6 +9,6 @@ namespace App.Domain.Core.AppServices.Admins.Queries
 {
     public interface IGetProductById
     {
-        Task<ProductDto> Execute(int id, CancellationToken cancellationToken);
+        Task<ProductDto> Execute(int? id, CancellationToken cancellationToken);
     }
 }

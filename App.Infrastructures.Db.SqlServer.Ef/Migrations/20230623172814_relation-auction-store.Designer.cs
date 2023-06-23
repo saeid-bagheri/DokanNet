@@ -4,6 +4,7 @@ using App.Infrastructures.Db.SqlServer.Ef.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230623172814_relation-auction-store")]
+    partial class relationauctionstore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,15 +136,15 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca0a438f-084f-41a1-aab2-7dfdb76866cd",
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 60, DateTimeKind.Local).AddTicks(2957),
+                            ConcurrencyStamp = "83c8b995-cb95-478a-80b9-c7c9eedacc49",
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 766, DateTimeKind.Local).AddTicks(6631),
                             Email = "saeidbagheri034@gmail.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SAEIDBAGHERI034@GMAIL.COM",
                             NormalizedUserName = "SAEIDBAGHERI034",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOl8jbzBwvuyhe8OgbAVIkAemHBFHL0Kq8fqX2IxDDnQXTfDIu2uo1ZWqt6cIb8PEw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBs620cOEid9aKUmzeJQo+Mus31nquIbdvxeIX35DkRXZHW8S5YPf8sctmsZVvgaPw==",
                             PhoneNumber = "09389059421",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "54e8dfb5-8700-4936-a2cd-4b0369afa909",
@@ -152,15 +155,15 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "14ff62a8-8b89-4e4b-a2f7-daad93db8712",
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 139, DateTimeKind.Local).AddTicks(8627),
+                            ConcurrencyStamp = "27d721a8-3b28-4f3c-923b-af48758411d9",
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 895, DateTimeKind.Local).AddTicks(7571),
                             Email = "keyvanhafezi@gmail.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "KEYVANHAFEZI@GMAIL.COM",
                             NormalizedUserName = "KEYVANHAFEZI",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI6vOrU4x4g4cv5VdHa+wG/h+EMiusNZv2iJ0uYFCV1T08+2uImxvaIkci0W2tV+fg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN+lPf0fSp7SoWQZh+fWUKWC6kPyA4bygs5e/Y7r2e6w2i+Z9LbU+sgJ2/vzhTiSPg==",
                             PhoneNumber = "09199999999",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "KKNDWQL54F5NAZZM6LOLFGBUYZWSPKVU",
@@ -214,12 +217,12 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 1,
                             CountOfProducts = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9866),
-                            EndTime = new DateTime(2023, 6, 23, 22, 14, 31, 218, DateTimeKind.Local).AddTicks(9847),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3779),
+                            EndTime = new DateTime(2023, 6, 23, 21, 58, 13, 988, DateTimeKind.Local).AddTicks(3759),
                             HasBuyer = false,
                             Price = 200000,
                             ProductId = 9,
-                            StartTime = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9846),
+                            StartTime = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3757),
                             StoreId = 4
                         });
                 });
@@ -303,7 +306,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Id = 1,
                             Address = "تهران",
                             CityId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9592),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3540),
                             FirstName = "سعید",
                             IsDeleted = false,
                             LastName = "باقری",
@@ -314,7 +317,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Id = 2,
                             Address = "تهران پونک",
                             CityId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9596),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3544),
                             FirstName = "کیوان",
                             IsDeleted = false,
                             LastName = "حافظی",
@@ -358,21 +361,21 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9335),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3053),
                             IsDeleted = false,
                             Title = "پوشاک"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9353),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3074),
                             IsDeleted = false,
                             Title = "ابزار"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9355),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3077),
                             IsDeleted = false,
                             ParentId = 2,
                             Title = "ابزار برقی"
@@ -380,7 +383,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9356),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3079),
                             IsDeleted = false,
                             ParentId = 2,
                             Title = "ابزار غیر برقی"
@@ -388,7 +391,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9358),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3082),
                             IsDeleted = false,
                             ParentId = 1,
                             Title = "لباس مردانه"
@@ -396,14 +399,14 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9359),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3084),
                             IsDeleted = false,
                             Title = "لوازم الکترونیک"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9360),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3086),
                             IsDeleted = false,
                             ParentId = 6,
                             Title = "موبایل"
@@ -496,7 +499,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 1,
                             BuyerId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9759),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3616),
                             Description = "راضی بودم خوب بود.",
                             IsConfirmed = false,
                             IsDeleted = false,
@@ -507,7 +510,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 2,
                             BuyerId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9762),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3619),
                             Description = "جنسش بی کیفیت بود.",
                             IsConfirmed = false,
                             IsDeleted = false,
@@ -518,7 +521,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 3,
                             BuyerId = 2,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9765),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3621),
                             Description = "قیمتش خیلی بالاست",
                             IsConfirmed = false,
                             IsDeleted = false,
@@ -601,7 +604,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 1,
                             BuyerId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9819),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3693),
                             IsFinal = true,
                             SellerId = 1,
                             SiteCommission = 55000,
@@ -611,7 +614,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 2,
                             BuyerId = 2,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9821),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3695),
                             IsFinal = true,
                             SellerId = 2,
                             SiteCommission = 475000,
@@ -759,7 +762,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 1,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9490),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3400),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -773,7 +776,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 2,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9495),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3404),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -787,7 +790,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 3,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9498),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3407),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -801,7 +804,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 4,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9500),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3409),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -815,7 +818,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         {
                             Id = 5,
                             CategoryId = 7,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9502),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3413),
                             IsAuction = false,
                             IsConfirmed = true,
                             IsDeleted = false,
@@ -900,7 +903,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Id = 1,
                             Address = "تهران",
                             CityId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9555),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3467),
                             FeePercentage = 5m,
                             FirstName = "سعید",
                             IsDeleted = false,
@@ -912,7 +915,7 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                             Id = 2,
                             Address = "تهران پونک",
                             CityId = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9559),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3470),
                             FeePercentage = 5m,
                             FirstName = "کیوان",
                             IsDeleted = false,
@@ -952,14 +955,14 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9725),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3576),
                             IsClosed = false,
                             Title = "همه چی فروشی"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2023, 6, 23, 21, 14, 31, 218, DateTimeKind.Local).AddTicks(9728),
+                            CreatedAt = new DateTime(2023, 6, 23, 20, 58, 13, 988, DateTimeKind.Local).AddTicks(3579),
                             IsClosed = false,
                             Title = "موبایل کیوان"
                         });

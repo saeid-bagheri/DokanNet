@@ -1,6 +1,6 @@
-﻿@model List<SellerProductVM>
+﻿@model List<SellerAuctionVM>
 @{
-    ViewData["Title"] = "محصولات من";
+    ViewData["Title"] = "مزایده های من";
     Layout = "_Layout";
 }
 
@@ -26,57 +26,62 @@
                             <div class="category-item my-2">
                                 <div class="row">
 
-                                    @foreach (var product in Model)
+                                    @foreach (var auction in Model)
                                     {
                                         <div class="col-md-4">
                                             <div class="product-box-item shadow-box">
                                                 <div class="product-box-item-img">
                                                     <a href="#">
-                                                        @if (product.Images.Count > 0)
+                                                        @if (auction.ProductImages.Count > 0)
                                                         {
-                                                            <img src="@product.Images[0].Url" alt="" class="img-fluid">
+                                                            <img src="@auction.ProductImages[0].Url" alt="" class="img-fluid">
                                                         }
                                                         else
                                                         {
                                                             <img src="img/product/wach3.jpg" alt="" class="img-fluid">
                                                         }
                                                     </a>
-                                                    <div class="product-box-item-hover">
-                                                        <div class="product-box-item-hover-cart">
-                                                            <button class="product-box-item-hover-cart-btn">
-                                                                <i class="bi bi-pencil-fill"></i> ویرایش محصول
-                                                            </button>
+                                                    @if (auction.HasBuyer)
+                                                    {
+                                                        <div class="product-box-item-hover">
+                                                            <div class="product-box-item-hover-cart">
+                                                                <button class="product-box-item-hover-cart-btn">
+                                                                    <i class="bi bi-list"></i> لیست خریداران
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    }
                                                 </div>
                                                 <a href="#">
                                                     <div class="product-box-item-desc">
                                                         <div class="product-box-item-title my-1">
                                                             <h5>
-                                                                @product.Title
+                                                                @auction.ProductTitle
                                                             </h5>
                                                         </div>
                                                         <div class="product-box-item-title text-danger">
-                                                            <h6>
-                                                                موجودی : @product.Stock
+                                                            <h6 style="height: 35px;">
+                                                                تعداد : @auction.CountOfProducts
                                                             </h6>
                                                         </div>
-                                                        @if (!product.IsConfirmed)
+                                                        @if (auction.StartTime > DateTime.Now)
                                                         {
-                                                            <span class="badge bg-danger rounded-pill text-white my-flex-center">تایید نشده!</span>
+                                                            <span class="badge bg-danger rounded-pill text-white my-flex-center">شروع نشده</span>
                                                         }
-                                                        <div class="product-box-price">
+                                                        else if (auction.StartTime <= DateTime.Now && auction.EndTime > DateTime.Now)
+                                                        {
+                                                            <span class="badge bg-danger rounded-pill text-white my-flex-center">در حال انجام</span>
+                                                        }
+                                                        else if (auction.EndTime <= DateTime.Now)
+                                                        {
+                                                            <span class="badge bg-danger rounded-pill text-white my-flex-center">تمام شده</span>
+                                                        }
+                                                        <div class="product-box-price" style="margin-top: 10px; height: 90px;">
                                                             <div class="d-flex justify-content-between">
-                                                                @if (product.IsAuction)
-                                                                {
-                                                                    <span class="badge bg-info rounded-pill text-white my-flex-center">کالای مزایده ای</span>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <span class="badge bg-info rounded-pill text-white my-flex-center">کالای عادی</span>
-                                                                }
+                                                                <span class=" bg-info rounded-pill text-white my-flex-center">زمان شروع : @auction.StartTime</span>
+                                                                <span class=" bg-info rounded-pill text-white my-flex-center">زمان پایان : @auction.EndTime</span>
                                                                 <span class="new-price" style="color: #0f8a2e;">
-                                                                    قیمت: @product.Price تومان
+                                                                    قیمت: @auction.Price تومان
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -91,7 +96,7 @@
                         </div>
 
                         <div class="text-center">
-                            <a class="btn btn-add-to-cart my-3" asp-area="Seller" asp-controller="Product" asp-action="Create" asp-route-id="@storeId">افزودن محصول</a>
+                            <a class="btn btn-add-to-cart my-3" asp-area="Seller" asp-controller="Auction" asp-action="Create" asp-route-id="@storeId">ایجاد مزایده جدید</a>
                         </div>
                     </div>
                 </div>
@@ -106,4 +111,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
+    }
