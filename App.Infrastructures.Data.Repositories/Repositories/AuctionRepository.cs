@@ -56,6 +56,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var records = await _context.Auctions
                 .Where(a => a.StoreId == storeId)
                 .Include(a => a.Product)
+                .ThenInclude(p => p.Images)
                 .ToListAsync(cancellationToken);
             return _mapper.Map<List<AuctionDto>>(records);
         }

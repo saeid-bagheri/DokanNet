@@ -23,11 +23,6 @@ namespace App.Domain.Service.Sellers.Queries
         public async Task<List<AuctionDto>> Execute(int storeId, CancellationToken cancellationToken)
         {
             var auctions = await _auctionRepository.GetAllByStoreId(storeId, cancellationToken);
-            foreach (var auction in auctions)
-            {
-                auction.ProductTitle = (await _getProductById.Execute(auction.ProductId, cancellationToken)).Title;
-                auction.ProductImages = (await _getProductById.Execute(auction.ProductId, cancellationToken)).Images;
-            }
             return auctions;
         }
     }

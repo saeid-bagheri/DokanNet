@@ -29,6 +29,7 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<UpdateSellerProfileVM, SellerDto>().ReverseMap();
             CreateMap<SellerProductVM, ProductDto>().ReverseMap();
             CreateMap<SellerAuctionVM, AuctionDto>().ReverseMap();
+            CreateMap<SellerCreateAuctionVM, AuctionDto>().ReverseMap();
 
         }
     }

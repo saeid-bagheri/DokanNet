@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.AppServices.Admins.Commands
+namespace App.Domain.Core.Services.Common.Commands
 {
     public interface IUpdateProduct
     {

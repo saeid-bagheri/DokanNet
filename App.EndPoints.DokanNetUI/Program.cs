@@ -8,11 +8,13 @@ using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Admins.Queries;
 using App.Domain.Core.Services.Application.Queries;
+using App.Domain.Core.Services.Common.Commands;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.Domain.Service.Admins.Commands;
 using App.Domain.Service.Admins.Queries;
 using App.Domain.Service.Application.Queries;
+using App.Domain.Service.Common.Commands;
 using App.Domain.Service.Sellers.Commands;
 using App.Domain.Service.Sellers.Queries;
 using App.EndPoints.DokanNetUI.AutoMapper;
@@ -113,6 +115,8 @@ builder.Services.AddScoped<IAddCategory, AddCategory>();
 builder.Services.AddScoped<IGetAuctionsByStoreId, GetAuctionsByStoreId>();
 builder.Services.AddScoped<ICreateAuction, CreateAuction>();
 builder.Services.AddScoped<IGetAuctionProductsByStoreId, GetAuctionProductsByStoreId>();
+builder.Services.AddScoped<IReduceProductStock, ReduceProductStock>();
+builder.Services.AddScoped<IIsExistProductInStoreByName, IsExistProductInStoreByName>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

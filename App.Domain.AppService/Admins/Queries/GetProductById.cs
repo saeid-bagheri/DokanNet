@@ -21,7 +21,7 @@ namespace App.Domain.AppService.Admins.Queries
             _sellerRepository = sellerRepository;
         }
 
-        public async Task<ProductDto> Execute(int? id, CancellationToken cancellationToken)
+        public async Task<ProductDto> Execute(int id, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetById(id, cancellationToken);
             product.SellerName = (await _sellerRepository.GetById(product.StoreId, cancellationToken)).FirstName + " " +

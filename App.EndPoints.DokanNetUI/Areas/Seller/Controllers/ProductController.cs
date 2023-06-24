@@ -2,6 +2,7 @@
 using App.Domain.Core.AppServices.Sellers.Commands;
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Application.Queries;
+using App.Domain.Core.Services.Common.Commands;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
@@ -25,11 +26,13 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         private readonly IAddImageToProduct _addImageToProduct;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IIsExistProductInStoreByName _isExistProductInStoreByName;
 
         public ProductController(IGetProductsByStoreId getProductsByStore, IGetSellerById getSellerById,
                                  IMapper mapper, IWebHostEnvironment hostingEnvironment,
                                  IGetStoreById getStoreById, IGetCategories getCategories,
-                                 ICreateProduct createProduct, IAddImageToProduct addImageToProduct)
+                                 ICreateProduct createProduct, IAddImageToProduct addImageToProduct,
+                                 IIsExistProductInStoreByName isExistProductInStoreByName)
         {
             _getProductsByStore = getProductsByStore;
             _getSellerById = getSellerById;
@@ -39,7 +42,10 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
             _createProduct = createProduct;
             _hostingEnvironment = hostingEnvironment;
             _addImageToProduct = addImageToProduct;
+            _isExistProductInStoreByName = isExistProductInStoreByName;
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
@@ -65,16 +71,26 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         {
             if (ModelState.IsValid)
             {
-                //create product
-                var productId = await _createProduct.Execute(_mapper.Map<ProductDto>(model), cancellationToken);
-
-                //add product image
-                if (model.Image is not null)
+                //check product is exist in store
+                var isExist = await _isExistProductInStoreByName.Execute(model.Title, model.StoreId, cancellationToken);
+                if (isExist)
                 {
-                    await _addImageToProduct.Execute(productId, model.Image, _hostingEnvironment.WebRootPath, cancellationToken);
+                    ModelState.AddModelError(string.Empty, "محصول با این نام در غرفه موجود است");
                 }
-                return RedirectToAction("Index", new { id = model.StoreId });
+                else
+                {
+                    //create product
+                    var productId = await _createProduct.Execute(_mapper.Map<ProductDto>(model), cancellationToken);
+
+                    //add product image
+                    if (model.Image is not null)
+                    {
+                        await _addImageToProduct.Execute(productId, model.Image, _hostingEnvironment.WebRootPath, cancellationToken);
+                    }
+                    return RedirectToAction("Index", new { id = model.StoreId });
+                }
             }
+            model.Categories = await _getCategories.Execute(cancellationToken);
             return View(model);
         }
 

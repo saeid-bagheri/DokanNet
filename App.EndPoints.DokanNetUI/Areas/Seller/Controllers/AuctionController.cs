@@ -19,16 +19,19 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         private readonly IGetAuctionProductsByStoreId _getAuctionProductsByStore;
         private readonly ICreateAuction _createAuction;
         private readonly IGetProductById _getProductById;
+        private readonly IReduceProductStock _reduceProductStock;
 
         public AuctionController(IMapper mapper, IGetAuctionsByStoreId getAuctionsByStore,
-                                 ICreateAuction createAuction,IGetProductById getProductById,
-                                 IGetAuctionProductsByStoreId getAuctionProductsByStore)
+                                 ICreateAuction createAuction, IGetProductById getProductById,
+                                 IGetAuctionProductsByStoreId getAuctionProductsByStore,
+                                 IReduceProductStock reduceProductStock)
         {
             _mapper = mapper;
             _getAuctionsByStore = getAuctionsByStore;
             _createAuction = createAuction;
             _getProductById = getProductById;
             _getAuctionProductsByStore = getAuctionProductsByStore;
+            _reduceProductStock = reduceProductStock;
         }
 
 
@@ -42,7 +45,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
 
         public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
         {
-            var sellerAuctionVM = new SellerAuctionVM()
+            var sellerAuctionVM = new SellerCreateAuctionVM()
             {
                 StoreId = id,
                 Products = await _getAuctionProductsByStore.Execute(id, cancellationToken)
@@ -51,24 +54,39 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SellerAuctionVM model, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(SellerCreateAuctionVM model, CancellationToken cancellationToken)
         {
-            var errors = ModelState.Values.SelectMany(v => v.Errors); //to check the errors
             if (ModelState.IsValid)
             {
                 //The number of auction products should not be more than the number of warehouse products
                 if (model.CountOfProducts <= (await _getProductById.Execute(model.ProductId, cancellationToken)).Stock)
                 {
-                    //create auction
-                    await _createAuction.Execute(_mapper.Map<AuctionDto>(model), cancellationToken);
-                    //Reducing the number of stock products to the amount of auction products
+                    //start time should not be more than the end time
+                    if (model.StartTime < model.EndTime)
+                    {
+                        //create auction
+                        await _createAuction.Execute(_mapper.Map<AuctionDto>(model), cancellationToken);
+
+                        //Reducing the number of stock products to the amount of auction products
+                        await _reduceProductStock.Execute(model.CountOfProducts, model.ProductId, cancellationToken);
 
 
+                        return RedirectToAction("Index", new { id = model.StoreId });
 
-                    return RedirectToAction("Index", new { id = model.StoreId });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "زمان شروع باید کوچکتر از زمان پایان باشد");
+                    }
                 }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "تعداد محصول مزایده نباید بیشتر از موجودی انبار باشد");
+                }
+
             }
-            return View();
+            model.Products = await _getAuctionProductsByStore.Execute(model.StoreId, cancellationToken);
+            return View(model);
         }
     }
 }
