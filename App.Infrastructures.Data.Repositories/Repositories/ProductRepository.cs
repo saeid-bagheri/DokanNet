@@ -45,7 +45,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<ProductDto>();
             records = await _context.Products
-                .Where(P => P.IsDeleted == false)
+                .Where(p => p.IsDeleted == false)
                 .Include(p => p.Category)
                 .Include(p => p.Store)
                 .Select(p => new ProductDto
@@ -71,7 +71,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<ProductDto>();
             records = await _context.Products
-                .Where(p => p.StoreId == storeId && p.IsDeleted == false)
+                .Where(p => p.StoreId == storeId && p.IsDeleted == false && p.IsConfirmed)
                 .Include(p => p.Category)
                 .Include(p => p.Images)
                 .Select(p => new ProductDto
@@ -95,7 +95,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<List<ProductDto>> GetAllByCategoryId(int categoryId, CancellationToken cancellationToken)
         {
             var records = await _context.Products
-                .Where(p => p.CategoryId == categoryId && p.IsDeleted == false)
+                .Where(p => p.CategoryId == categoryId && p.IsDeleted == false && p.IsConfirmed)
                 .Select(p => new ProductDto
                 {
                     Id = p.Id,

@@ -27,7 +27,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         }
 
 
-        public async Task Create(AuctionDto entity, CancellationToken cancellationToken)
+        public async Task<int> Create(AuctionDto entity, CancellationToken cancellationToken)
         {
 
             var record = new Auction
@@ -43,6 +43,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             };
             await _context.Auctions.AddAsync(record, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
+            return record.Id;
         }
 
         public async Task<List<AuctionDto>> GetAll(CancellationToken cancellationToken)
@@ -64,7 +65,9 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<AuctionDto> GetById(int id, CancellationToken cancellationToken)
         {
             var record = await _context.Auctions
-                .Where(a => a.Id == id).FirstOrDefaultAsync(cancellationToken);
+                .Where(a => a.Id == id)
+                .Include(a => a.Bids)
+                .FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map<AuctionDto>(record);
         }
     }

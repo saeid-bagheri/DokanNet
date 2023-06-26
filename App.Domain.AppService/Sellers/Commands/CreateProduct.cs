@@ -32,7 +32,7 @@ namespace App.Domain.Service.Sellers.Commands
                 Stock = entity.Stock,
                 IsConfirmed = false,
                 IsAuction = entity.IsAuction,
-                IsEnabled = !entity.IsAuction,
+                IsEnabled = true,
                 Price = entity.Price,
                 CreatedAt = DateTime.Now
             };

@@ -1,9 +1,11 @@
 ﻿using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DtoModels;
+using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using AutoMapper;
+using Hangfire;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +22,14 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         private readonly ICreateAuction _createAuction;
         private readonly IGetProductById _getProductById;
         private readonly IReduceProductStock _reduceProductStock;
+        private readonly IEndOfAuction _endOfAuction;
+        private readonly IBackgroundJobClient _backgroundJobClient;
 
         public AuctionController(IMapper mapper, IGetAuctionsByStoreId getAuctionsByStore,
                                  ICreateAuction createAuction, IGetProductById getProductById,
                                  IGetAuctionProductsByStoreId getAuctionProductsByStore,
-                                 IReduceProductStock reduceProductStock)
+                                 IReduceProductStock reduceProductStock, IEndOfAuction endOfAuction,
+                                 IBackgroundJobClient backgroundJobClient)
         {
             _mapper = mapper;
             _getAuctionsByStore = getAuctionsByStore;
@@ -32,6 +37,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
             _getProductById = getProductById;
             _getAuctionProductsByStore = getAuctionProductsByStore;
             _reduceProductStock = reduceProductStock;
+            _endOfAuction = endOfAuction;
+            _backgroundJobClient = backgroundJobClient;
         }
 
 
@@ -65,23 +72,25 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                     if (model.StartTime < model.EndTime)
                     {
                         //create auction
-                        await _createAuction.Execute(_mapper.Map<AuctionDto>(model), cancellationToken);
+                        var auctionId = await _createAuction.Execute(_mapper.Map<AuctionDto>(model), cancellationToken);
 
                         //Reducing the number of stock products to the amount of auction products
                         await _reduceProductStock.Execute(model.CountOfProducts, model.ProductId, cancellationToken);
 
+                        //run end of auction with hangfire
+                        _backgroundJobClient.Schedule(() => _endOfAuction.Execute(auctionId, cancellationToken), (model.EndTime - model.StartTime).Value);
 
                         return RedirectToAction("Index", new { id = model.StoreId });
 
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "زمان شروع باید کوچکتر از زمان پایان باشد");
+                        ModelState.AddModelError(string.Empty, "زمان شروع باید از زمان پایان کوچکتر باشد");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "تعداد محصول مزایده نباید بیشتر از موجودی انبار باشد");
+                    ModelState.AddModelError(string.Empty, "تعداد محصول مزایده نباید از موجودی انبار بیشتر باشد");
                 }
 
             }

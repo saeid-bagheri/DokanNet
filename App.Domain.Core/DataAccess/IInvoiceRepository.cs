@@ -4,7 +4,7 @@ namespace App.Infrastructures.Data.Repositories
 {
     public interface IInvoiceRepository
     {
-        Task Create(InvoiceDto entity, CancellationToken cancellationToken);
+        Task<int> Create(InvoiceDto entity, CancellationToken cancellationToken);
         Task<List<InvoiceDto>> GetAll(CancellationToken cancellationToken);
         Task<List<InvoiceDto>> GetAllByBuyerId(int buyerId, CancellationToken cancellationToken);
         Task<List<InvoiceDto>> GetAllBySellerId(int sellerId, CancellationToken cancellationToken);

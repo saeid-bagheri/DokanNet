@@ -23,6 +23,7 @@ using App.Infrastructures.Data.Repositories.AutoMapper;
 using App.Infrastructures.Data.Repositories.Repositories;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
 using AutoMapper;
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -73,6 +74,15 @@ var configMapper = new MapperConfiguration(cfg =>
 var mapper = configMapper.CreateMapper();
 builder.Services.AddSingleton(mapper);
 #endregion config autoMapper
+#region hangfire
+builder.Services.AddHangfire(configuration => configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(connectionString));
+
+builder.Services.AddHangfireServer();
+#endregion hangfire
 
 #region dependency injection
 
@@ -103,6 +113,7 @@ builder.Services.AddScoped<IGetUsers, GetUsers>();
 builder.Services.AddScoped<IGetInvoices, GetInvoices>();
 builder.Services.AddScoped<ICreateSeller, CreateSeller>();
 builder.Services.AddScoped<IAddRoleToUser, AddRoleToUser>();
+builder.Services.AddScoped<IEndOfAuction, EndOfAuction>();
 
 //sellers
 builder.Services.AddScoped<ICreateStore, CreateStore>();
@@ -132,8 +143,12 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>();
 
 #endregion dependency injection
+
+
+
 
 var app = builder.Build();
 

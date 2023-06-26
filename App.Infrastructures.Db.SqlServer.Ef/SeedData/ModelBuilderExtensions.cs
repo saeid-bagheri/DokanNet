@@ -406,6 +406,27 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                     CreatedAt = DateTime.Now
                 });
 
+            //bid
+            modelBuilder.Entity<Bid>().HasData(
+                new Bid()
+                {
+                    Id = 1,
+                    BuyerId = 1,
+                    AuctionId = 1,
+                    Price = 210000,
+                    IsWinner = false,
+                    CreatedAt = DateTime.Now
+                },
+                new Bid()
+                {
+                    Id = 2,
+                    BuyerId = 2,
+                    AuctionId = 1,
+                    Price = 220000,
+                    IsWinner = true,
+                    CreatedAt = DateTime.Now.AddMinutes(2)
+                });
+
 
         }
     }

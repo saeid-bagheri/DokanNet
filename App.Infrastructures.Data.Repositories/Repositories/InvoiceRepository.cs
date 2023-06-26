@@ -21,7 +21,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         }
 
 
-        public async Task Create(InvoiceDto entity, CancellationToken cancellationToken)
+        public async Task<int> Create(InvoiceDto entity, CancellationToken cancellationToken)
         {
             var record = new Invoice
             {
@@ -34,6 +34,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             };
             await _context.Invoices.AddAsync(record);
             await _context.SaveChangesAsync(cancellationToken);
+            return record.Id;
         }
 
         public async Task<List<InvoiceDto>> GetAll(CancellationToken cancellationToken)

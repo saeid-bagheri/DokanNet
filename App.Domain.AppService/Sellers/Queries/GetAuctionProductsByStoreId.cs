@@ -19,7 +19,8 @@ namespace App.Domain.Service.Sellers.Queries
         }
         public async Task<List<ProductDto>> Execute(int storeId, CancellationToken cancellationToken)
         {
-            var products = (await _productRepository.GetAllByStoreId(storeId, cancellationToken)).Where(p => p.IsAuction == true).ToList();
+            var products = (await _productRepository.GetAllByStoreId(storeId, cancellationToken))
+                .Where(p => p.IsAuction && p.IsEnabled).ToList();
             return products;
         }
     }

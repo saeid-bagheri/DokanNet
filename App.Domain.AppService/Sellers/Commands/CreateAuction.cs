@@ -20,7 +20,7 @@ namespace App.Domain.Service.Sellers.Commands
             _auctionRepository = auctionRepository;
             _getProductById = getProductById;
         }
-        public async Task Execute(AuctionDto entity, CancellationToken cancellationToken)
+        public async Task<int> Execute(AuctionDto entity, CancellationToken cancellationToken)
         {
             var auctionDto = new AuctionDto()
             {
@@ -34,7 +34,7 @@ namespace App.Domain.Service.Sellers.Commands
                 EndTime = entity.EndTime,
                 CreatedAt = DateTime.Now
             };
-            await _auctionRepository.Create(auctionDto, cancellationToken);
+            return await _auctionRepository.Create(auctionDto, cancellationToken);
         }
     }
 }

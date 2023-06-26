@@ -6,7 +6,6 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
 {
     public class SellerCreateAuctionVM
     {
-
         public int StoreId { get; set; }
 
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
@@ -16,6 +15,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
         public List<ProductDto> Products { get; set; } = new List<ProductDto>();
 
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
+        [Range(1, int.MaxValue, ErrorMessage = "تعداد محصول نباید 0 باشد")]
         [Display(Name = "تعداد محصول")]
         public int CountOfProducts { get; set; }
 
