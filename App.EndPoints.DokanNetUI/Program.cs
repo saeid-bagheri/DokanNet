@@ -3,6 +3,7 @@ using App.Domain.AppService.Admins.Queries;
 using App.Domain.Core.AppServices.Admins.Commands;
 using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.AppServices.Sellers.Commands;
+using App.Domain.Core.Configs;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
@@ -35,54 +36,23 @@ builder.Services.AddControllersWithViews();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     //send user to a page that said your access is denied!
-    options.AccessDeniedPath= "/";
+    options.AccessDeniedPath = "/";
 
 });
 
 
-var config = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json", optional: false)
-    .AddJsonFile("appsettings.Development.json", optional: false)
-    .Build();
 
-#region config dbContext
-var connectionString = config.GetSection("ConnectionString").Value;
+#region config from appsetting
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", false, true)
+    .AddJsonFile("appsettings.Development.json");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(connectionString);
-});
-#endregion  config dbContext
-#region config identity
-builder.Services.AddIdentity<AppUser,IdentityRole<int>>(options =>
-{
-    options.SignIn.RequireConfirmedEmail = false;
-    options.SignIn.RequireConfirmedPhoneNumber = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequiredLength = 4;
-    options.Password.RequireNonAlphanumeric = false;
-}).AddEntityFrameworkStores<AppDbContext>();
-#endregion config identity
-#region config autoMapper
-var configMapper = new MapperConfiguration(cfg =>
-{
-    cfg.AddProfile(new AutoMappingInfrastructures());
-    cfg.AddProfile(new AutoMappingUI());
-});
-var mapper = configMapper.CreateMapper();
-builder.Services.AddSingleton(mapper);
-#endregion config autoMapper
-#region hangfire
-builder.Services.AddHangfire(configuration => configuration
-    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-    .UseSimpleAssemblyNameTypeSerializer()
-    .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(connectionString));
+var connectionString = builder.Configuration.GetSection("ConnectionString").Value;
+var siteConfig = builder.Configuration.GetSection("MedalConfig").Get<SiteConfig>();
+builder.Services.AddSingleton(siteConfig);
+#endregion config from appsetting
 
-builder.Services.AddHangfireServer();
-#endregion hangfire
 
 #region dependency injection
 
@@ -146,9 +116,43 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IInvoiceProductRepository, InvoiceProductRepository>();
 
 #endregion dependency injection
+#region config dbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
+#endregion  config dbContext
+#region config identity
+builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 4;
+    options.Password.RequireNonAlphanumeric = false;
+}).AddEntityFrameworkStores<AppDbContext>();
+#endregion config identity
+#region config autoMapper
+var configMapper = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new AutoMappingInfrastructures());
+    cfg.AddProfile(new AutoMappingUI());
+});
+var mapper = configMapper.CreateMapper();
+builder.Services.AddSingleton(mapper);
+#endregion config autoMapper
+#region config hangfire
+builder.Services.AddHangfire(configuration => configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage(connectionString));
 
+builder.Services.AddHangfireServer();
 
-
+#endregion config hangfire
 
 var app = builder.Build();
 

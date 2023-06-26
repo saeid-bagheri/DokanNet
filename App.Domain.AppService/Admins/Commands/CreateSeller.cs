@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.DataAccess;
+﻿using App.Domain.Core.Configs;
+using App.Domain.Core.DataAccess;
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
@@ -19,20 +20,23 @@ namespace App.Domain.Service.Admins.Commands
         private readonly IBuyerRepository _buyerRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly Medalconfig _medalconfig;
 
         public CreateSeller(UserManager<AppUser> userManager, ISellerRepository sellerRepository,
-                            IBuyerRepository buyerRepository, SignInManager<AppUser> signInManager)
+                            IBuyerRepository buyerRepository, SignInManager<AppUser> signInManager,
+                            Medalconfig medalconfig)
         {
             _userManager = userManager;
             _sellerRepository = sellerRepository;
             _buyerRepository = buyerRepository;
             _signInManager = signInManager;
+            _medalconfig = medalconfig;
         }
 
 
         public async Task Execute(SellerDto entity, CancellationToken cancellationToken)
         {
-            //add seller role tp user roles
+            //add seller role to user roles
             var user = await _userManager.FindByIdAsync(entity.Id.ToString());
             await _userManager.AddToRoleAsync(user, "SellerRole");
 
@@ -40,13 +44,10 @@ namespace App.Domain.Service.Admins.Commands
             await _signInManager.RefreshSignInAsync(user);
 
 
-
-
             //create new seller
             entity.IsDeleted = false;
             entity.CreatedAt = DateTime.Now;
-            //add this in appSetting
-            entity.FeePercentage = 5;
+            entity.FeePercentage = _medalconfig.FeePercentageDefault;
             await _sellerRepository.Create(entity, cancellationToken);
 
 
