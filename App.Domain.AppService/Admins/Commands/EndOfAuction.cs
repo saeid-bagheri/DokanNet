@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.DataAccess;
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Admins.Commands;
+using App.Domain.Core.Services.Common.Commands;
 using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,16 @@ namespace App.Domain.Service.Admins.Commands
     {
         private readonly IAuctionRepository _auctionRepository;
         private readonly ISellerRepository _sellerRepository;
-        private readonly IInvoiceRepository _invoiceRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IInvoiceProductRepository _invoiceProductRepository;
+        private readonly ICreateInvoice _createInvoice;
 
         public EndOfAuction(IAuctionRepository auctionRepository, ISellerRepository sellerRepository,
-                            IInvoiceRepository invoiceRepository, IProductRepository productRepository,
-                            IInvoiceProductRepository invoiceProductRepository)
+                            IProductRepository productRepository, ICreateInvoice createInvoice)
         {
             _auctionRepository = auctionRepository;
             _sellerRepository = sellerRepository;
-            _invoiceRepository = invoiceRepository;
             _productRepository = productRepository;
-            _invoiceProductRepository = invoiceProductRepository;
+            _createInvoice = createInvoice;
         }
 
 
@@ -47,25 +45,20 @@ namespace App.Domain.Service.Admins.Commands
 
 
                 //create new invoice
-                var invoice = new InvoiceDto()
+                var invoiceDto = new InvoiceDto()
                 {
                     TotalAmount = auction.Price,
-                    SiteCommission = Convert.ToInt32(auction.Price - ((seller.FeePercentage / 100) * auction.Price)),
                     BuyerId = winnerBid.BuyerId,
                     SellerId = seller.Id,
-                    IsFinal = true,
-                    CreatedAt = DateTime.Now
-                };
-                var invoiceId = await _invoiceRepository.Create(invoice, cancellationToken);
-
-                //create new invoiceProduct
-                var invoiceProduct = new InvoiceProductDto()
-                {
-                    InvoiceId = invoiceId,
                     ProductId = auction.ProductId,
                     CountOfProducts = auction.CountOfProducts
                 };
-                await _invoiceProductRepository.Create(invoiceProduct, cancellationToken);
+                await _createInvoice.Execute(invoiceDto, cancellationToken);
+
+                //update seller medal
+
+
+
             }
             else
             {

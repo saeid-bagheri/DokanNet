@@ -244,7 +244,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                     Mobile = "09389059421",
                     Address = "تهران",
                     CityId = 1,
-                    FeePercentage = 5,
                     IsDeleted = false,
                     CreatedAt = DateTime.Now
                 },
@@ -256,7 +255,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.SeedData
                     Mobile = "09366666666",
                     Address = "تهران پونک",
                     CityId = 1,
-                    FeePercentage = 5,
                     IsDeleted = false,
                     CreatedAt = DateTime.Now
                 });

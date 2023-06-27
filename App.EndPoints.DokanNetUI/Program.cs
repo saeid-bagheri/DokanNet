@@ -10,12 +10,14 @@ using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Admins.Queries;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Common.Commands;
+using App.Domain.Core.Services.Common.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.Domain.Service.Admins.Commands;
 using App.Domain.Service.Admins.Queries;
 using App.Domain.Service.Application.Queries;
 using App.Domain.Service.Common.Commands;
+using App.Domain.Service.Common.Queries;
 using App.Domain.Service.Sellers.Commands;
 using App.Domain.Service.Sellers.Queries;
 using App.EndPoints.DokanNetUI.AutoMapper;
@@ -49,8 +51,8 @@ builder.Configuration
     .AddJsonFile("appsettings.Development.json");
 
 var connectionString = builder.Configuration.GetSection("ConnectionString").Value;
-var siteConfig = builder.Configuration.GetSection("MedalConfig").Get<SiteConfig>();
-builder.Services.AddSingleton(siteConfig);
+builder.Configuration.GetSection("MedalConfig").Get<MedalConfig>();
+builder.Services.AddSingleton<MedalConfig>();
 #endregion config from appsetting
 
 
@@ -59,6 +61,8 @@ builder.Services.AddSingleton(siteConfig);
 //Common
 builder.Services.AddScoped<IGetCities, GetCities>();
 builder.Services.AddScoped<IGetCategories, GetCategories>();
+builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
+builder.Services.AddScoped<ICreateInvoice, CreateInvoice>();
 
 //admins
 builder.Services.AddScoped<ICloseStore, CloseStore>();
@@ -68,7 +72,6 @@ builder.Services.AddScoped<IDeleteProduct, DeleteProduct>();
 builder.Services.AddScoped<IDeleteUser, DeleteUser>();
 builder.Services.AddScoped<ILoginUser, LoginUser>();
 builder.Services.AddScoped<IRegisterUser, RegisterUser>();
-builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<IUpdateStore, UpdateStore>();
 builder.Services.AddScoped<IUpdateUser, UpdateUser>();
 builder.Services.AddScoped<IGetComments, GetComments>();
@@ -98,6 +101,7 @@ builder.Services.AddScoped<ICreateAuction, CreateAuction>();
 builder.Services.AddScoped<IGetAuctionProductsByStoreId, GetAuctionProductsByStoreId>();
 builder.Services.AddScoped<IReduceProductStock, ReduceProductStock>();
 builder.Services.AddScoped<IIsExistProductInStoreByName, IsExistProductInStoreByName>();
+builder.Services.AddScoped<IUpdateMedal, UpdateMedal>();
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

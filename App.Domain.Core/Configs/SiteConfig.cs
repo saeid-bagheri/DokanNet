@@ -12,7 +12,7 @@ namespace App.Domain.Core.Configs
     public class Rootobject
     {
         public Logging Logging { get; set; }
-        public Medalconfig MedalConfig { get; set; }
+        public MedalConfig MedalConfig { get; set; }
         public string ConnectionString { get; set; }
         public string AllowedHosts { get; set; }
     }
@@ -28,7 +28,7 @@ namespace App.Domain.Core.Configs
         public string MicrosoftAspNetCore { get; set; }
     }
 
-    public class Medalconfig
+    public class MedalConfig
     {
         public int FeePercentageDefault { get; set; }
         public int FeePercentageBronze { get; set; }

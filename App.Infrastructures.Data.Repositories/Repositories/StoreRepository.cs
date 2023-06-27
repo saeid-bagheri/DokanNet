@@ -57,6 +57,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var entity = await _context.Stores
                 .Where(s => s.Id == id)
                 .Include(s => s.Products)
+                .Include(s => s.Auctions)
                 .FirstOrDefaultAsync(cancellationToken);
             var record = new StoreDto
             {
@@ -66,7 +67,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 IsClosed = entity.IsClosed,
                 ClosedAt = entity.ClosedAt,
                 CreatedAt = entity.CreatedAt,
-                Products = entity.Products
+                Products = entity.Products,
+                Auctions = entity.Auctions
             };
             return record;
         }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.AppServices.Admins.Queries
+namespace App.Domain.Core.Services.Common.Commands
 {
-    public interface IGetStoreById
+    public interface ICreateInvoice
     {
-        Task<StoreDto> Execute(int id, CancellationToken cancellationToken);
+        Task Execute(InvoiceDto entity, CancellationToken cancellationToken);
     }
 }

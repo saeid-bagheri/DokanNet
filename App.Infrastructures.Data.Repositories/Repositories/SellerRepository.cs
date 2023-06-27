@@ -37,7 +37,6 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 Mobile = entity.Mobile,
                 Address = entity.Address,
                 CityId = entity.CityId,
-                FeePercentage = entity.FeePercentage,
                 IsDeleted = entity.IsDeleted,
                 CreatedAt = entity.CreatedAt
             };
@@ -76,7 +75,6 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             record.ProfileImgUrl = entity.ProfileImgUrl;
             record.Biography = entity.Biography;
             record.MedalId = entity.MedalId;
-            record.FeePercentage = entity.FeePercentage;
             record.Birthday = entity.Birthday;
 
             await _context.SaveChangesAsync(cancellationToken);

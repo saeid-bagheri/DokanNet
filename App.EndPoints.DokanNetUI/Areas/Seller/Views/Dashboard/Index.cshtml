@@ -26,25 +26,39 @@
                             <div class="col-xl-3 col-6 dashboard-cart-col">
                                 <div class="dashboard-cart shadow-box">
                                     <div class="dashboard-cart-title">
-                                        <i class="bi bi-activity"></i> سفارشات در
-                                        انتظار بررسی
+                                        <i class="bi bi-hammer"></i> تعداد مزایده های غرفه
                                     </div>
-                                    <div class="dashboard-cart-footer" style="background: #F6A21E;">0</div>
+                                    <div class="dashboard-cart-footer" style="background: #F6A21E;">@Model.Auctions.Count</div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-6 dashboard-cart-col">
                                 <div class="dashboard-cart shadow-box">
                                     <div class="dashboard-cart-title">
-                                        <i class="bi bi-x-octagon"></i> سفارشات لغو
-                                        شده
+                                        <i class="bi bi-award"></i> مدال
                                     </div>
-                                    <div class="dashboard-cart-footer" style="background: #0db47f;">0</div>
+                                    @{
+                                        switch (Model.MedalId)
+                                        {
+                                            case 1:
+                                                <div class="dashboard-cart-footer" style="background: #FFD700;">طلا</div>
+                                                break;
+                                            case 2:
+                                                <div class="dashboard-cart-footer" style="background: #C0C0C0;">نقره</div>
+                                                break;
+                                            case 3:
+                                                <div class="dashboard-cart-footer" style="background: #CD7F32;">برنز</div>
+                                                break;
+                                            default:
+                                                <div class="dashboard-cart-footer" style="background: #0db47f;">---</div>
+                                                break;
+                                        }
+                                    }
                                 </div>
                             </div>
                             <div class="col-xl-3 col-6 dashboard-cart-col">
                                 <div class="dashboard-cart shadow-box">
                                     <div class="dashboard-cart-title">
-                                        <i class="bi bi-repeat"></i> سفارشات مرجوعی
+                                        <i class="bi bi-repeat"></i> ...
                                     </div>
                                     <div class="dashboard-cart-footer" style="background: #BA0F30;">0</div>
                                 </div>

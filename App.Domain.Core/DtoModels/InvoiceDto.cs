@@ -23,8 +23,12 @@ namespace App.Domain.Core.DtoModels
 
         public bool IsFinal { get; set; }
 
-
         public DateTime CreatedAt { get; set; }
+
+
+        public int ProductId { get; set; }
+
+        public int CountOfProducts { get; set; }
 
         #region navigations
 

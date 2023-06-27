@@ -3,6 +3,7 @@ using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Application.Queries;
+using App.Domain.Core.Services.Common.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
@@ -60,7 +61,9 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                 Address = seller.Address,
                 ProfileImgUrl = seller.ProfileImgUrl,
                 StoreTitle = store.Title,
-                Products = store.Products
+                Products = store.Products,
+                Auctions = store.Auctions,
+                MedalId = seller.MedalId
             };
             TempData["SellerName"] = seller.FirstName + " " + seller.LastName;
             TempData["StoreTitle"] = store.Title;

@@ -27,8 +27,6 @@ namespace App.Domain.Core.DtoModels
 
         public int? MedalId { get; set; }
 
-        public decimal FeePercentage { get; set; }
-
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedAt { get; set; }

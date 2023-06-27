@@ -20,17 +20,17 @@ namespace App.Domain.Service.Admins.Commands
         private readonly IBuyerRepository _buyerRepository;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly Medalconfig _medalconfig;
+        private readonly MedalConfig _medalConfig;
 
         public CreateSeller(UserManager<AppUser> userManager, ISellerRepository sellerRepository,
                             IBuyerRepository buyerRepository, SignInManager<AppUser> signInManager,
-                            Medalconfig medalconfig)
+                            MedalConfig medalConfig)
         {
             _userManager = userManager;
             _sellerRepository = sellerRepository;
             _buyerRepository = buyerRepository;
             _signInManager = signInManager;
-            _medalconfig = medalconfig;
+            _medalConfig = medalConfig;
         }
 
 
@@ -47,7 +47,6 @@ namespace App.Domain.Service.Admins.Commands
             //create new seller
             entity.IsDeleted = false;
             entity.CreatedAt = DateTime.Now;
-            entity.FeePercentage = _medalconfig.FeePercentageDefault;
             await _sellerRepository.Create(entity, cancellationToken);
 
 

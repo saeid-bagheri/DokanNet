@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entities;
+﻿using App.Domain.Core.DtoModels;
+using App.Domain.Core.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
@@ -32,8 +33,11 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
 
         public string StoreTitle { get; set; } = null!;
 
+        public int? MedalId { get; set; }
+
         public string? ImageUrl { get; set; }
 
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
     }
 }

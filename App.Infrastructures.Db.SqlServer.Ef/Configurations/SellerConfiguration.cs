@@ -9,7 +9,6 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Configurations
         public void Configure(EntityTypeBuilder<Seller> builder)
         {
             builder.Property(e => e.CardNumber).HasMaxLength(50);
-            builder.Property(e => e.FeePercentage).HasColumnType("decimal(5, 2)");
             builder.Property(e => e.FirstName).HasMaxLength(50);
             builder.Property(e => e.LastName).HasMaxLength(50);
             builder.Property(e => e.Mobile).HasMaxLength(11);
