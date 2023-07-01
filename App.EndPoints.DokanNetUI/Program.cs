@@ -55,8 +55,8 @@ builder.Configuration
     .AddJsonFile("appsettings.Development.json");
 
 var connectionString = builder.Configuration.GetSection("ConnectionString").Value;
-builder.Configuration.GetSection("MedalConfig").Get<MedalConfig>();
-builder.Services.AddSingleton<MedalConfig>();
+var medalConfig = builder.Configuration.GetSection("MedalConfig").Get<MedalConfig>();
+builder.Services.AddSingleton(medalConfig);
 #endregion config from appsetting
 
 
@@ -68,6 +68,7 @@ builder.Services.AddScoped<IGetCategories, GetCategories>();
 builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<ICreateInvoice, CreateInvoice>();
 builder.Services.AddScoped<IGetLastPriceOfAuction, GetLastPriceOfAuction>();
+builder.Services.AddScoped<IAddImageToProduct, AddImageToProduct>();
 
 //admins
 builder.Services.AddScoped<ICloseStore, CloseStore>();
@@ -99,7 +100,6 @@ builder.Services.AddScoped<IGetSellerById, GetSellerById>();
 builder.Services.AddScoped<IUpdateSellerProfile, UpdateSellerProfile>();
 builder.Services.AddScoped<IGetProductsByStoreId, GetProductsByStoreId>();
 builder.Services.AddScoped<ICreateProduct, CreateProduct>();
-builder.Services.AddScoped<IAddImageToProduct, AddImageToProduct>();
 builder.Services.AddScoped<IAddCategory, AddCategory>();
 builder.Services.AddScoped<IGetAuctionsByStoreId, GetAuctionsByStoreId>();
 builder.Services.AddScoped<ICreateAuction, CreateAuction>();
@@ -112,6 +112,7 @@ builder.Services.AddScoped<IUpdateMedal, UpdateMedal>();
 builder.Services.AddScoped<IGetOpenAuctions, GetOpenAuctions>();
 builder.Services.AddScoped<ICreateBid, CreateBid>();
 builder.Services.AddScoped<ILosingBidsInAuction, LosingBidsInAuction>();
+builder.Services.AddScoped<IGetNormalProducts, GetNormalProducts>();
 
 
 //repositories

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace App.Domain.Service.Common.Commands
 {
@@ -43,7 +44,7 @@ namespace App.Domain.Service.Common.Commands
             };
 
             //site commission calculation
-            var feePercentage = 0;
+            double feePercentage = 0;
             var seller = await _sellerRepository.GetById(entity.SellerId, cancellationToken);
             if (seller != null)
             {
@@ -63,7 +64,8 @@ namespace App.Domain.Service.Common.Commands
                         break;
                 }
             }
-            invoiceDto.SiteCommission = Convert.ToInt32(invoiceDto.TotalAmount * (feePercentage / 100));
+            double percent = feePercentage / 100;
+            invoiceDto.SiteCommission = Convert.ToInt32(invoiceDto.TotalAmount * percent);
 
 
             //invoiceProduct

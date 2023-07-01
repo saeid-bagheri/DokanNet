@@ -6,6 +6,7 @@ namespace App.EndPoints.DokanNetUI.Models.ViewModels
 {
     public class HomeVM
     {
-        public virtual List<AuctionDto> openAuctions { get; set; } = new List<AuctionDto>();
+        public virtual List<BuyerAuctionVM> OpenAuctions { get; set; } = new List<BuyerAuctionVM>();
+        public virtual List<BuyerProductVM> NormalProducts { get; set; } = new List<BuyerProductVM>();
     }
 }

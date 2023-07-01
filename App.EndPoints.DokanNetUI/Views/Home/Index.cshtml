@@ -8,7 +8,84 @@
 </div>
 
 
+<!-- products-->
+<div class="product-box-two">
+    <div class="container">
+        <div class="pbt">
+            <div class="pbt-header">
+                <div class="pbt-header-title">
+                    <h6>جدیدترین محصولات</h6>
+                </div>
+                <div class="pbt-header-link">
+                    <a asp-controller="Home" asp-action="ProductList" class="fromCenter border-animate">مشاهده همه</a>
+                </div>
+            </div>
+            <div class="swiper product-box-two-slider">
+                <div class="swiper-wrapper">
+                    @foreach (var product in Model.NormalProducts)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-box-item shadow-box">
+                                <div class="product-box-item-img">
+                                    <a href="">
+                                        @if (product.Images.Count > 0)
+                                        {
+                                            <img src="@product.Images[0].Url" alt="" class="img-fluid">
+                                        }
+                                        else
+                                        {
+                                            <img src="img/product/wach3.jpg" alt="" class="img-fluid">
+                                        }
+                                    </a>
+                                    <div class="product-box-item-hover">
+                                        <div class="product-box-item-hover-cart align-content-center">
+                                            <a asp-controller="Bid" asp-action="Create" asp-route-id="@product.Id" class="product-box-item-hover-cart-btn">
+                                                <i class="bi bi-cart-plus"></i> افزودن به سبد خرید
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-box-item-desc">
+                                    <div class="product-box-item-title">
+                                        <h4 class="text-primary">
+                                            @product.Title
+                                        </h4>
+                                        <h6 class="my-2" style="height: 25px">
+                                            تعداد: @product.Stock
+                                        </h6>
+                                        <h6 style="color: #0f8a2e">
+                                            قیمت: @product.Price تومان
+                                        </h6>
+                                    </div>
+                                    <hr>
+                                    <div class="product-box-price">
+                                        <div class="d-flex justify-content-between text-center">
+                                            <span class="new-price" style="color: #930b87; font-size: 14px">
+                                                تاریخ ثبت
+                                                <br>
+                                                @product.CreatedAt
+                                            </span>
+                                            <span class="new-price" style="color: #930b87; font-size: 14px">
+                                                @product.StoreTitle
+                                                <br>
+                                                @product.SellerName
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-button-next sb2"></div>
+                <div class="swiper-button-prev sb2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of products -->
 
+<!-- open auctions-->
 <div class="product-box-two">
     <div class="container">
         <div class="pbt">
@@ -22,7 +99,7 @@
             </div>
             <div class="swiper product-box-two-slider">
                 <div class="swiper-wrapper">
-                    @foreach (var auction in Model.openAuctions)
+                    @foreach (var auction in Model.OpenAuctions)
                     {
                         <div class="swiper-slide">
                             <div class="product-box-item shadow-box">
@@ -40,7 +117,7 @@
                                     <div class="product-box-item-hover">
                                         <div class="product-box-item-hover-cart align-content-center">
                                             <a asp-controller="Bid" asp-action="Create" asp-route-id="@auction.Id" class="product-box-item-hover-cart-btn">
-                                                <span class="text-center">ثبت پیشنهاد</span>
+                                                <i class="bi bi-hammer"></i> ثبت پیشنهاد
                                             </a>
                                         </div>
                                     </div>
@@ -83,6 +160,10 @@
         </div>
     </div>
 </div>
+<!-- end of open auctions -->
+
+
+
 
 
 @section Scripts {

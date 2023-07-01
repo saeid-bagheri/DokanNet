@@ -27,7 +27,8 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<SellerAuctionVM, AuctionDto>().ReverseMap();
             CreateMap<SellerCreateAuctionVM, AuctionDto>().ReverseMap();
 
-            CreateMap<HomeVM, AuctionDto>().ReverseMap();
+            CreateMap<BuyerAuctionVM, AuctionDto>().ReverseMap();
+            CreateMap<BuyerProductVM, ProductDto>().ReverseMap();
             CreateMap<BidVM, BidDto>().ReverseMap();
 
         }

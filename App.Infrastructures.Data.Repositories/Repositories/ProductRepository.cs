@@ -47,6 +47,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             records = await _context.Products
                 .Where(p => p.IsDeleted == false)
                 .Include(p => p.Category)
+                .Include(p => p.Images)
                 .Include(p => p.Store)
                 .Select(p => new ProductDto
                 {
@@ -61,7 +62,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     IsEnabled = p.IsEnabled,
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    Images = p.Images
                 })
                 .ToListAsync(cancellationToken);
             return records;

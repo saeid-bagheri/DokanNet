@@ -1,9 +1,6 @@
-﻿using App.Domain.Core.Entities;
-using App.Domain.Core.Services.Application.Queries;
-using App.Domain.Core.Services.Buyers.Queries;
+﻿using App.Domain.Core.Services.Buyers.Queries;
 using App.EndPoints.DokanNetUI.Models.ViewModels;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,17 +10,26 @@ namespace App.EndPoints.DokanNetUI.Controllers
     {
         private readonly IGetOpenAuctions _getOpenAuctions;
         private readonly IMapper _mapper;
+        private readonly IGetNormalProducts _getNormalProducts;
 
-        public HomeController(IGetOpenAuctions getOpenAuctions, IMapper mapper)
+        public HomeController(IGetOpenAuctions getOpenAuctions, IMapper mapper,
+                              IGetNormalProducts getNormalProducts)
         {
             _getOpenAuctions = getOpenAuctions;
             _mapper = mapper;
+            _getNormalProducts = getNormalProducts;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             var homeVM = new HomeVM();
-            _mapper.Map(await _getOpenAuctions.Execute(cancellationToken), homeVM.openAuctions);
+
+            //get open auctions
+            _mapper.Map(await _getOpenAuctions.Execute(cancellationToken), homeVM.OpenAuctions);
+
+            //get last 10 normal products
+            _mapper.Map((await _getNormalProducts.Execute(cancellationToken)).Take(10), homeVM.NormalProducts);
+
             return View(homeVM);
         }
 
