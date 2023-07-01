@@ -1,5 +1,5 @@
 ﻿using App.Domain.Core.DtoModels;
-using App.Domain.Core.Services.Sellers.Queries;
+using App.Domain.Core.Services.Common.Queries;
 using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;

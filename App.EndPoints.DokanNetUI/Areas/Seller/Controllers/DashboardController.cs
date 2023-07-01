@@ -5,7 +5,6 @@ using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Common.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
-using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Controllers;
 using AutoMapper;

@@ -5,6 +5,7 @@ using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Common.Commands;
+using App.Domain.Core.Services.Sellers.Commands;
 using App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -24,11 +25,14 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         private readonly IGetCategories _getCategories;
         private readonly IAddCategory _addCategory;
         private readonly IMapper _mapper;
+        private readonly IAddImageToProduct _addImageToProduct;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         public ProductController(IGetProducts getProducts, IGetProductById getProductById,
                                  IMapper mapper, IUpdateProduct updateProduct,
                                  IDeleteProduct deleteProduct, IConfirmProduct confirmProduct,
-                                 IGetCategories getCategories, IAddCategory addCategory)
+                                 IGetCategories getCategories, IAddCategory addCategory,
+                                 IAddImageToProduct addImageToProduct, IWebHostEnvironment hostingEnvironment)
         {
             _getProducts = getProducts;
             _getProductById = getProductById;
@@ -38,6 +42,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
             _confirmProduct = confirmProduct;
             _getCategories = getCategories;
             _addCategory = addCategory;
+            _addImageToProduct = addImageToProduct;
+            _hostingEnvironment = hostingEnvironment;
         }
 
 
@@ -59,6 +65,12 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 await _updateProduct.Execute(_mapper.Map<ProductDto>(model), cancellationToken);
+
+                //add product image
+                if (model.Image is not null)
+                {
+                    await _addImageToProduct.Execute(model.Id, model.Image, _hostingEnvironment.WebRootPath, cancellationToken);
+                }
                 return RedirectToAction("Index");
             }
             return View(model);

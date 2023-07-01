@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Configs;
 using App.Domain.Core.DataAccess;
 using App.Domain.Core.DtoModels;
+using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Common.Commands;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
@@ -18,27 +19,25 @@ namespace App.Domain.Service.Common.Commands
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly MedalConfig _medialConfig;
         private readonly ISellerRepository _sellerRepository;
-        private readonly IInvoiceProductRepository _invoiceProductRepository;
         private readonly IUpdateMedal _updateMedal;
 
         public CreateInvoice(IInvoiceRepository invoiceRepository, MedalConfig medialConfig,
-                             ISellerRepository sellerRepository, IInvoiceProductRepository invoiceProductRepository,
-                             IUpdateMedal updateMedal)
+                             ISellerRepository sellerRepository, IUpdateMedal updateMedal)
         {
             _invoiceRepository = invoiceRepository;
             _medialConfig = medialConfig;
             _sellerRepository = sellerRepository;
-            _invoiceProductRepository = invoiceProductRepository;
             _updateMedal = updateMedal;
         }
         public async Task Execute(InvoiceDto entity, CancellationToken cancellationToken)
         {
 
-            var invoice = new InvoiceDto()
+            var invoiceDto = new InvoiceDto()
             {
                 TotalAmount = entity.TotalAmount,
                 BuyerId = entity.BuyerId,
                 SellerId = entity.SellerId,
+                Products = entity.Products,
                 IsFinal = true,
                 CreatedAt = DateTime.Now
             };
@@ -64,16 +63,25 @@ namespace App.Domain.Service.Common.Commands
                         break;
                 }
             }
-            invoice.SiteCommission = Convert.ToInt32(invoice.TotalAmount * (feePercentage / 100));
-            var invoiceId = await _invoiceRepository.Create(invoice, cancellationToken);
+            invoiceDto.SiteCommission = Convert.ToInt32(invoiceDto.TotalAmount * (feePercentage / 100));
 
-            var invoiceProduct = new InvoiceProductDto()
+
+            //invoiceProduct
+            var invoiceProducts = new List<InvoiceProduct>();
+            foreach (var product in invoiceDto.Products)
             {
-                InvoiceId = invoiceId,
-                ProductId = entity.ProductId,
-                CountOfProducts = entity.CountOfProducts
-            };
-            await _invoiceProductRepository.Create(invoiceProduct, cancellationToken);
+                invoiceProducts.Add(new InvoiceProduct()
+                {
+                    ProductId = product.Id,
+                    CountOfProducts = product.CountInInvoice
+                });
+            }
+            invoiceDto.InvoiceProducts = invoiceProducts;
+
+
+            //create invoice
+            await _invoiceRepository.Create(invoiceDto, cancellationToken);
+
 
 
             //update seller medal

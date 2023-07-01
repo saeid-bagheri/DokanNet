@@ -1,7 +1,90 @@
-﻿@{
+﻿@model HomeVM
+@{
     ViewData["Title"] = "صفحه اصلی";
 }
 
 <div class="text-center">
     <h1 class="display-4">به دکان نت خوش آمدید</h1>
 </div>
+
+
+
+<div class="product-box-two">
+    <div class="container">
+        <div class="pbt">
+            <div class="pbt-header">
+                <div class="pbt-header-title">
+                    <h6>مزایده های فعال</h6>
+                </div>
+                <div class="pbt-header-link">
+                    <a asp-controller="Home" asp-action="ProductList" class="fromCenter border-animate">مشاهده همه</a>
+                </div>
+            </div>
+            <div class="swiper product-box-two-slider">
+                <div class="swiper-wrapper">
+                    @foreach (var auction in Model.openAuctions)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-box-item shadow-box">
+                                <div class="product-box-item-img">
+                                    <a href="">
+                                        @if (auction.ProductImages.Count > 0)
+                                        {
+                                            <img src="@auction.ProductImages[0].Url" alt="" class="img-fluid">
+                                        }
+                                        else
+                                        {
+                                            <img src="img/product/wach3.jpg" alt="" class="img-fluid">
+                                        }
+                                    </a>
+                                    <div class="product-box-item-hover">
+                                        <div class="product-box-item-hover-cart align-content-center">
+                                            <a asp-controller="Bid" asp-action="Create" asp-route-id="@auction.Id" class="product-box-item-hover-cart-btn">
+                                                <span class="text-center">ثبت پیشنهاد</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-box-item-desc">
+                                    <div class="product-box-item-title">
+                                        <h4 class="text-primary">
+                                            @auction.ProductTitle
+                                        </h4>
+                                        <h6 class="my-2" style="height: 25px">
+                                            تعداد: @auction.CountOfProducts
+                                        </h6>
+                                        <h6 style="color: #0f8a2e">
+                                            آخرین قیمت: @auction.Price تومان
+                                        </h6>
+                                    </div>
+                                    <hr>
+                                    <div class="product-box-price">
+                                        <div class="d-flex justify-content-between text-center">
+                                            <span class="new-price" style="color: #930b87; font-size: 14px">
+                                                زمان پایان
+                                                <br>
+                                                @auction.EndTime
+                                            </span>
+                                            <span class="new-price" style="color: #930b87; font-size: 14px">
+                                                @auction.StoreTitle
+                                                <br>
+                                                @auction.SellerName
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-button-next sb2"></div>
+                <div class="swiper-button-prev sb2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }

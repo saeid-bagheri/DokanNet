@@ -50,14 +50,16 @@ namespace App.Domain.Service.Admins.Commands
                     TotalAmount = auction.Price,
                     BuyerId = winnerBid.BuyerId,
                     SellerId = seller.Id,
-                    ProductId = auction.ProductId,
-                    CountOfProducts = auction.CountOfProducts
+                    ProductId = auction.ProductId
                 };
+
+                //create productDto for add into invoiceProducts
+                var productDto = new ProductDto();
+                productDto = await _productRepository.GetById(auction.ProductId, cancellationToken);
+                productDto.CountInInvoice = auction.CountOfProducts;
+                invoiceDto.Products.Add(productDto);
+
                 await _createInvoice.Execute(invoiceDto, cancellationToken);
-
-                //update seller medal
-
-
 
             }
             else

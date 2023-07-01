@@ -29,10 +29,19 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels
 
         [Display(Name = "محصول فعال")]
         public bool IsEnabled { get; set; }
+        
 
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
         [Range(1, int.MaxValue, ErrorMessage = "قیمت محصول نمیتواند 0 تومان باشد")]
         [Display(Name = "قیمت محصول (تومان)")]
         public int Price { get; set; }
+
+
+        [Display(Name = "عکس محصول")]
+        public IFormFile? Image { get; set; }
+
+        public List<Image> Images { get; set; } = new List<Image>();
+
+
     }
 }

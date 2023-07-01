@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Service.Sellers.Commands
+namespace App.Domain.Service.Common.Commands
 {
     public class AddImageToProduct : IAddImageToProduct
     {
@@ -22,7 +22,7 @@ namespace App.Domain.Service.Sellers.Commands
         public async Task Execute(int productId, IFormFile entity, string webRootPath, CancellationToken cancellationToken)
         {
             //add image to wwwroot
-            var filename = Guid.NewGuid().ToString().Replace("-", "") +"-" + entity.FileName;
+            var filename = Guid.NewGuid().ToString().Replace("-", "") + "-" + entity.FileName;
             var filePath = Path.Combine(webRootPath, "productImages", filename);
 
             using (var stream = File.Create(filePath))

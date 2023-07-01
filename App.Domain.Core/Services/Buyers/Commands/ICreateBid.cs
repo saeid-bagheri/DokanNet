@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.Services.Sellers.Queries
+namespace App.Domain.Core.Services.Buyers.Commands
 {
-    public interface IGetSellerById
+    public interface ICreateBid
     {
-        Task<SellerDto> Execute(int id, CancellationToken cancellationToken);
+        Task Execute(BidDto entity, CancellationToken cancellationToken);
     }
 }

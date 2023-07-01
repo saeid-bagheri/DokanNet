@@ -18,6 +18,7 @@ namespace App.Domain.Core.DtoModels
         public string? SellerName { get; set; }
 
         public int Stock { get; set; }
+        public int CountInInvoice { get; set; }
 
         public bool IsConfirmed { get; set; }
 

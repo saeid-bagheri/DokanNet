@@ -11,12 +11,13 @@ namespace App.Domain.Core.DtoModels
     {
 
         public int Id { get; set; }
-
         public int StoreId { get; set; }
+        public string? StoreTitle { get; set; }
+        public string? SellerName { get; set; }
 
         public int ProductId { get; set; }
         public string ProductTitle { get; set; } = null!;
-        public virtual ICollection<Image> ProductImages { get; set; } = new List<Image>();
+        public virtual List<Image> ProductImages { get; set; } = new List<Image>();
 
         public int CountOfProducts { get; set; }
 

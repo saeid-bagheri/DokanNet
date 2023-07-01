@@ -28,7 +28,7 @@ namespace App.Domain.Core.DtoModels
 
         public int ProductId { get; set; }
 
-        public int CountOfProducts { get; set; }
+        public virtual ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
 
         #region navigations
 

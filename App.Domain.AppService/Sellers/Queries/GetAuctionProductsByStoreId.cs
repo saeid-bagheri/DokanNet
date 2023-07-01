@@ -20,7 +20,7 @@ namespace App.Domain.Service.Sellers.Queries
         public async Task<List<ProductDto>> Execute(int storeId, CancellationToken cancellationToken)
         {
             var products = (await _productRepository.GetAllByStoreId(storeId, cancellationToken))
-                .Where(p => p.IsAuction && p.IsEnabled).ToList();
+                .Where(p => p.IsAuction && p.IsEnabled & p.Stock > 0).ToList();
             return products;
         }
     }

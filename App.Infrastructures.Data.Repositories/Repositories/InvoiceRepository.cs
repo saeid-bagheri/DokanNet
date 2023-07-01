@@ -30,7 +30,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 BuyerId = entity.BuyerId,
                 SellerId = entity.SellerId,
                 IsFinal = entity.IsFinal,
-                CreatedAt = entity.CreatedAt
+                CreatedAt = entity.CreatedAt,
+                InvoiceProducts = entity.InvoiceProducts
             };
             await _context.Invoices.AddAsync(record);
             await _context.SaveChangesAsync(cancellationToken);

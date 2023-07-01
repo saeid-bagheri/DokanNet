@@ -9,6 +9,8 @@ using App.Domain.Core.Entities;
 using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Admins.Queries;
 using App.Domain.Core.Services.Application.Queries;
+using App.Domain.Core.Services.Buyers.Commands;
+using App.Domain.Core.Services.Buyers.Queries;
 using App.Domain.Core.Services.Common.Commands;
 using App.Domain.Core.Services.Common.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
@@ -16,6 +18,8 @@ using App.Domain.Core.Services.Sellers.Queries;
 using App.Domain.Service.Admins.Commands;
 using App.Domain.Service.Admins.Queries;
 using App.Domain.Service.Application.Queries;
+using App.Domain.Service.Buyers.Commands;
+using App.Domain.Service.Buyers.Queries;
 using App.Domain.Service.Common.Commands;
 using App.Domain.Service.Common.Queries;
 using App.Domain.Service.Sellers.Commands;
@@ -47,7 +51,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 #region config from appsetting
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", false, true)
+    .AddJsonFile("appsettings.json")
     .AddJsonFile("appsettings.Development.json");
 
 var connectionString = builder.Configuration.GetSection("ConnectionString").Value;
@@ -63,6 +67,7 @@ builder.Services.AddScoped<IGetCities, GetCities>();
 builder.Services.AddScoped<IGetCategories, GetCategories>();
 builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<ICreateInvoice, CreateInvoice>();
+builder.Services.AddScoped<IGetLastPriceOfAuction, GetLastPriceOfAuction>();
 
 //admins
 builder.Services.AddScoped<ICloseStore, CloseStore>();
@@ -102,6 +107,12 @@ builder.Services.AddScoped<IGetAuctionProductsByStoreId, GetAuctionProductsBySto
 builder.Services.AddScoped<IReduceProductStock, ReduceProductStock>();
 builder.Services.AddScoped<IIsExistProductInStoreByName, IsExistProductInStoreByName>();
 builder.Services.AddScoped<IUpdateMedal, UpdateMedal>();
+
+//buyers
+builder.Services.AddScoped<IGetOpenAuctions, GetOpenAuctions>();
+builder.Services.AddScoped<ICreateBid, CreateBid>();
+builder.Services.AddScoped<ILosingBidsInAuction, LosingBidsInAuction>();
+
 
 //repositories
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();

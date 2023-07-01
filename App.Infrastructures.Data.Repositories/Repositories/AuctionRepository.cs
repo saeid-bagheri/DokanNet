@@ -46,9 +46,14 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             return record.Id;
         }
 
+
+
         public async Task<List<AuctionDto>> GetAll(CancellationToken cancellationToken)
         {
-            var records = await _context.Auctions.ToListAsync(cancellationToken);
+            var records = await _context.Auctions
+                .Include(a => a.Product)
+                .ThenInclude(p => p.Images)
+                .ToListAsync(cancellationToken);
             return _mapper.Map<List<AuctionDto>>(records);
         }
 
@@ -69,6 +74,14 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 .Include(a => a.Bids)
                 .FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map<AuctionDto>(record);
+        }
+        public async Task Update(AuctionDto entity, CancellationToken cancellationToken)
+        {
+            var auction = await _context.Auctions
+                .Where(a => a.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
+            auction.HasBuyer = entity.HasBuyer;
+            auction.Price = entity.Price;
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -40,10 +40,17 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             return _mapper.Map<List<BidDto>>(records);
         }
 
-        public async Task<List<BidDto>> GetAllByBuyerId(int BuyerId, CancellationToken cancellationToken)
+        public async Task<List<BidDto>> GetAllByAuctionId(int auctionId, CancellationToken cancellationToken)
         {
             var records = await _context.Bids
-                .Where(b => b.BuyerId == BuyerId).ToListAsync(cancellationToken);
+                .Where(b => b.AuctionId == auctionId).ToListAsync(cancellationToken);
+            return _mapper.Map<List<BidDto>>(records);
+        }
+
+        public async Task<List<BidDto>> GetAllByBuyerId(int buyerId, CancellationToken cancellationToken)
+        {
+            var records = await _context.Bids
+                .Where(b => b.BuyerId == buyerId).ToListAsync(cancellationToken);
             return _mapper.Map<List<BidDto>>(records);
         }
 
@@ -52,6 +59,14 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var record = await _context.Bids
                 .Where(b => b.Id == id).FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map<BidDto>(record);
+        }
+
+        public async Task Update(BidDto entity, CancellationToken cancellationToken)
+        {
+            var record = await _context.Bids
+                .Where(b => b.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
+            record.IsWinner = entity.IsWinner;
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
