@@ -25,11 +25,6 @@ namespace App.Domain.Core.DtoModels
 
         public DateTime CreatedAt { get; set; }
 
-
-        public int ProductId { get; set; }
-
-        public virtual ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
-
         #region navigations
 
         public virtual Buyer Buyer { get; set; } = null!;

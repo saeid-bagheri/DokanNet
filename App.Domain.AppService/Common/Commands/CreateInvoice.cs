@@ -38,7 +38,7 @@ namespace App.Domain.Service.Common.Commands
                 TotalAmount = entity.TotalAmount,
                 BuyerId = entity.BuyerId,
                 SellerId = entity.SellerId,
-                Products = entity.Products,
+                InvoiceProducts = entity.InvoiceProducts,
                 IsFinal = true,
                 CreatedAt = DateTime.Now
             };
@@ -67,18 +67,6 @@ namespace App.Domain.Service.Common.Commands
             double percent = feePercentage / 100;
             invoiceDto.SiteCommission = Convert.ToInt32(invoiceDto.TotalAmount * percent);
 
-
-            //invoiceProduct
-            var invoiceProducts = new List<InvoiceProduct>();
-            foreach (var product in invoiceDto.Products)
-            {
-                invoiceProducts.Add(new InvoiceProduct()
-                {
-                    ProductId = product.Id,
-                    CountOfProducts = product.CountInInvoice
-                });
-            }
-            invoiceDto.InvoiceProducts = invoiceProducts;
 
 
             //create invoice
