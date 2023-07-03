@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
-using App.Domain.Core.Services.Sellers.Commands;
+using App.Domain.Core.Services.Common.Commands;
 using App.Infrastructures.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;

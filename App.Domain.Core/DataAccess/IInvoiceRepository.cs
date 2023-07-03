@@ -10,5 +10,6 @@ namespace App.Infrastructures.Data.Repositories
         Task<List<InvoiceDto>> GetAllBySellerId(int sellerId, CancellationToken cancellationToken);
         Task<InvoiceDto> GetById(int id, CancellationToken cancellationToken);
         Task Update(InvoiceDto entity, CancellationToken cancellationToken);
+        Task Delete(int id, CancellationToken cancellationToken);
     }
 }

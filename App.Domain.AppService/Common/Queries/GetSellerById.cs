@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Service.Sellers.Queries
+namespace App.Domain.Service.Common.Queries
 {
     public class GetSellerById : IGetSellerById
     {

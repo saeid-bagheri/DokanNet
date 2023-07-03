@@ -1,6 +1,7 @@
-﻿using App.Domain.Core.AppServices.Admins.Queries;
-using App.Domain.Core.DtoModels;
+﻿using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Admins.Commands;
+using App.Domain.Core.Services.Common.Commands;
+using App.Domain.Core.Services.Common.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;

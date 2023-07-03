@@ -4877,7 +4877,7 @@ span.product-meta-item {
 
 .main-table tbody td {
     padding: 10px 10px;
-    text-align: right;
+    text-align: center;
 }
 
 .main-table-2 h6 {
@@ -5956,4 +5956,11 @@ span.product-meta-item {
     -moz-border-radius: 12px;
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
+}
+
+
+/* my css */
+.center-vertical {
+    display: flex;
+    align-items: center;
 }

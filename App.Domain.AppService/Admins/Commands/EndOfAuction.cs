@@ -53,7 +53,7 @@ namespace App.Domain.Service.Admins.Commands
                     SellerId = seller.Id
                 };
 
-                //create invoiceProductDto
+                //create invoiceProducts
                 var invoiceProducts = new List<InvoiceProduct>();
                 invoiceProducts.Add(new InvoiceProduct()
                 {

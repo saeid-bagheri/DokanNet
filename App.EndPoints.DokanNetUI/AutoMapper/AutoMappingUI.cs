@@ -30,6 +30,7 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<BuyerAuctionVM, AuctionDto>().ReverseMap();
             CreateMap<BuyerProductVM, ProductDto>().ReverseMap();
             CreateMap<BidVM, BidDto>().ReverseMap();
+            CreateMap<BasketVM, InvoiceDto>().ReverseMap();
 
         }
     }

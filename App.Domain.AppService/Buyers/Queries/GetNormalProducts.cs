@@ -28,7 +28,7 @@ namespace App.Domain.Service.Buyers.Queries
         public async Task<List<ProductDto>> Execute(CancellationToken cancellationToken)
         {
             var normalProducts = (await _productRepository.GetAll(cancellationToken))
-                .Where(p => !p.IsAuction && p.IsConfirmed)
+                .Where(p => !p.IsAuction && p.IsConfirmed && p.Stock > 0)
                 .OrderByDescending(p => p.CreatedAt)
                 .ToList();
             foreach (var product in normalProducts)

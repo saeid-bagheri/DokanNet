@@ -12,12 +12,12 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Configurations
 
             builder.HasOne(d => d.Invoice).WithMany(p => p.InvoiceProducts)
                 .HasForeignKey(d => d.InvoiceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_InvoiceProduct_Invoices");
 
             builder.HasOne(d => d.Product).WithMany(p => p.InvoiceProducts)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_InvoiceProduct_Products");
         }
     }

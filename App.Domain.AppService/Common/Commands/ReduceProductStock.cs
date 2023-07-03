@@ -1,12 +1,12 @@
 ﻿using App.Domain.Core.DataAccess;
-using App.Domain.Core.Services.Sellers.Commands;
+using App.Domain.Core.Services.Common.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Service.Sellers.Commands
+namespace App.Domain.Service.Common.Commands
 {
     public class ReduceProductStock : IReduceProductStock
     {

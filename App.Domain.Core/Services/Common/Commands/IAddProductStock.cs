@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.Services.Sellers.Commands
+namespace App.Domain.Core.Services.Common.Commands
 {
-    public interface IReduceProductStock
+    public interface IAddProductStock
     {
         Task Execute(int countOfProducts, int productId, CancellationToken cancellationToken);
     }

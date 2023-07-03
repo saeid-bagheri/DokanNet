@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.Services.Buyers.Commands
 {
-    public interface IAddProductToBasket
+    public interface IFinalizePurchase
     {
-        Task Execute(InvoiceDto currentBasket, BasketProductDto entity, CancellationToken cancellationToken);
+        Task Execute(InvoiceDto entity, CancellationToken cancellationToken);
     }
 }

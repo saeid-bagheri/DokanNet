@@ -3,7 +3,6 @@ using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Common.Commands;
 using App.Domain.Core.Services.Common.Queries;
-using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using AutoMapper;

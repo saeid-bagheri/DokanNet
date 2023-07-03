@@ -42,7 +42,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<InvoiceDto>();
             records = await _context.Invoices
-                .Where(i => i.IsFinal == true)
+                .Where(i => i.IsFinal == true && !i.IsDeleted)
                 .Include(i => i.Buyer)
                 .Include(i => i.Seller)
                 .Select(i => new InvoiceDto
@@ -64,7 +64,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<InvoiceDto>();
             records = await _context.Invoices
-                .Where(i => i.SellerId == sellerId)
+                .Where(i => i.SellerId == sellerId && !i.IsDeleted)
                 .Select(i => new InvoiceDto
                 {
                     Id = i.Id,
@@ -82,7 +82,9 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = new List<InvoiceDto>();
             records = await _context.Invoices
-                .Where(i => i.BuyerId == buyerId)
+                .Where(i => i.BuyerId == buyerId && !i.IsDeleted)
+                .Include(i => i.InvoiceProducts)
+                .ThenInclude(ip => ip.Product)
                 .Select(i => new InvoiceDto
                 {
                     Id = i.Id,
@@ -91,7 +93,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     BuyerId = i.BuyerId,
                     SellerId = i.SellerId,
                     IsFinal = i.IsFinal,
-                    CreatedAt = i.CreatedAt
+                    CreatedAt = i.CreatedAt,
+                    InvoiceProducts = i.InvoiceProducts
                 }).ToListAsync(cancellationToken);
             return records;
         }
@@ -122,7 +125,19 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             Invoice.BuyerId = entity.BuyerId;
             Invoice.SellerId = entity.SellerId;
             Invoice.IsFinal = entity.IsFinal;
+            Invoice.InvoiceProducts = entity.InvoiceProducts;
             await _context.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task Delete(int id, CancellationToken cancellationToken)
+        {
+            var record = await _context.Invoices
+                .Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+            record.IsDeleted = true;
+            record.DeletedAt = DateTime.Now;
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+
     }
 }

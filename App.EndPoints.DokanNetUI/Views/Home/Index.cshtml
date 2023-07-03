@@ -8,6 +8,16 @@
 </div>
 
 
+
+<div id="error-container" class="container my-3">
+    @if (TempData.ContainsKey("SameSellerErrorMessage"))
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["SameSellerErrorMessage"]
+        </div>
+    }
+</div>
+
 <!-- products-->
 <div class="product-box-two">
     <div class="container">

@@ -69,6 +69,9 @@ builder.Services.AddScoped<IUpdateProduct, UpdateProduct>();
 builder.Services.AddScoped<ICreateInvoice, CreateInvoice>();
 builder.Services.AddScoped<IGetLastPriceOfAuction, GetLastPriceOfAuction>();
 builder.Services.AddScoped<IAddImageToProduct, AddImageToProduct>();
+builder.Services.AddScoped<IReduceProductStock, ReduceProductStock>();
+builder.Services.AddScoped<IAddProductStock, AddProductStock>();
+builder.Services.AddScoped<ICalculateSiteCommissionPercent, CalculateSiteCommissionPercent>();
 
 //admins
 builder.Services.AddScoped<ICloseStore, CloseStore>();
@@ -104,15 +107,21 @@ builder.Services.AddScoped<IAddCategory, AddCategory>();
 builder.Services.AddScoped<IGetAuctionsByStoreId, GetAuctionsByStoreId>();
 builder.Services.AddScoped<ICreateAuction, CreateAuction>();
 builder.Services.AddScoped<IGetAuctionProductsByStoreId, GetAuctionProductsByStoreId>();
-builder.Services.AddScoped<IReduceProductStock, ReduceProductStock>();
 builder.Services.AddScoped<IIsExistProductInStoreByName, IsExistProductInStoreByName>();
 builder.Services.AddScoped<IUpdateMedal, UpdateMedal>();
+builder.Services.AddScoped<IGetSellerByProductId, GetSellerByProductId>();
 
 //buyers
 builder.Services.AddScoped<IGetOpenAuctions, GetOpenAuctions>();
 builder.Services.AddScoped<ICreateBid, CreateBid>();
 builder.Services.AddScoped<ILosingBidsInAuction, LosingBidsInAuction>();
 builder.Services.AddScoped<IGetNormalProducts, GetNormalProducts>();
+builder.Services.AddScoped<IGetBasketByBuyerId, GetBasketByBuyerId>();
+builder.Services.AddScoped<ICreateBasket, CreateBasket>();
+builder.Services.AddScoped<IAddProductToBasket, AddProductToBasket>();
+builder.Services.AddScoped<IGetCountOfBasketProductsByBuyerId, GetCountOfBasketProductsByBuyerId>();
+builder.Services.AddScoped<IReduceProductFromBasket, ReduceProductFromBasket>();
+builder.Services.AddScoped<IFinalizePurchase, FinalizePurchase>();
 
 
 //repositories
