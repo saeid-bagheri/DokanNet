@@ -44,7 +44,9 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<BuyerDto> GetById(int id, CancellationToken cancellationToken)
         {
             var record = await _context.Buyers
-                .Where(b => b.Id == id).FirstOrDefaultAsync(cancellationToken);
+                .Where(b => b.Id == id)
+                .Include(b => b.City)
+                .FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map<BuyerDto>(record);
         }
 

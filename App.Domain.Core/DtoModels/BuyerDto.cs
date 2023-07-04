@@ -15,7 +15,7 @@ namespace App.Infrastructures.Data.Repositories
 
         public string? Address { get; set; }
 
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
 
         public string? ProfileImgUrl { get; set; }
 
@@ -28,6 +28,8 @@ namespace App.Infrastructures.Data.Repositories
         #region navigations
 
         public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+
+        public virtual City? City { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

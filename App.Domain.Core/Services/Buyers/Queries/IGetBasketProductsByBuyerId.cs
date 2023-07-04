@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Service.Buyers.Queries
+namespace App.Domain.Core.Services.Buyers.Queries
 {
     public interface IGetCountOfBasketProductsByBuyerId
     {

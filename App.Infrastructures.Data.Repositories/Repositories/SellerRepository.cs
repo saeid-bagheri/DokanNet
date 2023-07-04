@@ -56,6 +56,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var record = await _context.Sellers
                 .Where(s => s.Id == id)
                 .Include(s => s.City)
+                .Include(s => s.Medal)
                 .FirstOrDefaultAsync(cancellationToken);
             return _mapper.Map<SellerDto>(record);
         }

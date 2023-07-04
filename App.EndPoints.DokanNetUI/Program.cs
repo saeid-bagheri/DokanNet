@@ -122,6 +122,9 @@ builder.Services.AddScoped<IAddProductToBasket, AddProductToBasket>();
 builder.Services.AddScoped<IGetCountOfBasketProductsByBuyerId, GetCountOfBasketProductsByBuyerId>();
 builder.Services.AddScoped<IReduceProductFromBasket, ReduceProductFromBasket>();
 builder.Services.AddScoped<IFinalizePurchase, FinalizePurchase>();
+builder.Services.AddScoped<IGetBuyerById, GetBuyerById>();
+builder.Services.AddScoped<IUpdateBuyer, UpdateBuyer>();
+builder.Services.AddScoped<IGetInvoicesByBuyerId, GetInvoicesByBuyerId>();
 
 
 //repositories

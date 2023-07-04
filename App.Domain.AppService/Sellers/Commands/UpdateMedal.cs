@@ -26,7 +26,8 @@ namespace App.Domain.Service.Sellers.Commands
         {
             //calculate the seller's income
             var sellerIncome = 0;
-            var invoices = await _invoiceRepository.GetAllBySellerId(sellerId, cancellationToken);
+            var invoices = (await _invoiceRepository.GetAllBySellerId(sellerId, cancellationToken))
+                                                    .Where(i => i.IsFinal).ToList();
             foreach (var invoice in invoices)
             {
                 sellerIncome += invoice.TotalAmount;

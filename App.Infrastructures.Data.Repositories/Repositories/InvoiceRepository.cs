@@ -65,24 +65,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var records = new List<InvoiceDto>();
             records = await _context.Invoices
                 .Where(i => i.SellerId == sellerId && !i.IsDeleted)
-                .Select(i => new InvoiceDto
-                {
-                    Id = i.Id,
-                    TotalAmount = i.TotalAmount,
-                    SiteCommission = i.SiteCommission,
-                    BuyerId = i.BuyerId,
-                    SellerId = i.SellerId,
-                    IsFinal = i.IsFinal,
-                    CreatedAt = i.CreatedAt
-                }).ToListAsync(cancellationToken);
-            return records;
-        }
-
-        public async Task<List<InvoiceDto>> GetAllByBuyerId(int buyerId, CancellationToken cancellationToken)
-        {
-            var records = new List<InvoiceDto>();
-            records = await _context.Invoices
-                .Where(i => i.BuyerId == buyerId && !i.IsDeleted)
+                .Include(i => i.Buyer)
                 .Include(i => i.InvoiceProducts)
                 .ThenInclude(ip => ip.Product)
                 .Select(i => new InvoiceDto
@@ -94,7 +77,31 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     SellerId = i.SellerId,
                     IsFinal = i.IsFinal,
                     CreatedAt = i.CreatedAt,
-                    InvoiceProducts = i.InvoiceProducts
+                    InvoiceProducts = i.InvoiceProducts,
+                    Buyer = i.Buyer
+                }).ToListAsync(cancellationToken);
+            return records;
+        }
+
+        public async Task<List<InvoiceDto>> GetAllByBuyerId(int buyerId, CancellationToken cancellationToken)
+        {
+            var records = new List<InvoiceDto>();
+            records = await _context.Invoices
+                .Where(i => i.BuyerId == buyerId && !i.IsDeleted)
+                .Include(i => i.Seller)
+                .Include(i => i.InvoiceProducts)
+                .ThenInclude(ip => ip.Product)
+                .Select(i => new InvoiceDto
+                {
+                    Id = i.Id,
+                    TotalAmount = i.TotalAmount,
+                    SiteCommission = i.SiteCommission,
+                    BuyerId = i.BuyerId,
+                    SellerId = i.SellerId,
+                    IsFinal = i.IsFinal,
+                    CreatedAt = i.CreatedAt,
+                    InvoiceProducts = i.InvoiceProducts,
+                    Seller = i.Seller
                 }).ToListAsync(cancellationToken);
             return records;
         }

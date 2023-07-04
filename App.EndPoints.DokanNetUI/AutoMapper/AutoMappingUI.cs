@@ -2,6 +2,7 @@
 using App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Models.ViewModels;
+using App.Infrastructures.Data.Repositories;
 using AutoMapper;
 
 namespace App.EndPoints.DokanNetUI.AutoMapper
@@ -31,6 +32,8 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<BuyerProductVM, ProductDto>().ReverseMap();
             CreateMap<BidVM, BidDto>().ReverseMap();
             CreateMap<BasketVM, InvoiceDto>().ReverseMap();
+            CreateMap<BuyerProfileVM, BuyerDto>().ReverseMap();
+            CreateMap<UpdateBuyerProfileVM, BuyerDto>().ReverseMap();
 
         }
     }
