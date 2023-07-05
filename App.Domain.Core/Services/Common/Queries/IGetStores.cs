@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.AppServices.Admins.Queries
+namespace App.Domain.Core.Services.Common.Queries
 {
-    public interface IGetProducts
+    public interface IGetStores
     {
-        Task<List<ProductDto>> Execute(CancellationToken cancellationToken);
+        Task<List<StoreDto>> Execute(CancellationToken cancellationToken);
     }
 }

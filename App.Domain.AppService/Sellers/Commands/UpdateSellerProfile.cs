@@ -32,6 +32,7 @@ namespace App.Domain.Service.Sellers.Commands
             sellerDto.CityId = entity.CityId;
             sellerDto.ProfileImgUrl = entity.ProfileImgUrl;
             sellerDto.Birthday = entity.Birthday;
+            sellerDto.Biography = entity.Biography;
             await _sellerRepository.Update(sellerDto, cancellationToken);
 
             //update buyerz

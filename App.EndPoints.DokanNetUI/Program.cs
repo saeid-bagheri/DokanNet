@@ -110,6 +110,7 @@ builder.Services.AddScoped<IGetAuctionProductsByStoreId, GetAuctionProductsBySto
 builder.Services.AddScoped<IIsExistProductInStoreByName, IsExistProductInStoreByName>();
 builder.Services.AddScoped<IUpdateMedal, UpdateMedal>();
 builder.Services.AddScoped<IGetSellerByProductId, GetSellerByProductId>();
+builder.Services.AddScoped<IGetInvoicesBySellerId, GetInvoicesBySellerId>();
 
 //buyers
 builder.Services.AddScoped<IGetOpenAuctions, GetOpenAuctions>();

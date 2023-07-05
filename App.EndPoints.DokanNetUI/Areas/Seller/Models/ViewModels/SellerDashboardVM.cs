@@ -39,5 +39,6 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
 
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
+        public virtual ICollection<InvoiceDto> Invoices { get; set; } = new List<InvoiceDto>();
     }
 }

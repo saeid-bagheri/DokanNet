@@ -5,6 +5,7 @@ using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Common.Queries;
 using App.Domain.Core.Services.Sellers.Commands;
+using App.Domain.Core.Services.Sellers.Queries;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Controllers;
 using AutoMapper;
@@ -27,10 +28,13 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         private readonly IGetUserRolesByUserName _getUserRolesByUserName;
         private readonly IGetStoreById _getStoreById;
         private readonly IGetSellerById _getSellerById;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IGetInvoicesBySellerId _getInvoicesBySellerId;
 
         public DashboardController(IGetCities getCities, IMapper mapper,
                                ICreateSeller createSeller, IGetUserRolesByUserName getUserRolesByUserName,
-                               ICreateStore createStore, IGetStoreById getStoreById, IGetSellerById getSellerById)
+                               ICreateStore createStore, IGetStoreById getStoreById, IGetSellerById getSellerById,
+                               IWebHostEnvironment hostingEnvironment, IGetInvoicesBySellerId getInvoicesBySellerId)
         {
             _getCities = getCities;
             _mapper = mapper;
@@ -39,6 +43,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
             _createStore = createStore;
             _getStoreById = getStoreById;
             _getSellerById = getSellerById;
+            _hostingEnvironment = hostingEnvironment;
+            _getInvoicesBySellerId = getInvoicesBySellerId;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -59,14 +65,17 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                 Biography = seller.Biography,
                 Address = seller.Address,
                 ProfileImgUrl = seller.ProfileImgUrl,
+                MedalId = seller.MedalId,
+                Invoices = await _getInvoicesBySellerId.Execute(seller.Id, cancellationToken),
                 StoreTitle = store.Title,
                 Products = store.Products,
                 Auctions = store.Auctions,
-                MedalId = seller.MedalId
+                ImageUrl = store.ImageUrl
             };
             TempData["SellerName"] = seller.FirstName + " " + seller.LastName;
             TempData["StoreTitle"] = store.Title;
             TempData["StoreId"] = dashboard.Id;
+            TempData["StoreImageUrl"] = dashboard.ImageUrl;
             return View(dashboard);
         }
 
@@ -88,7 +97,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                 {
                     model.Id = Convert.ToInt32(User.Identity.GetUserId());
                     await _createSeller.Execute(_mapper.Map<SellerDto>(model), cancellationToken);
-                    await _createStore.Execute(_mapper.Map<StoreDto>(model), cancellationToken);
+                    await _createStore.Execute(_mapper.Map<StoreDto>(model), _hostingEnvironment.WebRootPath, cancellationToken);
                 }
                 return RedirectToAction("Index", "Dashboard");
             }

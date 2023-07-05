@@ -102,9 +102,6 @@
                 <div class="pbt-header-title">
                     <h6>مزایده های فعال</h6>
                 </div>
-                <div class="pbt-header-link">
-                    <a asp-controller="Home" asp-action="ProductList" class="fromCenter border-animate">مشاهده همه</a>
-                </div>
             </div>
             <div class="swiper product-box-two-slider">
                 <div class="swiper-wrapper">
@@ -194,6 +191,69 @@
     </div>
 </div>
 <!-- end main-category -->
+<!-- stores -->
+<div class="product-box-two">
+    <div class="container">
+        <div class="pbt">
+            <div class="pbt-header">
+                <div class="pbt-header-title">
+                    <h6>غرفه های فعال</h6>
+                </div>
+            </div>
+            <div class="swiper product-box-two-slider">
+                <div class="swiper-wrapper">
+                    @foreach (var store in Model.Stores)
+                    {
+                        <div class="swiper-slide">
+                            <div class="product-box-item shadow-box">
+                                <div class="product-box-item-img">
+                                    <a href="">
+                                            <img src="@store.ImageUrl" alt="@store.Title" class="img-fluid">
+                                    </a>
+                                    <div class="product-box-item-hover">
+                                        <div class="product-box-item-hover-cart align-content-center">
+                                            <a asp-controller="Store" asp-action="Index" asp-route-id="@store.Id" class="product-box-item-hover-cart-btn">
+                                                <i class="bi bi-hammer"></i> ورود به غرفه
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-box-item-desc">
+                                    <div class="product-box-item-title">
+                                        <h4 class="text-primary">
+                                            @store.Title
+                                        </h4>
+                                        <h6 class="my-2" style="height: 25px">
+                                            تعداد محصول: @store.Products.Count
+                                        </h6>
+                                    </div>
+                                    <hr>
+                                    <div class="product-box-price">
+                                        <div class="justify-content-between text-center">
+                                            <span class="new-price text-center" style="color: #930b87; font-size: 14px">
+                                                نام غرفه دار: @store.SellerName
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-button-next sb2"></div>
+                <div class="swiper-button-prev sb2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end stores -->
+
+
+
+
+
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     }

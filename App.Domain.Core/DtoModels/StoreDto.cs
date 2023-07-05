@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace App.Domain.Core.DtoModels
         public string? SellerName { get; set; } = null!;
 
         public string? ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
 
         public bool IsClosed { get; set; }
 

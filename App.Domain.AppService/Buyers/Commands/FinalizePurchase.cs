@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Buyers.Commands;
 using App.Domain.Core.Services.Common.Commands;
+using App.Domain.Core.Services.Sellers.Commands;
 using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,14 @@ namespace App.Domain.Service.Buyers.Commands
     {
         private readonly IInvoiceRepository _invoiceRepository;
         private readonly ICalculateSiteCommissionPercent _calculateSiteCommissionPercent;
+        private readonly IUpdateMedal _updateMedal;
 
-        public FinalizePurchase(IInvoiceRepository invoiceRepository, ICalculateSiteCommissionPercent calculateSiteCommissionPercent)
+        public FinalizePurchase(IInvoiceRepository invoiceRepository, ICalculateSiteCommissionPercent calculateSiteCommissionPercent,
+                                IUpdateMedal updateMedal)
         {
             _invoiceRepository = invoiceRepository;
             _calculateSiteCommissionPercent = calculateSiteCommissionPercent;
+            _updateMedal = updateMedal;
         }
 
         public async Task Execute(InvoiceDto entity, CancellationToken cancellationToken)
@@ -36,6 +40,10 @@ namespace App.Domain.Service.Buyers.Commands
                 CreatedAt = DateTime.Now,
             };
             await _invoiceRepository.Update(invoiceDto, cancellationToken);
+
+
+            //update seller medal
+            await _updateMedal.Execute(entity.SellerId, cancellationToken);
         }
     }
 }

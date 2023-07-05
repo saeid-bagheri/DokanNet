@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.Services.Sellers.Queries
 {
-    public interface IGetProductsByStoreId
+    public interface IGetInvoicesBySellerId
     {
-        Task<List<ProductDto>> Execute(int storeId, CancellationToken cancellationToken);
+        Task<List<InvoiceDto>> Execute(int sellerId, CancellationToken cancellationToken);
     }
 }

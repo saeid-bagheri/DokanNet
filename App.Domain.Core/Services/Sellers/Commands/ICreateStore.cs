@@ -9,6 +9,6 @@ namespace App.Domain.Core.Services.Sellers.Commands
 {
     public interface ICreateStore
     {
-        Task Execute(StoreDto entity, CancellationToken cancellationToken);
+        Task Execute(StoreDto entity, string webRootPath, CancellationToken cancellationToken);
     }
 }

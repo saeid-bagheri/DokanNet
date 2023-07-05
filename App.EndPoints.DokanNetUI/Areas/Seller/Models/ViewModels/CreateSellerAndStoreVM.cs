@@ -52,7 +52,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
         [Display(Name = "عنوان غرفه")]
         public string Title { get; set; } = null!;
 
+        [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
         [Display(Name = "عکس غرفه")]
-        public string? ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var records = new List<StoreDto>();
             records = await _context.Stores
                 .Where(s => s.IsClosed == false)
+                .Include(s => s.Products)
                 .Select(s => new StoreDto
                 {
                     Id = s.Id,
@@ -47,7 +48,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     ImageUrl = s.ImageUrl,
                     IsClosed = s.IsClosed,
                     ClosedAt = s.ClosedAt,
-                    CreatedAt = s.CreatedAt
+                    CreatedAt = s.CreatedAt,
+                    Products = s.Products
                 }).ToListAsync(cancellationToken);
             return records;
         }

@@ -1,6 +1,5 @@
 ﻿using App.Domain.AppService.Admins.Queries;
 using App.Domain.Core.AppServices.Admins.Commands;
-using App.Domain.Core.AppServices.Admins.Queries;
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Admins.Commands;
 using App.Domain.Core.Services.Application.Queries;

@@ -1,0 +1,87 @@
+﻿@model List<SellerInvoiceVM>
+@{
+    ViewData["Title"] = "لیست فاکتورها";
+    Layout = "_Layout";
+}
+
+
+
+
+<div class="content">
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                <!-- content -->
+                <div class="col-lg-12">
+                    <!-- invoices -->
+                    <div class="mt-4 text-center text-bold">
+                        <h5 class="fw-bold">
+                            لیست فاکتور های من
+                        </h5>
+                    </div>
+                    <hr />
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="bg-info text-white">
+                                <th>شماره</th>
+                                <th>محصولات</th>
+                                <th>مبلغ کل فاکتور (تومان)</th>
+                                <th>نام خریدار</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{
+                                int num = 1;
+                                int totalSales = 0;
+                            }
+                            @foreach (var invoice in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @num
+                                        @{
+                                            num++;
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var item in invoice.InvoiceProducts)
+                                        {
+                                            <span>(@item.CountOfProducts عدد</span>
+                                            <span class="text-danger">@item.Product.Title</span>
+                                            <span>)</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => invoice.TotalAmount)
+                                        @{
+                                            totalSales += invoice.TotalAmount;
+                                        }
+                                    </td>
+                                    <td>
+                                        @invoice.Buyer.FirstName @invoice.Buyer.LastName
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="color:blue">فروش کل: @totalSales</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- end invoices -->
+                </div>
+                <!-- end content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
