@@ -8,16 +8,18 @@ namespace App.EndPoints.DokanNetUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IGetOpenAuctions _getOpenAuctions;
         private readonly IMapper _mapper;
+        private readonly IGetOpenAuctions _getOpenAuctions;
         private readonly IGetNormalProducts _getNormalProducts;
+        private readonly IGetParentCategories _getParentCategories;
 
         public HomeController(IGetOpenAuctions getOpenAuctions, IMapper mapper,
-                              IGetNormalProducts getNormalProducts)
+                              IGetNormalProducts getNormalProducts, IGetParentCategories getParentCategories)
         {
-            _getOpenAuctions = getOpenAuctions;
             _mapper = mapper;
+            _getOpenAuctions = getOpenAuctions;
             _getNormalProducts = getNormalProducts;
+            _getParentCategories = getParentCategories;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -29,6 +31,9 @@ namespace App.EndPoints.DokanNetUI.Controllers
 
             //get last 10 normal products
             _mapper.Map((await _getNormalProducts.Execute(cancellationToken)).Take(10), homeVM.NormalProducts);
+
+            //get parent categories
+            _mapper.Map((await _getParentCategories.Execute(cancellationToken)), homeVM.ParentCategories);
 
             return View(homeVM);
         }

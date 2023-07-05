@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.DtoModels;
+using App.Domain.Core.Entities;
 using App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Models.ViewModels;
@@ -34,6 +35,8 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
             CreateMap<BasketVM, InvoiceDto>().ReverseMap();
             CreateMap<BuyerProfileVM, BuyerDto>().ReverseMap();
             CreateMap<UpdateBuyerProfileVM, BuyerDto>().ReverseMap();
+            CreateMap<BuyerCategoryVM, CategoryDto>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
 
         }
     }

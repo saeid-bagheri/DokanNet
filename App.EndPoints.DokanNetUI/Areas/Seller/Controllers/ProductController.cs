@@ -18,8 +18,6 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
     public class ProductController : Controller
     {
         private readonly IGetProductsByStoreId _getProductsByStore;
-        private readonly IGetSellerById _getSellerById;
-        private readonly IGetStoreById _getStoreById;
         private readonly IGetCategories _getCategories;
         private readonly ICreateProduct _createProduct;
         private readonly IAddImageToProduct _addImageToProduct;
@@ -27,16 +25,13 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IIsExistProductInStoreByName _isExistProductInStoreByName;
 
-        public ProductController(IGetProductsByStoreId getProductsByStore, IGetSellerById getSellerById,
-                                 IMapper mapper, IWebHostEnvironment hostingEnvironment,
-                                 IGetStoreById getStoreById, IGetCategories getCategories,
+        public ProductController(IGetProductsByStoreId getProductsByStore, IMapper mapper,
+                                 IWebHostEnvironment hostingEnvironment, IGetCategories getCategories,
                                  ICreateProduct createProduct, IAddImageToProduct addImageToProduct,
                                  IIsExistProductInStoreByName isExistProductInStoreByName)
         {
             _getProductsByStore = getProductsByStore;
-            _getSellerById = getSellerById;
             _mapper = mapper;
-            _getStoreById = getStoreById;
             _getCategories = getCategories;
             _createProduct = createProduct;
             _hostingEnvironment = hostingEnvironment;

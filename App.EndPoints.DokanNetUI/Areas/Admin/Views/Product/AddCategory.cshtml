@@ -30,7 +30,9 @@
                     @Html.DisplayFor(modelItem => category.ParentTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => category.ImageUrl)
+                    <div class="text-center">
+                        <img src="@category.ImageUrl" alt="" style="height: 50px">
+                    </div>
                 </td>
             </tr>
         }

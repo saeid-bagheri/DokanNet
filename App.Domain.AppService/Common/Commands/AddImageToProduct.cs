@@ -21,9 +21,9 @@ namespace App.Domain.Service.Common.Commands
         }
         public async Task Execute(int productId, IFormFile entity, string webRootPath, CancellationToken cancellationToken)
         {
-            //add image to wwwroot
+            //add product image to wwwroot
             var filename = Guid.NewGuid().ToString().Replace("-", "") + "-" + entity.FileName;
-            var filePath = Path.Combine(webRootPath, "productImages", filename);
+            var filePath = Path.Combine(webRootPath, @"img\products", filename);
 
             using (var stream = File.Create(filePath))
             {
@@ -35,7 +35,7 @@ namespace App.Domain.Service.Common.Commands
             var imageDto = new ImageDto()
             {
                 Title = filename,
-                Url = @"\productImages\" + filename,
+                Url = @"\img\products\" + filename,
                 ProductId = productId,
                 CreatedAt = DateTime.Now
             };

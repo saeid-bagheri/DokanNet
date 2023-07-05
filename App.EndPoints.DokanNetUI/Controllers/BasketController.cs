@@ -109,7 +109,8 @@ namespace App.EndPoints.DokanNetUI.Controllers
                     else
                     {
                         TempData["SameSellerErrorMessage"] = "از دو غرفه به صورت همزمان نمیتوان خرید کرد";
-                        return RedirectToAction("Index", "Home");
+                        //back tp pervious page
+                        return Redirect(Request.Headers["Referer"].ToString());
                     }
                 }
             }

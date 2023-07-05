@@ -98,11 +98,13 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var records = await _context.Products
                 .Where(p => p.CategoryId == categoryId && p.IsDeleted == false && p.IsConfirmed)
+                .Include (p => p.Category)
+                .Include(p => p.Images)
                 .Select(p => new ProductDto
                 {
                     Id = p.Id,
                     Title = p.Title,
-                    CategoryId = p.CategoryId,
+                    Category = p.Category,
                     StoreId = p.StoreId,
                     Stock = p.Stock,
                     IsConfirmed = p.IsConfirmed,
@@ -110,7 +112,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     IsEnabled = p.IsEnabled,
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    Images = p.Images
                 }).ToListAsync(cancellationToken);
             return records;
         }

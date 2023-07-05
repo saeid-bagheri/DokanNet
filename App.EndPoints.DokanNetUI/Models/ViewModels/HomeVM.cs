@@ -8,5 +8,6 @@ namespace App.EndPoints.DokanNetUI.Models.ViewModels
     {
         public virtual List<BuyerAuctionVM> OpenAuctions { get; set; } = new List<BuyerAuctionVM>();
         public virtual List<BuyerProductVM> NormalProducts { get; set; } = new List<BuyerProductVM>();
+        public virtual List<BuyerCategoryVM> ParentCategories { get; set; } = new List<BuyerCategoryVM>();
     }
 }

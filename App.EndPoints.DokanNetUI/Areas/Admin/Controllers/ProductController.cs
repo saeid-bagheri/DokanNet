@@ -103,7 +103,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _addCategory.Execute(_mapper.Map<CategoryDto>(model), cancellationToken);
+                await _addCategory.Execute(_mapper.Map<CategoryDto>(model), _hostingEnvironment.WebRootPath, cancellationToken);
                 return RedirectToAction("AddCategory");
             }
             return View(model);

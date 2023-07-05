@@ -125,6 +125,9 @@ builder.Services.AddScoped<IFinalizePurchase, FinalizePurchase>();
 builder.Services.AddScoped<IGetBuyerById, GetBuyerById>();
 builder.Services.AddScoped<IUpdateBuyer, UpdateBuyer>();
 builder.Services.AddScoped<IGetInvoicesByBuyerId, GetInvoicesByBuyerId>();
+builder.Services.AddScoped<IGetParentCategories, GetParentCategories>();
+builder.Services.AddScoped<IGetProductsByCategoryAndSubcategories, GetProductsByCategoryAndSubcategories>();
+builder.Services.AddScoped<IGetCategoryById, GetCategoryById>();
 
 
 //repositories
