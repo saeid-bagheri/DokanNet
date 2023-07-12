@@ -3,7 +3,11 @@ using App.Domain.Core.DtoModels;
 using App.Domain.Core.Services.Application.Queries;
 using App.Domain.Core.Services.Common.Commands;
 using App.Domain.Core.Services.Common.Queries;
+using App.Domain.Core.Services.Sellers.Commands;
 using App.Domain.Core.Services.Sellers.Queries;
+using App.Domain.Service.Common.Commands;
+using App.Domain.Service.Common.Queries;
+using App.EndPoints.DokanNetUI.Areas.Admin.Models.ViewModels;
 using App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
@@ -24,11 +28,14 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IIsExistProductInStoreByName _isExistProductInStoreByName;
+        private readonly IGetProductById _getProductById;
+        private readonly ISellerUpdateProduct _sellerUpdateProduct;
 
         public ProductController(IGetProductsByStoreId getProductsByStore, IMapper mapper,
                                  IWebHostEnvironment hostingEnvironment, IGetCategories getCategories,
                                  ICreateProduct createProduct, IAddImageToProduct addImageToProduct,
-                                 IIsExistProductInStoreByName isExistProductInStoreByName)
+                                 IIsExistProductInStoreByName isExistProductInStoreByName, IGetProductById getProductById,
+                                 ISellerUpdateProduct sellerUpdateProduct)
         {
             _getProductsByStore = getProductsByStore;
             _mapper = mapper;
@@ -37,6 +44,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
             _hostingEnvironment = hostingEnvironment;
             _addImageToProduct = addImageToProduct;
             _isExistProductInStoreByName = isExistProductInStoreByName;
+            _getProductById = getProductById;
+            _sellerUpdateProduct = sellerUpdateProduct;
         }
 
 
@@ -85,6 +94,31 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Controllers
                 }
             }
             model.Categories = await _getCategories.Execute(cancellationToken);
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> Update(int id, CancellationToken cancellationToken)
+        {
+            var product = _mapper.Map<SellerProductVM>(await _getProductById.Execute(id, cancellationToken));
+            product.Categories = await _getCategories.Execute(cancellationToken);
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(SellerProductVM model, CancellationToken cancellationToken)
+        {
+            if (ModelState.IsValid)
+            {
+                await _sellerUpdateProduct.Execute(_mapper.Map<ProductDto>(model), cancellationToken);
+
+                //add product image
+                if (model.Image is not null)
+                {
+                    await _addImageToProduct.Execute(model.Id, model.Image, _hostingEnvironment.WebRootPath, cancellationToken);
+                }
+                return RedirectToAction("Index", new { id = model.StoreId });
+            }
             return View(model);
         }
 

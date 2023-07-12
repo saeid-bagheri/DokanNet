@@ -24,7 +24,8 @@ namespace App.EndPoints.DokanNetUI.Controllers
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
             var buyerStoreVM = _mapper.Map<BuyerStoreVM>(await _getStoreById.Execute(id, cancellationToken));
-            buyerStoreVM.Products = await _getProductsByStoreId.Execute(id, cancellationToken);
+            buyerStoreVM.Products = (await _getProductsByStoreId.Execute(id, cancellationToken))
+                                    .Where(p => !p.IsAuction && p.Stock > 0).ToList();
             buyerStoreVM.Seller = await _getSellerById.Execute(id, cancellationToken);
             return View(buyerStoreVM);
         }

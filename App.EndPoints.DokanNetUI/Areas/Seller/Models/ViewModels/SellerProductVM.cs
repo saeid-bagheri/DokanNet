@@ -16,6 +16,7 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
         [Display(Name = "دسته بندی")]
         public int? CategoryId { get; set; }
+        public string? CategoryTitle { get; set; }
         public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
         [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
@@ -32,7 +33,6 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
         [Display(Name = "قیمت محصول")]
         public int? Price { get; set; }
 
-        [Required(ErrorMessage = "وارد  کردن {0} اجباری است ")]
         [Display(Name = "عکس محصول")]
         public IFormFile? Image { get; set; }
 

@@ -27,10 +27,11 @@ namespace App.Domain.Core.DtoModels
         public DateTime? DeletedAt { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        public virtual ICollection<CategoryDto> SubCategories { get; set; } = new List<CategoryDto>();
 
         #region navigations
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
 
         #endregion navigations
     }

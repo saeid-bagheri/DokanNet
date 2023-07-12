@@ -4,6 +4,15 @@
     Layout = "_Layout";
 }
 
+<div id="error-container" class="container my-3">
+    @if (TempData.ContainsKey("SameSellerErrorMessage"))
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["SameSellerErrorMessage"]
+        </div>
+    }
+</div>
+
 
 <div class="content">
     <div class="dashboard">

@@ -1,0 +1,89 @@
+﻿@model SellerProductVM
+
+@{
+    ViewData["Title"] = "ویرایش محصول";
+    Layout = "_Layout";
+}
+
+<h3>ویرایش محصول</h3>
+<hr />
+
+
+
+<div class="content">
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                <!-- partial dashboard -->
+                <div class="col-lg-3">
+                    <partial name="~/Areas/Seller/Views/Shared/_PartialSellerDashboard.cshtml"></partial>
+                </div>
+                <!-- end partial dashboard -->
+                <!-- content -->
+                <div class="col-lg-9">
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form enctype="multipart/form-data" asp-action="Update" method="post">
+                        <div class="form-group">
+                            <label asp-for="Id" class="control-label"></label>
+                            <input readonly asp-for="Id" class="form-control" />
+                            <span asp-validation-for="Id" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StoreId" class="control-label"></label>
+                            <input hidden asp-for="StoreId" class="form-control" />
+                            <span asp-validation-for="StoreId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <br />
+                            <select required asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, nameof(CategoryDto.Id), nameof(CategoryDto.Title)))" class="form-control">
+                                <option style="display:none;" value="">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Stock" class="control-label"></label>
+                            <input asp-for="Stock" class="form-control" />
+                            <span asp-validation-for="Stock" class="text-danger" class="text-danger"></span>
+                        </div>
+                        <div class="form-group checkbox">
+                            <label asp-for="IsAuction" class="control-label mx-2"></label>
+                            <input type="checkbox" asp-for="IsAuction" class="form-check-input" />
+                            <span asp-validation-for="IsAuction" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Image" class="control-label"></label>
+                            <input asp-for="Image" type="file" class="form-control-file" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="ویرایش کردن" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+                <!-- end content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+    <a class="btn btn-light my-2" asp-action="Index" asp-route-id="@Model.StoreId">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

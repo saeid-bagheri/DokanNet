@@ -1,13 +1,13 @@
 ﻿using App.Domain.Core.DataAccess;
 using App.Domain.Core.DtoModels;
-using App.Domain.Core.Services.Common.Commands;
+using App.Domain.Core.Services.Admins.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Service.Common.Commands
+namespace App.Domain.Service.Admins.Commands
 {
     public class UpdateProduct : IUpdateProduct
     {

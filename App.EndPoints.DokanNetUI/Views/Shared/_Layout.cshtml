@@ -35,17 +35,6 @@
 
                 @*serach*@
                 <div class="col-lg-6 text-center d-none d-lg-block order-lg-2 order-3">
-                    <div class="top-menu-search ">
-                        <form action="" method="get">
-                            <div class="input-group">
-                                <input name="txt" type="text" class="search-txt rounded-pill"
-                                       placeholder="نام محصول مورد نظر خود را وارد کنید">
-                                <button type="submit" class="search-btn input-group-text rounded-pill">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
                 @*end serach*@
 
@@ -105,31 +94,57 @@
                 }
                 @*end login register basket*@
 
+
+
                 <div class="col-lg-12 col-4 order-lg-4 order-1">
                     <div class="top-menu-menu col-lg-5 d-lg-flex d-none">
                         <ul class="navbar-nav">
+
+
+
+                            @*categories*@
+                            @{
+                                var categories = ViewBag.categories as List<BuyerCategoryVM>;
+                            }
+
                             <li class="nav-item">
                                 <a href="" class="nav-link border-animate fromCenter">
                                     دسته بندی محصولات <i class="bi bi-list"></i>
                                 </a>
                                 <ul class="level-one">
-                                    <li><a href="">منو شماره 1</a></li>
-                                    <li><a href="">منو شماره 2</a></li>
-                                    <li class="position-relative">
-                                        <a href="">
-                                            منو شماره 3 <i class="bi bi-chevron-left"></i>
-                                        </a>
-                                        <ul class="level-two">
-                                            <li><a href="">1 زیر منو شماره </a></li>
-                                            <li><a href="">2 زیر منو شماره </a></li>
-                                            <li><a href="">3 زیر منو شماره </a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="">منو شماره 4</a></li>
-                                    <li><a href="">منو شماره 5</a></li>
-                                    <li><a href="">منو شماره 6</a></li>
+                                    @if (categories is not null)
+                                    {
+
+                                        @foreach (var category_1 in categories)
+                                        {
+                                            <li>
+                                                <a asp-controller="Category" asp-action="Index" asp-route-id="@category_1.Id">@category_1.Title</a>
+                                                <ul class="level-two">
+                                                    @foreach (var category_2 in category_1.SubCategories)
+                                                    {
+                                                        <li>
+                                                            <a asp-controller="Category" asp-action="Index" asp-route-id="@category_2.Id">@category_2.Title</a>
+                                                            <ul class="level-two">
+                                                                @foreach (var category_3 in category_2.SubCategories)
+                                                                {
+                                                                    <li>
+                                                                        <a asp-controller="Category" asp-action="Index" asp-route-id="@category_3.Id">@category_3.Title</a>
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </li>
+                            @*end categories*@
+
+
+
+                            @*buyer seller admin*@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item">
@@ -166,239 +181,13 @@
                                     </li>
                                 }
                             }
+                            @*end buyer seller admin*@
+
                         </ul>
                     </div>
-                    <div class="responsive-menu d-block d-lg-none">
-                        <div class="responsive-menu-icon">
-                            <span id="showResponsiveMenu" class="pointer"><i class="bi bi-list"></i></span>
-                        </div>
-                        <div class="rm-body">
-                            <div class="rm-overlay"></div>
-                            <div class="rm-items">
-                                <div class="rm-item-close pointer">
-                                    <i class="bi bi-x"></i>
-                                </div>
-                                <div class="rm-item-img">
-                                    <img src="img/default-icon/logo.png" alt="">
-                                </div>
-                                <div class="rm-item-search">
-                                    <div class="top-menu-search ">
-                                        <form action="" method="get">
-                                            <div class="input-group">
-                                                <input name="txt" type="text" class="search-txt rounded-pill"
-                                                       placeholder="نام محصول مورد نظر خود را وارد کنید">
-                                                <button type="submit" class="search-btn input-group-text rounded-pill">
-                                                    <i class="bi bi-search"></i>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <ul class="rm-item-menu navbar-nav">
-                                    <li class="nav-item bg-ul-f7">
-                                        <a href="index.html" class="nav-link">صفحه اصلی</a>
-                                    </li>
-                                    <li class="nav-item bg-ul-f7">
-                                        <a href="" class="nav-link">گوشی موبایل</a>
-                                        <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                        <ul class="navbar-nav h-0">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="">برند</a>
-                                                <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                <ul class="navbar-nav h-0 bg-ul-f7">
-                                                    <li class="nav-item"><a href="" class="nav-link">سامسونگ</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">هوآوی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">شیائومی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">الجی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">سونی</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="">بر اساس رده بندی</a>
-                                                <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                <ul class="navbar-nav h-0 bg-ul-f7">
-                                                    <li class="nav-item"><a href="" class="nav-link">لمسی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">دکمه ای</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">نظامی</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item bg-ul-f7">
-                                        <a href="" class="nav-link">تبلت</a>
-                                        <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                        <ul class="navbar-nav h-0">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="">کشور</a>
-                                                <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                <ul class="navbar-nav h-0 bg-ul-f7">
-                                                    <li class="nav-item"><a href="" class="nav-link">ژاپن</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">کره جنوبی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">آمریکایی</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="">بر اساس رده بندی</a>
-                                                <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                <ul class="navbar-nav h-0 bg-ul-f7">
-                                                    <li class="nav-item"><a href="" class="nav-link">لمسی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">دانش آموزی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">مخصوص بازی</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item bg-ul-f7">
-                                        <a href="" class="nav-link">لپتاپ</a>
-                                        <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                        <ul class="navbar-nav h-0">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="">برند</a>
-                                                <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                <ul class="navbar-nav h-0 bg-ul-f7">
-                                                    <li class="nav-item"><a href="" class="nav-link">ایسر</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">مایکروسافت</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">ایسوس</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">اپل</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">سونی</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="">بر اساس قیمت</a>
-                                                <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                <ul class="navbar-nav h-0 bg-ul-f7">
-                                                    <li class="nav-item"><a href="" class="nav-link">ارزان</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">اقتصادی</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link">گران</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item bg-ul-f7">
-                                        <a href="" class="nav-link">صفحات</a>
-                                        <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                        <ul class="navbar-nav h-0">
-                                            <li><a href="index.html">صفحه اصلی</a></li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="product.html">صفحه محصول</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="category.html">
-                                                    صفحه دسته
-                                                    بندی
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="cart.html">صفحه سبد خرید</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="search.html">صفحه جستجو</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link"
-                                                   href="category-product-row.html">دسته بندی محصولات خطی</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="404.html">صفحه 404</a></li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="login.html">صفحه ورود</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="register.html">
-                                                    صفحه ثبت
-                                                    نام
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="forget.html">
-                                                    صفحه فراموشی رمز
-                                                    عبور
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="blog.html">صفحه وبلاگ</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="blog-detail.html">
-                                                    صفحه جزییات
-                                                    وبلاگ
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="compare.html">
-                                                    صفحه مقایسه
-                                                    محصول
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="checkout.html">
-                                                    پرداخت مرحله
-                                                    ای
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="payment-ok.html">
-                                                    پرداخت
-                                                    موفق
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="payment-nok.html">
-                                                    پرداخت
-                                                    ناموفق
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="payment-nok.html">
-                                                    پرداخت
-                                                    ناموفق
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="product-not-found.html">
-                                                    محصول
-                                                    ناموجود
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="empty-cart.html">
-                                                    سبد خرید
-                                                    خالی
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="dashboard.html">
-                                                    داشبورد
-                                                    کاربری
-                                                </a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="order.html">سفارشات</a></li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="favorite.html">
-                                                    محصولات مورد
-                                                    علاقه
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link"
-                                                   href="notification.html">اطلاعیه</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="comments.html">نظرات</a></li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="address.html">آدرس ها</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="last-seen.html">
-                                                    آخرین بازدید
-                                                    ها
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
+
             </div>
         </div>
     </header>
@@ -499,7 +288,6 @@
         </p>
     </div>
     <!-- end copy right -->
-
     <!-- Modal -->
     <div class="modal fade modal-lg product-modal" id="productModal" tabindex="-1">
         <div class="modal-dialog">

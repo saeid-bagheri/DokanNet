@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.Services.Common.Commands
+namespace App.Domain.Core.Services.Sellers.Commands
 {
-    public interface IUpdateProduct
+    public interface ISellerUpdateProduct
     {
         Task Execute(ProductDto entity, CancellationToken cancellationToken);
     }

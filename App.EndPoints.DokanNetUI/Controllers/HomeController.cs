@@ -37,7 +37,7 @@ namespace App.EndPoints.DokanNetUI.Controllers
             _mapper.Map((await _getNormalProducts.Execute(cancellationToken)).Take(10), homeVM.NormalProducts);
 
             //get parent categories
-            _mapper.Map((await _getParentCategories.Execute(cancellationToken)), homeVM.ParentCategories);
+            ViewBag.categories = _mapper.Map((await _getParentCategories.Execute(cancellationToken)), homeVM.ParentCategories);
 
             //get stores
             _mapper.Map((await _getStores.Execute(cancellationToken)), homeVM.Stores);

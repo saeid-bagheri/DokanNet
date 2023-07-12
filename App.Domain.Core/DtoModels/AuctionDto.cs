@@ -17,7 +17,7 @@ namespace App.Domain.Core.DtoModels
 
         public int ProductId { get; set; }
         public string ProductTitle { get; set; } = null!;
-        public virtual List<Image> ProductImages { get; set; } = new List<Image>();
+        public virtual List<ImageDto> ProductImages { get; set; } = new List<ImageDto>();
 
         public int CountOfProducts { get; set; }
 
@@ -33,7 +33,7 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+        public virtual ICollection<BidDto> Bids { get; set; } = new List<BidDto>();
 
         public virtual Store Store { get; set; } = null!;
 

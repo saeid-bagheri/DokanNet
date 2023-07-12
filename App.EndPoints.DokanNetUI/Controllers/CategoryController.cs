@@ -10,10 +10,10 @@ namespace App.EndPoints.DokanNetUI.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IGetCategoryById _getCategoryById;
-        private readonly IGetProductsByCategoryAndSubcategories _getProductsByCategoryAndSubcategories;
+        private readonly IGetProductsForCategoryAndSubcategories _getProductsByCategoryAndSubcategories;
 
         public CategoryController(IMapper mapper, IGetCategoryById getCategoryById,
-                                  IGetProductsByCategoryAndSubcategories getProductsByCategoryAndSubcategories)
+                                  IGetProductsForCategoryAndSubcategories getProductsByCategoryAndSubcategories)
         {
             _mapper = mapper;
             _getCategoryById = getCategoryById;

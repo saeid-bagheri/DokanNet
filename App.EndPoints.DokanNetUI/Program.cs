@@ -25,6 +25,7 @@ using App.Domain.Service.Common.Queries;
 using App.Domain.Service.Sellers.Commands;
 using App.Domain.Service.Sellers.Queries;
 using App.EndPoints.DokanNetUI.AutoMapper;
+using App.EndPoints.DokanNetUI.CustomMiddleWares;
 using App.Infrastructures.Data.Repositories;
 using App.Infrastructures.Data.Repositories.AutoMapper;
 using App.Infrastructures.Data.Repositories.Repositories;
@@ -32,12 +33,14 @@ using App.Infrastructures.Db.SqlServer.Ef.Database;
 using AutoMapper;
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<CustomExceptionMiddleware>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -111,6 +114,7 @@ builder.Services.AddScoped<IIsExistProductInStoreByName, IsExistProductInStoreBy
 builder.Services.AddScoped<IUpdateMedal, UpdateMedal>();
 builder.Services.AddScoped<IGetSellerByProductId, GetSellerByProductId>();
 builder.Services.AddScoped<IGetInvoicesBySellerId, GetInvoicesBySellerId>();
+builder.Services.AddScoped<ISellerUpdateProduct, SellerUpdateProduct>();
 
 //buyers
 builder.Services.AddScoped<IGetOpenAuctions, GetOpenAuctions>();
@@ -127,7 +131,7 @@ builder.Services.AddScoped<IGetBuyerById, GetBuyerById>();
 builder.Services.AddScoped<IUpdateBuyer, UpdateBuyer>();
 builder.Services.AddScoped<IGetInvoicesByBuyerId, GetInvoicesByBuyerId>();
 builder.Services.AddScoped<IGetParentCategories, GetParentCategories>();
-builder.Services.AddScoped<IGetProductsByCategoryAndSubcategories, GetProductsByCategoryAndSubcategories>();
+builder.Services.AddScoped<IGetProductsForCategoryAndSubcategories, GetProductsForCategoryAndSubcategories>();
 builder.Services.AddScoped<IGetCategoryById, GetCategoryById>();
 
 
@@ -186,6 +190,11 @@ builder.Services.AddHangfireServer();
 
 #endregion config hangfire
 
+
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -195,6 +204,13 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
+
+//Execption Heandling
+app.UseMiddleware<CustomExceptionMiddleware>();
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

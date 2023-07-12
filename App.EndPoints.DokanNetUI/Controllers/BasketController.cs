@@ -81,7 +81,8 @@ namespace App.EndPoints.DokanNetUI.Controllers
                     //Reducing the number of stock products
                     await _reduceProductStock.Execute(basketProductDto.CountOfProducts, basketProductDto.ProductId, cancellationToken);
 
-                    return RedirectToAction("Index", "Home");
+                    //back tp pervious page
+                    return Redirect(Request.Headers["Referer"].ToString());
                 }
 
                 //this buyer has basket

@@ -13,6 +13,7 @@ namespace App.EndPoints.DokanNetUI.Models.ViewModels
         public string Title { get; set; } = null!;
         public string? ImageUrl { get; set; }
 
+        public virtual ICollection<CategoryDto> SubCategories { get; set; } = new List<CategoryDto>();
 
         #region navigations
 

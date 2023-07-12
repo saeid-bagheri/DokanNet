@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.Services.Buyers.Queries
 {
-    public interface IGetProductsByCategoryAndSubcategories
+    public interface IGetProductsForCategoryAndSubcategories
     {
         Task<List<ProductDto>> Execute(int parentCategoryId, CancellationToken cancellationToken);
     }
