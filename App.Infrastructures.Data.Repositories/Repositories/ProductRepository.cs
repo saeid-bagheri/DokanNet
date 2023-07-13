@@ -2,6 +2,7 @@
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace App.Infrastructures.Data.Repositories.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductRepository(AppDbContext context)
+        public ProductRepository(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
 
@@ -63,7 +66,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
                     CreatedAt = p.CreatedAt,
-                    Images = p.Images
+                    Images = _mapper.Map<List<ImageDto>>(p.Images)
                 })
                 .ToListAsync(cancellationToken);
             return records;
@@ -89,7 +92,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
                     CreatedAt = p.CreatedAt,
-                    Images = p.Images
+                    Images = _mapper.Map<List<ImageDto>>(p.Images)
                 }).ToListAsync(cancellationToken);
             return records;
         }
@@ -104,7 +107,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 {
                     Id = p.Id,
                     Title = p.Title,
-                    Category = p.Category,
+                    Category = _mapper.Map<CategoryDto>(p.Category),
                     StoreId = p.StoreId,
                     Stock = p.Stock,
                     IsConfirmed = p.IsConfirmed,
@@ -113,7 +116,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     Price = p.Price,
                     IsDeleted = p.IsDeleted,
                     CreatedAt = p.CreatedAt,
-                    Images = p.Images
+                    Images = _mapper.Map<List<ImageDto>>(p.Images)
                 }).ToListAsync(cancellationToken);
             return records;
         }

@@ -1,4 +1,6 @@
-﻿namespace App.Infrastructures.Data.Repositories
+﻿using App.Domain.Core.DtoModels;
+
+namespace App.Infrastructures.Data.Repositories
 {
     public interface IBuyerRepository
     {

@@ -2,6 +2,7 @@
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace App.Infrastructures.Data.Repositories.Repositories
     public class InvoiceRepository : IInvoiceRepository
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public InvoiceRepository(AppDbContext context)
+        public InvoiceRepository(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
 
@@ -31,7 +34,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 SellerId = entity.SellerId,
                 IsFinal = entity.IsFinal,
                 CreatedAt = entity.CreatedAt,
-                InvoiceProducts = entity.InvoiceProducts
+                InvoiceProducts = _mapper.Map<List<InvoiceProduct>>(entity.InvoiceProducts)
             };
             await _context.Invoices.AddAsync(record);
             await _context.SaveChangesAsync(cancellationToken);
@@ -77,8 +80,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     SellerId = i.SellerId,
                     IsFinal = i.IsFinal,
                     CreatedAt = i.CreatedAt,
-                    InvoiceProducts = i.InvoiceProducts,
-                    Buyer = i.Buyer
+                    InvoiceProducts = _mapper.Map<List<InvoiceProductDto>>(i.InvoiceProducts),
+                    Buyer = _mapper.Map<BuyerDto>(i.Buyer)
                 }).ToListAsync(cancellationToken);
             return records;
         }
@@ -100,8 +103,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     SellerId = i.SellerId,
                     IsFinal = i.IsFinal,
                     CreatedAt = i.CreatedAt,
-                    InvoiceProducts = i.InvoiceProducts,
-                    Seller = i.Seller
+                    InvoiceProducts = _mapper.Map<List<InvoiceProductDto>>(i.InvoiceProducts),
+                    Seller = _mapper.Map<SellerDto>(i.Seller)
                 }).ToListAsync(cancellationToken);
             return records;
         }
@@ -125,15 +128,71 @@ namespace App.Infrastructures.Data.Repositories.Repositories
 
         public async Task Update(InvoiceDto entity, CancellationToken cancellationToken)
         {
-            var Invoice = await _context.Invoices
-                .Where(i => i.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
-            Invoice.TotalAmount = entity.TotalAmount;
-            Invoice.SiteCommission = entity.SiteCommission;
-            Invoice.BuyerId = entity.BuyerId;
-            Invoice.SellerId = entity.SellerId;
-            Invoice.IsFinal = entity.IsFinal;
-            Invoice.InvoiceProducts = entity.InvoiceProducts;
-            await _context.SaveChangesAsync(cancellationToken);
+
+            var invoice = await _context.Invoices
+                .Include(i => i.InvoiceProducts)
+                .FirstOrDefaultAsync(i => i.Id == entity.Id, cancellationToken);
+
+            if (invoice != null)
+            {
+                // به روزرسانی مقادیر مربوط به Invoice
+                invoice.TotalAmount = entity.TotalAmount;
+                invoice.SiteCommission = entity.SiteCommission;
+                invoice.BuyerId = entity.BuyerId;
+                invoice.SellerId = entity.SellerId;
+                invoice.IsFinal = entity.IsFinal;
+
+                // به روزرسانی InvoiceProducts
+                var existingProductIds = invoice.InvoiceProducts.Select(ip => ip.ProductId).ToList();
+                var updatedProductIds = entity.InvoiceProducts.Select(ip => ip.ProductId).ToList();
+
+                // حذف InvoiceProducts غیرموجود
+                var removedInvoiceProducts = invoice.InvoiceProducts.Where(ip => !updatedProductIds.Contains(ip.ProductId)).ToList();
+                foreach (var removedInvoiceProduct in removedInvoiceProducts)
+                {
+                    invoice.InvoiceProducts.Remove(removedInvoiceProduct);
+                }
+
+                // اضافه کردن InvoiceProducts جدید
+                var addedInvoiceProducts = entity.InvoiceProducts.Where(ip => !existingProductIds.Contains(ip.ProductId)).ToList();
+                foreach (var addedInvoiceProductDto in addedInvoiceProducts)
+                {
+                    var addedInvoiceProduct = new InvoiceProduct
+                    {
+                        InvoiceId = invoice.Id,
+                        ProductId = addedInvoiceProductDto.ProductId,
+                        CountOfProducts = addedInvoiceProductDto.CountOfProducts
+                    };
+                    invoice.InvoiceProducts.Add(addedInvoiceProduct);
+                }
+
+                // به روزرسانی InvoiceProducts موجود
+                foreach (var updatedInvoiceProductDto in entity.InvoiceProducts)
+                {
+                    var existingInvoiceProduct = invoice.InvoiceProducts.FirstOrDefault(ip => ip.ProductId == updatedInvoiceProductDto.ProductId);
+                    if (existingInvoiceProduct != null)
+                    {
+                        existingInvoiceProduct.CountOfProducts = updatedInvoiceProductDto.CountOfProducts;
+                    }
+                }
+
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+
+
+
+
+
+
+            //var Invoice = await _context.Invoices
+            //    .Where(i => i.Id == entity.Id).FirstOrDefaultAsync(cancellationToken);
+            //Invoice.TotalAmount = entity.TotalAmount;
+            //Invoice.SiteCommission = entity.SiteCommission;
+            //Invoice.BuyerId = entity.BuyerId;
+            //Invoice.SellerId = entity.SellerId;
+            //Invoice.IsFinal = entity.IsFinal;
+            //Invoice.InvoiceProducts = entity.InvoiceProducts;
+            //await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task Delete(int id, CancellationToken cancellationToken)

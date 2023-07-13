@@ -25,7 +25,7 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual Product Product { get; set; } = null!;
+        public virtual ProductDto Product { get; set; } = null!;
 
         #endregion navigations
     }

@@ -1,6 +1,6 @@
 ﻿using App.Domain.Core.Entities;
 
-namespace App.Infrastructures.Data.Repositories
+namespace App.Domain.Core.DtoModels
 {
     public class BuyerDto
     {
@@ -27,13 +27,13 @@ namespace App.Infrastructures.Data.Repositories
 
         #region navigations
 
-        public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+        public virtual ICollection<BidDto> Bids { get; set; } = new List<BidDto>();
 
-        public virtual City? City { get; set; }
+        public virtual CityDto? City { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<CommentDto> Comments { get; set; } = new List<CommentDto>();
 
-        public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
+        public virtual ICollection<InvoiceDto> Invoices { get; set; } = new List<InvoiceDto>();
 
         #endregion navigations
     }

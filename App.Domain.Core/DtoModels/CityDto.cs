@@ -15,8 +15,8 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual ICollection<Seller> Sellers { get; set; } = new List<Seller>();
-        public virtual ICollection<Buyer> Buyers { get; set; } = new List<Buyer>();
+        public virtual ICollection<SellerDto> Sellers { get; set; } = new List<SellerDto>();
+        public virtual ICollection<BuyerDto> Buyers { get; set; } = new List<BuyerDto>();
 
         #endregion navigations
     }

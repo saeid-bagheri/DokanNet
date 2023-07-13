@@ -45,7 +45,7 @@ namespace App.Domain.Service.Buyers.Commands
             }
 
             //this product is not in the basket
-            currentBasket.InvoiceProducts.Add(new InvoiceProduct()
+            currentBasket.InvoiceProducts.Add(new InvoiceProductDto()
             {
                 ProductId = entity.ProductId,
                 CountOfProducts = entity.CountOfProducts

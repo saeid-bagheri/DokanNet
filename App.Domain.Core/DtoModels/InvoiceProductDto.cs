@@ -16,9 +16,9 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual Invoice Invoice { get; set; } = null!;
+        public virtual InvoiceDto Invoice { get; set; } = null!;
 
-        public virtual Product Product { get; set; } = null!;
+        public virtual ProductDto Product { get; set; } = null!;
 
         #endregion navigations
     }

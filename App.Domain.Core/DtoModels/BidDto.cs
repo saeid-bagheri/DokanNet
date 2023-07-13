@@ -23,9 +23,9 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual Auction Auction { get; set; } = null!;
+        public virtual AuctionDto Auction { get; set; } = null!;
 
-        public virtual Buyer Buyer { get; set; } = null!;
+        public virtual BuyerDto Buyer { get; set; } = null!;
 
         #endregion navigations
     }

@@ -31,11 +31,11 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual Buyer Buyer { get; set; } = null!;
+        public virtual BuyerDto Buyer { get; set; } = null!;
 
-        public virtual Seller Seller { get; set; } = null!;
+        public virtual SellerDto Seller { get; set; } = null!;
 
-        public virtual ICollection<InvoiceProduct> InvoiceProducts { get; set; } = new List<InvoiceProduct>();
+        public virtual ICollection<InvoiceProductDto> InvoiceProducts { get; set; } = new List<InvoiceProductDto>();
 
         #endregion navigations
     }

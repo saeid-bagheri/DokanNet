@@ -34,8 +34,8 @@ namespace App.Domain.Service.Buyers.Commands
             };
 
             //create invoiceProducts
-            var invoiceProducts = new List<InvoiceProduct>();
-            invoiceProducts.Add(new InvoiceProduct()
+            var invoiceProducts = new List<InvoiceProductDto>();
+            invoiceProducts.Add(new InvoiceProductDto()
             {
                 ProductId = entity.ProductId,
                 CountOfProducts = entity.CountOfProducts

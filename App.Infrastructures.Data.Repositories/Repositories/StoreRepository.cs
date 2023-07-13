@@ -2,6 +2,7 @@
 using App.Domain.Core.DtoModels;
 using App.Domain.Core.Entities;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace App.Infrastructures.Data.Repositories.Repositories
     public class StoreRepository : IStoreRepository
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public StoreRepository(AppDbContext context)
+        public StoreRepository(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
 
@@ -49,7 +52,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                     IsClosed = s.IsClosed,
                     ClosedAt = s.ClosedAt,
                     CreatedAt = s.CreatedAt,
-                    Products = s.Products
+                    Products = _mapper.Map<List<ProductDto>>(s.Products)
                 }).ToListAsync(cancellationToken);
             return records;
         }
@@ -69,8 +72,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
                 IsClosed = entity.IsClosed,
                 ClosedAt = entity.ClosedAt,
                 CreatedAt = entity.CreatedAt,
-                Products = entity.Products,
-                Auctions = entity.Auctions
+                Products = _mapper.Map<List<ProductDto>>(entity.Products),
+                Auctions = _mapper.Map<List<AuctionDto>>(entity.Auctions)
             };
             return record;
         }

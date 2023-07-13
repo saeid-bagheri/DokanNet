@@ -26,11 +26,11 @@ namespace App.Domain.Core.DtoModels
         public DateTime CreatedAt { get; set; }
 
         #region navigations
-        public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
+        public virtual ICollection<AuctionDto> Auctions { get; set; } = new List<AuctionDto>();
 
-        public virtual Seller IdNavigation { get; set; } = null!;
+        public virtual SellerDto IdNavigation { get; set; } = null!;
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
 
         #endregion navigations
     }

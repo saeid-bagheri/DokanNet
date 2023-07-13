@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Services.Buyers.Queries;
+﻿using App.Domain.Core.DtoModels;
+using App.Domain.Core.Services.Buyers.Queries;
 using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;

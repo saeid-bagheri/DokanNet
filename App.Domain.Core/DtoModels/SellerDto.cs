@@ -37,13 +37,13 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual City City { get; set; } = null!;
+        public virtual CityDto City { get; set; } = null!;
 
-        public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
+        public virtual ICollection<InvoiceDto> Invoices { get; set; } = new List<InvoiceDto>();
 
-        public virtual Medal? Medal { get; set; } = null!;
+        public virtual MedalDto? Medal { get; set; } = null!;
 
-        public virtual Store? Store { get; set; }
+        public virtual StoreDto? Store { get; set; }
 
         #endregion navigations
     }

@@ -18,8 +18,8 @@ namespace App.Domain.Core.DtoModels
 
         #region Navigation properties
 
-        public Buyer? Buyer { get; set; }
-        public Seller? Seller { get; set; }
+        public BuyerDto? Buyer { get; set; }
+        public SellerDto? Seller { get; set; }
         public Admin? Admin { get; set; }
 
         #endregion Navigation properties

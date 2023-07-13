@@ -35,7 +35,7 @@ namespace App.Domain.Core.DtoModels
 
         public virtual ICollection<BidDto> Bids { get; set; } = new List<BidDto>();
 
-        public virtual Store Store { get; set; } = null!;
+        public virtual StoreDto Store { get; set; } = null!;
 
         #endregion navigations
     }

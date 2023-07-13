@@ -1,4 +1,5 @@
-﻿using App.Infrastructures.Data.Repositories;
+﻿using App.Domain.Core.DtoModels;
+using App.Infrastructures.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -37,8 +37,8 @@ namespace App.EndPoints.DokanNetUI.Areas.Seller.Models.ViewModels
 
         public string? ImageUrl { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-        public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
+        public virtual ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
+        public virtual ICollection<AuctionDto> Auctions { get; set; } = new List<AuctionDto>();
         public virtual ICollection<InvoiceDto> Invoices { get; set; } = new List<InvoiceDto>();
     }
 }

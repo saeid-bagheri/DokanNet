@@ -38,15 +38,15 @@ namespace App.Domain.Core.DtoModels
 
         #region navigations
 
-        public virtual Category Category { get; set; } = null!;
+        public virtual CategoryDto Category { get; set; } = null!;
 
-        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<CommentDto> Comments { get; set; } = new List<CommentDto>();
 
-        public virtual ICollection<Image> Images { get; set; } = new List<Image>();
+        public virtual ICollection<ImageDto> Images { get; set; } = new List<ImageDto>();
 
-        public virtual ICollection<InvoiceProduct> InvoiceProducts { get; set; } = new List<InvoiceProduct>();
+        public virtual ICollection<InvoiceProductDto> InvoiceProducts { get; set; } = new List<InvoiceProductDto>();
 
-        public virtual Store Store { get; set; } = null!;
+        public virtual StoreDto Store { get; set; } = null!;
 
         #endregion navigations
     }
