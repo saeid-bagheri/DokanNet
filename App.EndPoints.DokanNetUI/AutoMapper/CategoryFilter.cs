@@ -26,6 +26,7 @@ namespace App.EndPoints.DokanNetUI.AutoMapper
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
+            throw new NotImplementedException();
         }
     }
 }

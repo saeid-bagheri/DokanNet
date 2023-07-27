@@ -46,7 +46,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     //send user to a page that said your access is denied!
     options.AccessDeniedPath = "/";
-
 });
 
 

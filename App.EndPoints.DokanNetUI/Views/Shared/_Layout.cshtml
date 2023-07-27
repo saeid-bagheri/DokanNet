@@ -24,173 +24,114 @@
     <!-- <div class="header-msg">
         <img src="img/default-icon/header-img.jpg" alt="">
     </div> -->
+
+
     <header>
         <div class="container">
-            <div class="row top-menu justify-content-center">
-                @*dokan net*@
-                <div class="col-lg-2 text-center d-none d-lg-block order-lg-2 order-3 top-menu-logo">
-                    <a class="btn btn-info h-100 w-50 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Home" asp-action="Index">دکان نت</a>
+            <div class="row top-menu justify-content-center align-items-center">
+
+                <!-- Logo -->
+                <div class="col-lg-3 col-md-3 col-12 text-center top-menu-logo">
+                    <a class="btn btn-info h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Home" asp-action="Index">دکان نت</a>
                 </div>
-                @*end dokan net*@
 
-                @*serach*@
-                <div class="col-lg-6 text-center d-none d-lg-block order-lg-2 order-3">
+                <div class="col-lg-5 col-md-6 col-12">
                 </div>
-                @*end serach*@
 
-                @*login register basket*@
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="col-lg-4 text-center col-4 order-lg-3 order-3">
-                        <div class="top-menu-btn h-100">
-                            <ul class="nav h-100">
-                                <li class="nav-item d-xl-block d-none h-100 d-flex justify-content-center align-items-center">
-                                    <a class="auth-btn-index pointer btn-danger h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Logout">
-                                        <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>خروج از حساب کاربری
-                                    </a>
-                                </li>
-                                <li class="nav-item d-xl-block d-none d-flex justify-content-center align-items-center">
-                                    <span class="nav-link text-white danger-span-border">@User.Identity.Name</span>
-                                </li>
-                                <li class="nav-item position-relative">
-                                    <a asp-area="" asp-controller="Basket" asp-action="Index">
-                                        <i class="bi bi-bag pointer"></i>
-                                        <span class="count-item rounded-circle">
-                                            @TempData["CountOfBasketProducts"]
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                }
-                else
-                {
-                    <div class="col-lg-4 text-center col-4 order-lg-3 order-3">
-                        <div class="top-menu-btn h-100">
-                            <ul class="nav h-100">
-                                <li class="nav-item d-xl-block d-none h-100 d-flex justify-content-center align-items-center">
-                                    <a class="auth-btn-index pointer h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Login">
-                                        <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>ورود به حساب کاربری
-                                    </a>
-                                </li>
-                                <li class="nav-item d-xl-block d-none h-100 d-flex justify-content-center align-items-center">
-                                    <a class="auth-btn-index pointer h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Register">
-                                        <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>ثبت نام
-                                    </a>
-                                </li>
-                                <li class="nav-item position-relative">
-                                    <a asp-area="" asp-controller="Basket" asp-action="Index">
-                                        <i class="bi bi-bag pointer"></i>
-                                        <span class="count-item rounded-circle">
-                                            0
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                }
-                @*end login register basket*@
-
-
-
-                <div class="col-lg-12 col-4 order-lg-4 order-1">
-                    <div class="top-menu-menu col-lg-5 d-lg-flex d-none">
-                        <ul class="navbar-nav">
-
-
-
-                            @*categories*@
-                            @{
-                                var categories = ViewBag.categories as List<BuyerCategoryVM>;
-                            }
-
+                <!-- User Actions -->
+                <div class="col-lg-4 col-md-3 col-12 text-center top-menu-btn my-2">
+                    <ul class="nav h-100">
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item">
-                                <a href="" class="nav-link border-animate fromCenter">
-                                    دسته بندی محصولات <i class="bi bi-list"></i>
+                                <a class="auth-btn-index pointer btn-danger h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>خروج از حساب کاربری
                                 </a>
-                                <ul class="level-one">
-                                    @if (categories is not null)
-                                    {
-
-                                        @foreach (var category_1 in categories)
-                                        {
-                                            <li>
-                                                <a asp-controller="Category" asp-action="Index" asp-route-id="@category_1.Id">@category_1.Title</a>
-                                                <ul class="level-two">
-                                                    @foreach (var category_2 in category_1.SubCategories)
-                                                    {
-                                                        <li>
-                                                            <a asp-controller="Category" asp-action="Index" asp-route-id="@category_2.Id">@category_2.Title</a>
-                                                            <ul class="level-two">
-                                                                @foreach (var category_3 in category_2.SubCategories)
-                                                                {
-                                                                    <li>
-                                                                        <a asp-controller="Category" asp-action="Index" asp-route-id="@category_3.Id">@category_3.Title</a>
-                                                                    </li>
-                                                                }
-                                                            </ul>
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </li>
-                                        }
-                                    }
-                                </ul>
                             </li>
-                            @*end categories*@
+                            <li class="nav-item">
+                                <span class="nav-link text-white danger-span-border">@User.Identity.Name</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="auth-btn-index pointer h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Login">
+                                    <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>ورود به حساب کاربری
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="auth-btn-index pointer h-100 d-flex justify-content-center align-items-center" asp-area="" asp-controller="Account" asp-action="Register">
+                                    <i class="bi bi-person-circle d-flex justify-content-center align-items-center"></i>ثبت نام
+                                </a>
+                            </li>
+                        }
+                        <!-- Basket Icon -->
+                        <li class="nav-item position-relative">
+                            <a asp-area="" asp-controller="Basket" asp-action="Index">
+                                <i class="bi bi-bag"></i>
+                                <span class="count-item rounded-circle">
+                                    @await Component.InvokeAsync("CountOfBasketProducts")
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-
-
-                            @*buyer seller admin*@
-                            @if (User.Identity.IsAuthenticated)
+                <!-- User Roles -->
+                <div class="col-12 text-center mt-2">
+                    <ul class="nav">
+                        <!-- Categories -->
+                        <li class="nav-item">
+                            <div class="col-lg-12 col-md-12 col-12 top-menu-menu">
+                                <ul class="navbar-nav d-lg-flex justify-content-center">
+                                    @await Component.InvokeAsync("CategoriesMenu")
+                                </ul>
+                            </div>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="BuyerProfile" asp-action="index" class="nav-link border-animate fromCenter">
+                                    پروفایل خریداری
+                                    <i class="bi bi-person-circle"></i>
+                                </a>
+                            </li>
+                            @if (User.IsInRole("SellerRole"))
                             {
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="BuyerProfile" asp-action="index" class="nav-link border-animate fromCenter">
-                                        پروفایل خریداری
+                                    <a asp-area="Seller" asp-controller="Dashboard" asp-action="index" class="nav-link border-animate fromCenter">
+                                        غرفه ی من
+                                        <i class="bi bi-shop"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="Seller" asp-controller="Dashboard" asp-action="Create" class="nav-link border-animate fromCenter">
+                                        غرفه دار شوید
+                                        <i class="bi bi-shop"></i>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("AdminRole"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link border-animate fromCenter" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                                        پنل ادمین
                                         <i class="bi bi-person-circle"></i>
                                     </a>
                                 </li>
-                                @if (User.IsInRole("SellerRole"))
-                                {
-                                    <li class="nav-item">
-                                        <a asp-area="Seller" asp-controller="Dashboard" asp-action="index" class="nav-link border-animate fromCenter">
-                                            غرفه ی من
-                                            <i class="bi bi-shop"></i>
-                                        </a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="nav-item">
-                                        <a asp-area="Seller" asp-controller="Dashboard" asp-action="Create" class="nav-link border-animate fromCenter">
-                                            غرفه دار شوید
-                                            <i class="bi bi-shop"></i>
-                                        </a>
-                                    </li>
-                                }
-                                @if (User.IsInRole("AdminRole"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link border-animate fromCenter" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
-                                            پنل ادمین
-                                            <i class="bi bi-person-circle"></i>
-                                        </a>
-                                    </li>
-                                }
                             }
-                            @*end buyer seller admin*@
-
-                        </ul>
-                    </div>
+                        }
+                    </ul>
                 </div>
-
 
             </div>
         </div>
     </header>
+
+
 
     <div class="container">
         <main role="main" class="pb-3">
