@@ -1,8 +1,10 @@
-﻿using App.Domain.Core.Services.Buyers.Queries;
+﻿using App.Domain.Core.DtoModels;
+using App.Domain.Core.Services.Buyers.Queries;
 using App.Domain.Core.Services.Common.Queries;
 using App.EndPoints.DokanNetUI.Models.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace App.EndPoints.DokanNetUI.Controllers
@@ -14,16 +16,18 @@ namespace App.EndPoints.DokanNetUI.Controllers
         private readonly IGetNormalProducts _getNormalProducts;
         private readonly IGetParentCategories _getParentCategories;
         private readonly IGetStores _getStores;
+        private readonly IConfiguration _configuration;
 
         public HomeController(IGetOpenAuctions getOpenAuctions, IMapper mapper,
                               IGetNormalProducts getNormalProducts, IGetParentCategories getParentCategories,
-                              IGetStores getStores)
+                              IGetStores getStores, IConfiguration configuration)
         {
             _mapper = mapper;
             _getOpenAuctions = getOpenAuctions;
             _getNormalProducts = getNormalProducts;
             _getParentCategories = getParentCategories;
             _getStores = getStores;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -39,8 +43,25 @@ namespace App.EndPoints.DokanNetUI.Controllers
             //get parent categories
             ViewBag.categories = _mapper.Map((await _getParentCategories.Execute(cancellationToken)), homeVM.ParentCategories);
 
-            //get stores
-            _mapper.Map((await _getStores.Execute(cancellationToken)), homeVM.Stores);
+            ////get stores from service
+            //_mapper.Map((await _getStores.Execute(cancellationToken)), homeVM.Stores);
+             
+            //get stores from api
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7065/api/Common/GetStores");
+            request.Headers.Add("ApiKey", _configuration.GetSection("ApiKey").Value);
+
+            var response = await client.SendAsync(request, cancellationToken);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("خطای دریافت از api");
+            }
+            else
+            {
+                var responseModel = JsonConvert.DeserializeObject<List<StoreDto>>(responseBody);
+                _mapper.Map(responseModel, homeVM.Stores);
+            }
 
             return View(homeVM);
         }

@@ -1,30 +1,21 @@
 using App.Domain.Core.Configs;
-using App.Domain.Core.DataAccess;
 using App.Domain.Core.Entities;
-using App.Domain.Service._IocConfigs;
-using App.EndPoints.DokanNetUI.AutoMapper;
-using App.EndPoints.DokanNetUI.CustomMiddleWares;
 using App.Infrastructures.Data.Repositories.AutoMapper;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
 using AutoMapper;
-using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using App.Domain.Service._IocConfigs;
 using App.Infrastructures.Data.Repositories._IocConfigs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<CustomExceptionMiddleware>();
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    //send user to a page that said your access is denied!
-    options.AccessDeniedPath = "/";
-});
-
-
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 #region config from appsetting
 builder.Configuration
@@ -65,67 +56,25 @@ builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 var configMapper = new MapperConfiguration(cfg =>
 {
     cfg.AddProfile(new AutoMappingInfrastructures());
-    cfg.AddProfile(new AutoMappingUI());
 });
 var mapper = configMapper.CreateMapper();
 builder.Services.AddSingleton(mapper);
 #endregion config autoMapper
-#region config hangfire
-builder.Services.AddHangfire(configuration => configuration
-    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-    .UseSimpleAssemblyNameTypeSerializer()
-    .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(connectionString));
-
-builder.Services.AddHangfireServer();
-
-#endregion config hangfire
-
-
-
-
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-
-
-//Execption Heandling
-app.UseMiddleware<CustomExceptionMiddleware>();
-
-
-
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
-
-app.UseAuthentication();
 app.UseAuthorization();
 
-
-app.MapAreaControllerRoute(
-    areaName: "Admin",
-    name: "Areas",
-    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
-
-app.MapAreaControllerRoute(
-    areaName: "Seller",
-    name: "Areas",
-    pattern: "Seller/{controller=Dashboard}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
+app.MapControllers();
 
 app.Run();

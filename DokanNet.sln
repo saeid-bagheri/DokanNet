@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Infrastructures.Db.SqlS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.EndPoints.DokanNetUI", "App.EndPoints.DokanNetUI\App.EndPoints.DokanNetUI.csproj", "{20A0ECE0-5B65-49ED-A368-456893D0FEE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.EndPoints.DokanNetApi", "App.EndPoints.DokanNetApi\App.EndPoints.DokanNetApi.csproj", "{C603E142-55FD-4AE7-BDB8-C9EDA4DBF693}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{20A0ECE0-5B65-49ED-A368-456893D0FEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20A0ECE0-5B65-49ED-A368-456893D0FEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20A0ECE0-5B65-49ED-A368-456893D0FEE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C603E142-55FD-4AE7-BDB8-C9EDA4DBF693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C603E142-55FD-4AE7-BDB8-C9EDA4DBF693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C603E142-55FD-4AE7-BDB8-C9EDA4DBF693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C603E142-55FD-4AE7-BDB8-C9EDA4DBF693}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{72F3F7AF-DB3A-413E-B1C0-19DC76C07DEC} = {EBBCE0F7-FDBF-4958-9C4D-505517EDA24D}
 		{ED7A5FBB-A109-481D-BB89-8DAEE86B3163} = {EBBCE0F7-FDBF-4958-9C4D-505517EDA24D}
 		{20A0ECE0-5B65-49ED-A368-456893D0FEE4} = {7794E3BC-E7BF-4AB4-91D9-CB2BDAD9118B}
+		{C603E142-55FD-4AE7-BDB8-C9EDA4DBF693} = {7794E3BC-E7BF-4AB4-91D9-CB2BDAD9118B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73E3FE74-5C5B-4B0F-B5AC-ABC40F5D2BD7}
